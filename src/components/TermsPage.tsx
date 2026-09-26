@@ -51,7 +51,7 @@ const TermsPage: React.FC = () => {
               <li><strong>Educational content</strong> about cryptocurrency, blockchain, and DeFi</li>
             </ul>
             <p className="text-gray-700 mb-4">
-              Yields are variable and not guaranteed. V1 vault strategies are deprecated; prefer current Prime (V2) vaults unless you understand legacy risk. All content is for educational and informational purposes only.
+              Yields are variable and not guaranteed. All content is for educational and informational purposes only.
             </p>
           </section>
 

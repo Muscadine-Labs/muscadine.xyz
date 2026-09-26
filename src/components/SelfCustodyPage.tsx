@@ -318,7 +318,7 @@ export default function SelfCustodyPage() {
                   <p className="text-gray-600 mb-4">Advanced Bitcoin wallet with excellent privacy features</p>
                   <div className="space-y-2">
                     <p className="text-sm text-gray-500">• Full node support</p>
-                    <p className="text-sm text-gray-500">• CoinJoin and privacy features</p>
+                    <p className="text-sm text-gray-500">• Privacy features</p>
                     <p className="text-sm text-gray-500">• Hardware wallet integration</p>
                     <p className="text-sm text-gray-500">• Advanced transaction building</p>
                   </div>
@@ -473,25 +473,6 @@ export default function SelfCustodyPage() {
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white border border-green-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Muscadine</h3>
-                  <p className="text-gray-600 mb-4">Curated Morpho vaults with managed risk</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Uses Morpho vaults to curate risk</p>
-                    <p className="text-sm text-gray-500">• Secure yield on USDC, Bitcoin, and Ethereum</p>
-                    <p className="text-sm text-gray-500">• Industry-low fees</p>
-                    <p className="text-sm text-gray-500">• Flexible deposits/withdrawals</p>
-                  </div>
-                  <a
-                    href="https://app.muscadine.xyz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-green-100 text-green-800 px-4 py-2 rounded-lg hover:bg-green-200 transition-colors"
-                  >
-                    Launch Muscadine App
-                  </a>
-                </div>
-                
                 <div className="bg-white border border-green-200 rounded-lg p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Morpho</h3>
                   <p className="text-gray-600 mb-4">Peer-to-peer lending with better rates</p>

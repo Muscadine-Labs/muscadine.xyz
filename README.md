@@ -1,6 +1,6 @@
 # muscadine.xyz
 
-Next.js marketing site for Muscadine Labs — financial self-sovereignty platform.
+Next.js marketing site for Muscadine Labs platform.
 
 
 ## Tech Stack

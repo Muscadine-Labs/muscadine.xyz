@@ -82,17 +82,15 @@ const SolutionsPage = () => {
               <p className="text-base text-gray-600 leading-relaxed">
                 Track, manage, and plan your net worth, assets, liabilities, cash, and more. A unified view of your financial picture to help you make informed decisions.
               </p>
-              <a 
-                href="https://portfolio.muscadine.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link 
+                href="/contact"
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
-                Open Portfolio
+                Contact us for more information
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 

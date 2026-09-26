@@ -4,7 +4,7 @@ export default function MuscadineFooter() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
           {/* Brand */}
           <div>
             <h3 className="text-lg font-light text-white mb-4 font-serif">Muscadine</h3>
@@ -42,56 +42,6 @@ export default function MuscadineFooter() {
                 Solutions
               </Link>
             </nav>
-          </div>
-          
-          {/* Solutions */}
-          <div>
-            <h4 className="text-sm font-medium text-white mb-4 uppercase tracking-wide">Solutions</h4>
-            <div className="space-y-2">
-              <a 
-                href="https://app.muscadine.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                App
-              </a>
-              <a 
-                href="https://portfolio.muscadine.xyz" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Portfolio
-              </a>
-              <Link 
-                href="/self-custody"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Self Custody
-              </Link>
-              <Link 
-                href="/node"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Node
-              </Link>
-            </div>
-          </div>
-          
-          {/* Resources */}
-          <div>
-            <h4 className="text-sm font-medium text-white mb-4 uppercase tracking-wide">Resources</h4>
-            <div className="space-y-2">
-              <a 
-                href="https://analytics.muscadine.xyz" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Analytics
-              </a>
-            </div>
           </div>
           
           {/* Legal */}
