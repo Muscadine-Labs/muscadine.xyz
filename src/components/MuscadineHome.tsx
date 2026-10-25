@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import type { HomeStats } from '@/src/lib/stats';
 
 const IsometricNodes = dynamic(() => import('./IsometricNodes'), { ssr: false });
 const PolyhedronShape = dynamic(() => import('./3DShapes/PolyhedronShape'), { ssr: false });
@@ -68,7 +69,8 @@ const CountUpAnimation = ({ target, duration = 2000, suffix = '', prefix = '' }:
       return Number.isInteger(millions) ? String(millions) : millions.toFixed(1);
     }
     if (target >= 1000) {
-      return (num / 1000).toFixed(0);
+      const thousands = num / 1000;
+      return target < 100000 ? thousands.toFixed(1) : thousands.toFixed(0);
     }
     return num.toString();
   };
@@ -94,7 +96,7 @@ const CountUpAnimation = ({ target, duration = 2000, suffix = '', prefix = '' }:
   );
 };
 
-const MuscadineHome = () => {
+const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
   return (
     <>
       {/* Hero Section - Full Width Background */}
@@ -162,21 +164,37 @@ const MuscadineHome = () => {
                   suffix="+" 
                 />
                 <p className="text-lg text-gray-600">
-                  in assets secured
+                  in digital assets &amp; self-custody solutions
                 </p>
               </div>
-              
-              {/* Stat 3 - Security */}
-              <div className="flex-1">
-                <CountUpAnimation 
-                  target={100} 
-                  duration={1000} 
-                  suffix="%" 
-                />
-                <p className="text-lg text-gray-600">
-                  security record
-                </p>
-              </div>
+
+              {/* Stat 3 - Morpho vault TVL (live) */}
+              {stats.vaultTvlUsd !== null && (
+                <div className="flex-1">
+                  <CountUpAnimation 
+                    target={stats.vaultTvlUsd} 
+                    duration={2000} 
+                    prefix="$" 
+                  />
+                  <p className="text-lg text-gray-600">
+                    in Morpho vaults
+                  </p>
+                </div>
+              )}
+
+              {/* Stat 4 - Yield generated for clients (live, DefiLlama) */}
+              {stats.yieldGeneratedUsd !== null && (
+                <div className="flex-1">
+                  <CountUpAnimation 
+                    target={stats.yieldGeneratedUsd} 
+                    duration={2000} 
+                    prefix="$" 
+                  />
+                  <p className="text-lg text-gray-600">
+                    yield generated for clients
+                  </p>
+                </div>
+              )}
           </div>
         </div>
 
