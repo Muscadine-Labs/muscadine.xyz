@@ -142,7 +142,7 @@ const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-x-hidden bg-linear-to-b from-gray-50 via-blue-50 to-gray-50 py-12 md:py-20 my-12 md:my-16">
         {/* Stats Section */}
         <div className="max-w-6xl mx-auto px-4 mb-16 md:mb-32">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-start gap-8 text-center">
               {/* Stat 1 - Clients */}
               <div className="flex-1">
                 <CountUpAnimation 
