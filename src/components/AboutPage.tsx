@@ -105,20 +105,9 @@ const AboutPage = () => {
                   </div>
               <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Nicholas Connelly</h3>
               <p className="text-blue-600 font-medium mb-4">Co-Founder & CEO</p>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed">
                 Bitcoin security expert with over 7 years of experience in digital asset protection. Specializes in self-custody solutions and institutional-grade security practices.
               </p>
-              <a 
-                href="https://nickconnelly.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-              >
-                Visit Website
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
             </div>
 
             {/* Team Member 2 */}
@@ -134,20 +123,9 @@ const AboutPage = () => {
                   </div>
               <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Ignas Panavas</h3>
               <p className="text-blue-600 font-medium mb-4">Co-Founder & CTO</p>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed">
                 DeFi protocol specialist and security auditor with extensive experience in smart contract analysis and risk assessment across multiple blockchain networks.
               </p>
-              <a 
-                href="https://ignaspanavas.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-              >
-                Visit Website
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
             </div>
           </div>
         </div>
