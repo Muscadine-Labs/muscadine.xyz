@@ -20,16 +20,16 @@ const RiskPage: React.FC = () => {
           </h1>
           <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
 
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-red-800 mb-2">Not a bank · Not advice</h2>
-            <p className="text-red-800">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-light text-gray-900 mb-2 font-serif">Not a bank · Not advice</h2>
+            <p className="text-gray-700">
               Muscadine Labs LLC is a <strong>DeFi vault curator and technology provider</strong>, not a bank, broker,
               investment adviser, or custodian. Nothing here is investment, tax, or legal advice. Digital asset
               strategies involve substantial risk, including total loss of principal. Past or projected yield is not a
               guarantee of future results. You retain custody of your assets and are solely responsible for wallet
               security, transaction signing, and eligibility in your jurisdiction. On-chain state is the source of
               truth. See also our{' '}
-              <Link href="/legal" className="underline font-medium text-red-900">
+              <Link href="/legal" className="underline font-medium text-gray-900">
                 legal disclaimer
               </Link>
               .
@@ -106,26 +106,14 @@ const RiskPage: React.FC = () => {
               </table>
             </div>
             <p className="text-gray-700 text-sm">
-              On-chain roles and contract addresses per vault:{' '}
-              <a
-                href="https://analytics.muscadine.xyz/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-orange-600 underline"
-              >
-                analytics.muscadine.xyz
-              </a>
+              On-chain roles and contract addresses are set per vault. Verify them on-chain before depositing.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Vault exposure (summary)</h2>
             <p className="text-gray-700 text-sm mb-4">
-              For documentation purposes only. Verify live allocation on{' '}
-              <a href="https://analytics.muscadine.xyz/" target="_blank" rel="noopener noreferrer" className="text-orange-600 underline">
-                analytics.muscadine.xyz
-              </a>{' '}
-              and on-chain.
+              For documentation purposes only. Verify live allocation on-chain.
             </p>
             <div className="overflow-x-auto border border-gray-200 rounded-lg">
               <table className="w-full text-sm">
@@ -158,7 +146,7 @@ const RiskPage: React.FC = () => {
               href="https://docs.morpho.org/get-started/resources/audits/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-orange-600 font-medium underline"
+              className="text-blue-600 font-medium underline"
             >
               Morpho audits — security reviews →
             </a>
@@ -168,30 +156,25 @@ const RiskPage: React.FC = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Related documents</h2>
             <ul className="text-gray-700 list-disc list-inside space-y-2">
               <li>
-                <Link href="/terms" className="text-orange-600 underline">
+                <Link href="/terms" className="text-blue-600 underline">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/legal" className="text-orange-600 underline">
+                <Link href="/legal" className="text-blue-600 underline">
                   Legal disclaimer
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-orange-600 underline">
+                <Link href="/privacy" className="text-blue-600 underline">
                   Privacy Policy
                 </Link>
-              </li>
-              <li>
-                <a href="https://analytics.muscadine.xyz/" target="_blank" rel="noopener noreferrer" className="text-orange-600 underline">
-                  Vault analytics (analytics.muscadine.xyz)
-                </a>
               </li>
             </ul>
           </section>
 
           <div className="mt-12 pt-8 border-t border-gray-200">
-            <Link href="/" className="inline-flex items-center text-orange-600 hover:text-orange-800 font-semibold transition-colors">
+            <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors">
               ← Back to Muscadine
             </Link>
           </div>

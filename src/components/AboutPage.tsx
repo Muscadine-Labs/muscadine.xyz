@@ -5,10 +5,10 @@ import Image from 'next/image';
 const AboutPage = () => {
   return (
     <>
-      <main className="max-w-6xl mx-auto px-4 pt-20">
+      <div>
         {/* Header Section */}
-        <div className="text-center py-20">
-          <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-8 font-serif">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl sm:text-4xl font-light text-gray-900 mb-6 font-serif">
             A Team You Can Trust
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
@@ -130,7 +130,7 @@ const AboutPage = () => {
           </div>
         </div>
 
-      </main>
+      </div>
     </>
   );
 };
