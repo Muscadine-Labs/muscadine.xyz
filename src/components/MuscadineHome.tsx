@@ -158,7 +158,7 @@ const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
               {/* Stat 2 - Assets */}
               <div className="flex-1">
                 <CountUpAnimation 
-                  target={15000000} 
+                  target={16000000} 
                   duration={2000} 
                   prefix="$" 
                   suffix="+" 
