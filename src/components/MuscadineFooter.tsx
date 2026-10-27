@@ -30,16 +30,16 @@ export default function MuscadineFooter() {
                 About Us
               </Link>
               <Link 
-                href="/contact"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Contact
-              </Link>
-              <Link 
                 href="/solutions"
                 className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
               >
                 Solutions
+              </Link>
+              <Link 
+                href="/contact"
+                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                Contact
               </Link>
             </nav>
           </div>

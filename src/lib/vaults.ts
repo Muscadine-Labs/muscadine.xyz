@@ -38,6 +38,8 @@ export interface VaultRow {
   kind: VaultKind;
   network: string;
   apy: number | null;
+  performanceFee: number | null;
+  managementFee: number | null;
   tvlUsd: number | null;
 }
 
@@ -56,7 +58,7 @@ function displayName(fallback: string, liveName: string | null | undefined, kind
 async function fetchVaultRows(): Promise<VaultRow[]> {
   const fields = VAULTS.map(
     (vault, i) =>
-      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssetsUsd avgNetApy chain { network } }`
+      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssetsUsd avgNetApy performanceFee managementFee chain { network } }`
   ).join('\n');
 
   try {
@@ -74,6 +76,8 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
           name: string | null;
           totalAssetsUsd: number | null;
           avgNetApy: number | null;
+          performanceFee: number | null;
+          managementFee: number | null;
           chain: { network: string | null } | null;
         } | null
       >;
@@ -87,6 +91,8 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
         kind: vault.kind,
         network: row?.chain?.network?.trim() || 'Base',
         apy: typeof row?.avgNetApy === 'number' ? row.avgNetApy * 100 : null,
+        performanceFee: typeof row?.performanceFee === 'number' ? row.performanceFee * 100 : null,
+        managementFee: typeof row?.managementFee === 'number' ? row.managementFee * 100 : null,
         tvlUsd: typeof row?.totalAssetsUsd === 'number' ? row.totalAssetsUsd : null,
       };
     });
@@ -97,6 +103,8 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
       kind: vault.kind,
       network: 'Base',
       apy: null,
+      performanceFee: null,
+      managementFee: null,
       tvlUsd: null,
     }));
   }

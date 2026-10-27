@@ -96,11 +96,11 @@ const AboutPage = () => {
             <div className="bg-white border-2 border-gray-200 rounded-lg p-8 text-center hover:border-gray-400 transition-all duration-300">
             <div className="mx-auto mb-6 h-64 w-64 overflow-hidden rounded-lg relative">
                     <Image 
-                      src="/Nicholas.connelly.headshot.jpg" 
+                      src="/nicholas-connelly-headshot.jpg" 
                       alt="Nicholas Connelly" 
                       fill
-                      sizes="256px"
-                      className="object-cover object-top" 
+                      sizes="512px"
+                      className="object-cover object-center" 
                     />
                   </div>
               <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Nicholas Connelly</h3>
