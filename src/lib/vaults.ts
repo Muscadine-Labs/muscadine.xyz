@@ -11,32 +11,46 @@ const DEFILLAMA_SUPPLY_SIDE_URL =
 
 export type VaultKind = 'vault' | 'wrapper';
 
+export type VaultStrategy = 'Prime' | 'Frontier';
+
 export interface VaultConfig {
   name: string;
   address: string;
   kind: VaultKind;
+  strategy: VaultStrategy;
 }
 
 export const VAULTS: readonly VaultConfig[] = [
-  { name: 'Muscadine USDC Prime', address: '0x89712980Cb434eF5aE4AB29349419eb976B0b496', kind: 'vault' },
-  { name: 'Muscadine USDC Frontier', address: '0x314fD07319ef645bA7D548915CCd91F4788A1839', kind: 'vault' },
-  { name: 'Muscadine WETH Prime', address: '0xD6DCAd2f7Da91FBb27BdA471540d9770c97a5a43', kind: 'vault' },
-  { name: 'Muscadine cbBTC Prime', address: '0x99dcd0D75822BA398F13B2A8852B07c7e137EC70', kind: 'vault' },
-  { name: 'Muscadine USDC Prime wrapper', address: '0x036A01eFdDC87F6634FFDE0533EE528b90fc7A45', kind: 'wrapper' },
-  { name: 'Muscadine WETH Prime wrapper', address: '0x548653b09b03A69f93B3890c382fE9DcD245cbc4', kind: 'wrapper' },
-  { name: 'Muscadine cbBTC Prime wrapper', address: '0x0e0a857d2AF1A2d43c82d1FA54766239CAb70147', kind: 'wrapper' },
-  { name: 'Muscadine USDC Frontier wrapper', address: '0x54D8417bD21C86A7806b58f5aa2e2E0bB88B856A', kind: 'wrapper' },
+  { name: 'Muscadine USDC Prime', address: '0x89712980Cb434eF5aE4AB29349419eb976B0b496', kind: 'vault', strategy: 'Prime' },
+  { name: 'Muscadine USDC Frontier', address: '0x314fD07319ef645bA7D548915CCd91F4788A1839', kind: 'vault', strategy: 'Frontier' },
+  { name: 'Muscadine WETH Prime', address: '0xD6DCAd2f7Da91FBb27BdA471540d9770c97a5a43', kind: 'vault', strategy: 'Prime' },
+  { name: 'Muscadine cbBTC Prime', address: '0x99dcd0D75822BA398F13B2A8852B07c7e137EC70', kind: 'vault', strategy: 'Prime' },
+  { name: 'Muscadine USDC Prime wrapper', address: '0x036A01eFdDC87F6634FFDE0533EE528b90fc7A45', kind: 'wrapper', strategy: 'Prime' },
+  { name: 'Muscadine WETH Prime wrapper', address: '0x548653b09b03A69f93B3890c382fE9DcD245cbc4', kind: 'wrapper', strategy: 'Prime' },
+  { name: 'Muscadine cbBTC Prime wrapper', address: '0x0e0a857d2AF1A2d43c82d1FA54766239CAb70147', kind: 'wrapper', strategy: 'Prime' },
+  { name: 'Muscadine USDC Frontier wrapper', address: '0x54D8417bD21C86A7806b58f5aa2e2E0bB88B856A', kind: 'wrapper', strategy: 'Frontier' },
 ];
 
 export const underlyingVaultAddresses = VAULTS.filter((vault) => vault.kind === 'vault').map(
   (vault) => vault.address
 );
 
+export interface VaultExposure {
+  symbol: string;
+  usd: number;
+}
+
 export interface VaultRow {
   name: string;
   address: string;
   kind: VaultKind;
+  strategy: VaultStrategy;
   network: string;
+  assetSymbol: string | null;
+  /** Total deposits in the vault asset (human units). */
+  totalAssets: number | null;
+  /** Collateral the vault lends against, largest first. */
+  exposure: VaultExposure[];
   apy: number | null;
   performanceFee: number | null;
   managementFee: number | null;
@@ -55,10 +69,66 @@ function displayName(fallback: string, liveName: string | null | undefined, kind
   return base;
 }
 
+interface MorphoAdapter {
+  positions?: {
+    items:
+      | {
+          state: { supplyAssetsUsd: number | null } | null;
+          market: { collateralAsset: { symbol: string | null } | null } | null;
+        }[]
+      | null;
+  } | null;
+}
+
+function toTokenAmount(raw: number | string | null | undefined, decimals: number | null | undefined): number | null {
+  if (raw === null || raw === undefined || typeof decimals !== 'number') return null;
+  const value = Number(raw);
+  return Number.isFinite(value) ? value / 10 ** decimals : null;
+}
+
+// Sum supplied USD per collateral token across market adapters. Markets the
+// vault is capped on but has nothing in are skipped.
+function collectExposure(adapters: MorphoAdapter[] | null | undefined): VaultExposure[] {
+  const bySymbol = new Map<string, number>();
+  for (const adapter of adapters ?? []) {
+    for (const position of adapter.positions?.items ?? []) {
+      const symbol = position.market?.collateralAsset?.symbol;
+      const usd = position.state?.supplyAssetsUsd ?? 0;
+      if (!symbol || usd < 1) continue;
+      bySymbol.set(symbol, (bySymbol.get(symbol) ?? 0) + usd);
+    }
+  }
+  return [...bySymbol.entries()]
+    .map(([symbol, usd]) => ({ symbol, usd }))
+    .sort((a, b) => b.usd - a.usd);
+}
+
+// Positions are queried one vault at a time: Morpho rejects a combined query
+// over all vaults as too complex. Exposure is optional, so a failure here
+// leaves the vault listed without it.
+async function fetchVaultExposure(address: string): Promise<VaultExposure[]> {
+  const query = `{ vault: vaultV2ByAddress(address: "${address}", chainId: ${BASE_CHAIN_ID}) { adapters { items { ... on MorphoMarketV1Adapter { positions(first: 50) { items { state { supplyAssetsUsd } market { collateralAsset { symbol } } } } } } } } }`;
+  try {
+    const res = await fetch(MORPHO_GRAPHQL_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ query }),
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (!res.ok) return [];
+    const json = (await res.json()) as {
+      data?: { vault: { adapters: { items: MorphoAdapter[] | null } | null } | null };
+    };
+    return collectExposure(json.data?.vault?.adapters?.items);
+  } catch {
+    return [];
+  }
+}
+
 async function fetchVaultRows(): Promise<VaultRow[]> {
   const fields = VAULTS.map(
     (vault, i) =>
-      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssetsUsd avgNetApy performanceFee managementFee chain { network } }`
+      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssets totalAssetsUsd netApy avgNetApy performanceFee managementFee chain { network } asset { symbol decimals } }`
   ).join('\n');
 
   try {
@@ -74,23 +144,32 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
         string,
         {
           name: string | null;
+          totalAssets: number | string | null;
           totalAssetsUsd: number | null;
+          netApy: number | null;
           avgNetApy: number | null;
           performanceFee: number | null;
           managementFee: number | null;
           chain: { network: string | null } | null;
+          asset: { symbol: string | null; decimals: number | null } | null;
         } | null
       >;
     };
     if (!json.data) throw new Error('morpho');
     return VAULTS.map((vault, i) => {
       const row = json.data?.[`v${i}`];
+      // Net APY matches the headline rate on app.muscadine.xyz and Morpho.
+      const apy = row?.netApy ?? row?.avgNetApy;
       return {
         name: displayName(vault.name, row?.name, vault.kind),
         address: vault.address,
         kind: vault.kind,
+        strategy: vault.strategy,
         network: row?.chain?.network?.trim() || 'Base',
-        apy: typeof row?.avgNetApy === 'number' ? row.avgNetApy * 100 : null,
+        assetSymbol: row?.asset?.symbol ?? null,
+        totalAssets: toTokenAmount(row?.totalAssets, row?.asset?.decimals),
+        exposure: [],
+        apy: typeof apy === 'number' ? apy * 100 : null,
         performanceFee: typeof row?.performanceFee === 'number' ? row.performanceFee * 100 : null,
         managementFee: typeof row?.managementFee === 'number' ? row.managementFee * 100 : null,
         tvlUsd: typeof row?.totalAssetsUsd === 'number' ? row.totalAssetsUsd : null,
@@ -101,7 +180,11 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
       name: vault.name,
       address: vault.address,
       kind: vault.kind,
+      strategy: vault.strategy,
       network: 'Base',
+      assetSymbol: null,
+      totalAssets: null,
+      exposure: [],
       apy: null,
       performanceFee: null,
       managementFee: null,
@@ -125,10 +208,16 @@ async function fetchRevenueToTokenHoldersUsd(): Promise<number | null> {
 }
 
 export async function getAppVaults(): Promise<AppVaults> {
-  const [vaults, revenueToTokenHoldersUsd] = await Promise.all([
+  const [rows, revenueToTokenHoldersUsd, exposures] = await Promise.all([
     fetchVaultRows(),
     fetchRevenueToTokenHoldersUsd(),
+    Promise.all(underlyingVaultAddresses.map(fetchVaultExposure)),
   ]);
+
+  const vaults = rows.map((vault) => {
+    const index = underlyingVaultAddresses.indexOf(vault.address);
+    return index === -1 ? vault : { ...vault, exposure: exposures[index] };
+  });
 
   const underlying = vaults.filter((vault) => vault.kind === 'vault');
   const tvlValues = underlying.map((vault) => vault.tvlUsd);
