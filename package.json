@@ -51,5 +51,8 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }
