@@ -42,12 +42,6 @@ const MuscadineBanner = () => {
             </Link>
             
             <Link
-              href="/app"
-              className="inline-flex items-center text-sm justify-center px-4 py-2 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:outline-hidden transition-all duration-300"
-            >
-              Vaults
-            </Link>
-            <Link
               href="/solutions"
               className="inline-flex items-center text-sm justify-center px-4 py-2 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:outline-hidden transition-all duration-300"
             >
@@ -94,13 +88,6 @@ const MuscadineBanner = () => {
                 About Us
               </Link>
               
-              <Link
-                href="/app"
-                className="inline-flex items-center text-sm justify-center px-4 py-2 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:outline-hidden transition-all duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Vaults
-              </Link>
               <Link
                 href="/solutions"
                 className="inline-flex items-center text-sm justify-center px-4 py-2 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:outline-hidden transition-all duration-300"

@@ -30,12 +30,6 @@ export default function MuscadineFooter() {
                 About Us
               </Link>
               <Link 
-                href="/app"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Vaults
-              </Link>
-              <Link 
                 href="/solutions"
                 className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
               >

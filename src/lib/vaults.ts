@@ -35,11 +35,6 @@ export const underlyingVaultAddresses = VAULTS.filter((vault) => vault.kind === 
   (vault) => vault.address
 );
 
-export interface VaultExposure {
-  symbol: string;
-  usd: number;
-}
-
 export interface VaultRow {
   name: string;
   address: string;
@@ -49,9 +44,13 @@ export interface VaultRow {
   assetSymbol: string | null;
   /** Total deposits in the vault asset (human units). */
   totalAssets: number | null;
-  /** Collateral the vault lends against, largest first. */
-  exposure: VaultExposure[];
   apy: number | null;
+  /** Realized average net APY over the last 90 days, in percentage points. */
+  apy90: number | null;
+  /** Value of one share, quoted in the vault asset. */
+  sharePrice: number | null;
+  /** Dollar value of one share. */
+  sharePriceUsd: number | null;
   performanceFee: number | null;
   managementFee: number | null;
   tvlUsd: number | null;
@@ -69,66 +68,16 @@ function displayName(fallback: string, liveName: string | null | undefined, kind
   return base;
 }
 
-interface MorphoAdapter {
-  positions?: {
-    items:
-      | {
-          state: { supplyAssetsUsd: number | null } | null;
-          market: { collateralAsset: { symbol: string | null } | null } | null;
-        }[]
-      | null;
-  } | null;
-}
-
 function toTokenAmount(raw: number | string | null | undefined, decimals: number | null | undefined): number | null {
   if (raw === null || raw === undefined || typeof decimals !== 'number') return null;
   const value = Number(raw);
   return Number.isFinite(value) ? value / 10 ** decimals : null;
 }
 
-// Sum supplied USD per collateral token across market adapters. Markets the
-// vault is capped on but has nothing in are skipped.
-function collectExposure(adapters: MorphoAdapter[] | null | undefined): VaultExposure[] {
-  const bySymbol = new Map<string, number>();
-  for (const adapter of adapters ?? []) {
-    for (const position of adapter.positions?.items ?? []) {
-      const symbol = position.market?.collateralAsset?.symbol;
-      const usd = position.state?.supplyAssetsUsd ?? 0;
-      if (!symbol || usd < 1) continue;
-      bySymbol.set(symbol, (bySymbol.get(symbol) ?? 0) + usd);
-    }
-  }
-  return [...bySymbol.entries()]
-    .map(([symbol, usd]) => ({ symbol, usd }))
-    .sort((a, b) => b.usd - a.usd);
-}
-
-// Positions are queried one vault at a time: Morpho rejects a combined query
-// over all vaults as too complex. Exposure is optional, so a failure here
-// leaves the vault listed without it.
-async function fetchVaultExposure(address: string): Promise<VaultExposure[]> {
-  const query = `{ vault: vaultV2ByAddress(address: "${address}", chainId: ${BASE_CHAIN_ID}) { adapters { items { ... on MorphoMarketV1Adapter { positions(first: 50) { items { state { supplyAssetsUsd } market { collateralAsset { symbol } } } } } } } } }`;
-  try {
-    const res = await fetch(MORPHO_GRAPHQL_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ query }),
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (!res.ok) return [];
-    const json = (await res.json()) as {
-      data?: { vault: { adapters: { items: MorphoAdapter[] | null } | null } | null };
-    };
-    return collectExposure(json.data?.vault?.adapters?.items);
-  } catch {
-    return [];
-  }
-}
-
 async function fetchVaultRows(): Promise<VaultRow[]> {
   const fields = VAULTS.map(
     (vault, i) =>
-      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssets totalAssetsUsd netApy avgNetApy performanceFee managementFee chain { network } asset { symbol decimals } }`
+      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssets totalAssetsUsd sharePrice netApy avgNetApy(lookback: NINETY_DAYS) performanceFee managementFee chain { network } asset { symbol decimals price { usd } } }`
   ).join('\n');
 
   try {
@@ -146,20 +95,25 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
           name: string | null;
           totalAssets: number | string | null;
           totalAssetsUsd: number | null;
+          sharePrice: number | null;
           netApy: number | null;
           avgNetApy: number | null;
           performanceFee: number | null;
           managementFee: number | null;
           chain: { network: string | null } | null;
-          asset: { symbol: string | null; decimals: number | null } | null;
+          asset: { symbol: string | null; decimals: number | null; price: { usd: number | null } | null } | null;
         } | null
       >;
     };
     if (!json.data) throw new Error('morpho');
     return VAULTS.map((vault, i) => {
       const row = json.data?.[`v${i}`];
-      // Net APY matches the headline rate on app.muscadine.xyz and Morpho.
-      const apy = row?.netApy ?? row?.avgNetApy;
+      // Spot net APY. The 90-day figure is avgNetApy(lookback: NINETY_DAYS), not this rate.
+      const apy = row?.netApy;
+      const sharePrice = typeof row?.sharePrice === 'number' ? row.sharePrice : null;
+      const assetPriceUsd = row?.asset?.price?.usd;
+      const sharePriceUsd =
+        sharePrice !== null && typeof assetPriceUsd === 'number' ? sharePrice * assetPriceUsd : null;
       return {
         name: displayName(vault.name, row?.name, vault.kind),
         address: vault.address,
@@ -168,8 +122,10 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
         network: row?.chain?.network?.trim() || 'Base',
         assetSymbol: row?.asset?.symbol ?? null,
         totalAssets: toTokenAmount(row?.totalAssets, row?.asset?.decimals),
-        exposure: [],
         apy: typeof apy === 'number' ? apy * 100 : null,
+        apy90: typeof row?.avgNetApy === 'number' ? row.avgNetApy * 100 : null,
+        sharePrice,
+        sharePriceUsd,
         performanceFee: typeof row?.performanceFee === 'number' ? row.performanceFee * 100 : null,
         managementFee: typeof row?.managementFee === 'number' ? row.managementFee * 100 : null,
         tvlUsd: typeof row?.totalAssetsUsd === 'number' ? row.totalAssetsUsd : null,
@@ -184,8 +140,10 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
       network: 'Base',
       assetSymbol: null,
       totalAssets: null,
-      exposure: [],
       apy: null,
+      apy90: null,
+      sharePrice: null,
+      sharePriceUsd: null,
       performanceFee: null,
       managementFee: null,
       tvlUsd: null,
@@ -208,16 +166,10 @@ async function fetchRevenueToTokenHoldersUsd(): Promise<number | null> {
 }
 
 export async function getAppVaults(): Promise<AppVaults> {
-  const [rows, revenueToTokenHoldersUsd, exposures] = await Promise.all([
+  const [vaults, revenueToTokenHoldersUsd] = await Promise.all([
     fetchVaultRows(),
     fetchRevenueToTokenHoldersUsd(),
-    Promise.all(underlyingVaultAddresses.map(fetchVaultExposure)),
   ]);
-
-  const vaults = rows.map((vault) => {
-    const index = underlyingVaultAddresses.indexOf(vault.address);
-    return index === -1 ? vault : { ...vault, exposure: exposures[index] };
-  });
 
   const underlying = vaults.filter((vault) => vault.kind === 'vault');
   const tvlValues = underlying.map((vault) => vault.tvlUsd);
