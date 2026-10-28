@@ -63,9 +63,9 @@ const PrivacyPage: React.FC = () => {
               <li>With service providers who assist in operating our services (under strict confidentiality agreements)</li>
               <li>In connection with a business transfer, merger, or acquisition (with notice to users)</li>
             </ul>
-            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-sm mt-4">
-              <p className="text-yellow-800 font-semibold mb-2">Third-Party Protocols (Morpho, Node Access, etc.):</p>
-              <p className="text-yellow-700">
+            <div className="bg-gray-50 border border-gray-200 p-4 rounded-sm mt-4">
+              <p className="text-gray-800 font-semibold mb-2">Third-Party Protocols (Morpho, Node Access, etc.):</p>
+              <p className="text-gray-700">
                 When you interact with third-party DeFi protocols (including Morpho vaults) or connect to our Bitcoin node 
                 through our curated services, those protocols and services may collect information according to their own 
                 privacy policies. We are not responsible for the privacy practices of third-party protocols or smart contracts.
@@ -86,9 +86,9 @@ const PrivacyPage: React.FC = () => {
               <li>Regular security assessments and updates</li>
               <li>Limited access to personal information on a need-to-know basis</li>
             </ul>
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-sm mt-4">
-              <p className="text-red-800 font-semibold mb-2">Important Security Reminder:</p>
-              <p className="text-red-700">
+            <div className="bg-gray-50 border border-gray-200 p-4 rounded-sm mt-4">
+              <p className="text-gray-800 font-semibold mb-2">Important Security Reminder:</p>
+              <p className="text-gray-700">
                 We never request your wallet private keys, seed phrases, or passwords. Never share these credentials with anyone, 
                 including Muscadine Labs LLC. Your digital assets remain in your control through non-custodial smart contracts.
               </p>
@@ -146,9 +146,9 @@ const PrivacyPage: React.FC = () => {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Service Disclaimers</h2>
-            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-sm mb-4">
-              <p className="text-yellow-800 font-semibold mb-2">Risk Curation Services:</p>
-              <p className="text-yellow-700 mb-4">
+            <div className="bg-gray-50 border border-gray-200 p-6 rounded-sm mb-4">
+              <p className="text-gray-800 font-semibold mb-2">Risk Curation Services:</p>
+              <p className="text-gray-700 mb-4">
                 Our risk curation for non-custodial vaults involves evaluating protocols, assessing smart contract security, 
                 and providing risk assessments. However, our curation does not guarantee safety or eliminate risks. All 
                 participation in DeFi protocols involves significant risk of total loss.

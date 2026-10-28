@@ -3,13 +3,13 @@
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import type { HomeStats } from '@/src/lib/stats';
 
 const IsometricNodes = dynamic(() => import('./IsometricNodes'), { ssr: false });
 const PolyhedronShape = dynamic(() => import('./3DShapes/PolyhedronShape'), { ssr: false });
 const StarShape = dynamic(() => import('./3DShapes/StarShape'), { ssr: false });
 const TorusShape = dynamic(() => import('./3DShapes/TorusShape'), { ssr: false });
 const PyramidShape = dynamic(() => import('./3DShapes/PyramidShape'), { ssr: false });
-const PixelBlast = dynamic(() => import('./PixelBlast'), { ssr: false });
 
 const CountUpAnimation = ({ target, duration = 2000, suffix = '', prefix = '' }: { 
   target: number; 
@@ -68,33 +68,27 @@ const CountUpAnimation = ({ target, duration = 2000, suffix = '', prefix = '' }:
       return Number.isInteger(millions) ? String(millions) : millions.toFixed(1);
     }
     if (target >= 1000) {
-      return (num / 1000).toFixed(0);
+      const thousands = num / 1000;
+      return target < 100000 ? thousands.toFixed(1) : thousands.toFixed(0);
     }
     return num.toString();
   };
 
-  const needsSmallUnit = target >= 1000;
   const unit = target >= 1000000 ? 'M' : target >= 1000 ? 'K' : '';
 
   return (
     <div ref={ref} className="flex-1">
-      <h2 className="text-5xl sm:text-6xl lg:text-7xl font-light text-gray-900 mb-2 font-serif">
-        {prefix && (
-          <span className="text-3xl sm:text-4xl lg:text-5xl">{prefix}</span>
-        )}
+      <h2 className="text-5xl sm:text-6xl lg:text-7xl font-light leading-none text-gray-900 mb-3 font-serif lining-nums tabular-nums tracking-tight">
+        {prefix}
         {isVisible ? formatNumber(count) : '0'}
-        {needsSmallUnit && (
-          <span className="text-3xl sm:text-4xl lg:text-5xl">{unit}</span>
-        )}
-        {suffix && (
-          <span className="text-3xl sm:text-4xl lg:text-5xl">{suffix}</span>
-        )}
+        {unit}
+        {suffix}
       </h2>
     </div>
   );
 };
 
-const MuscadineHome = () => {
+const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
   return (
     <>
       {/* Hero Section - Full Width Background */}
@@ -140,7 +134,7 @@ const MuscadineHome = () => {
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-x-hidden bg-linear-to-b from-gray-50 via-blue-50 to-gray-50 py-12 md:py-20 my-12 md:my-16">
         {/* Stats Section */}
         <div className="max-w-6xl mx-auto px-4 mb-16 md:mb-32">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-start gap-8 text-center">
               {/* Stat 1 - Clients */}
               <div className="flex-1">
                 <CountUpAnimation 
@@ -156,27 +150,30 @@ const MuscadineHome = () => {
               {/* Stat 2 - Assets */}
               <div className="flex-1">
                 <CountUpAnimation 
-                  target={15000000} 
+                  target={16000000} 
                   duration={2000} 
                   prefix="$" 
                   suffix="+" 
                 />
                 <p className="text-lg text-gray-600">
-                  in assets secured
+                  in digital assets &amp; self-custody solutions
                 </p>
               </div>
-              
-              {/* Stat 3 - Security */}
-              <div className="flex-1">
-                <CountUpAnimation 
-                  target={100} 
-                  duration={1000} 
-                  suffix="%" 
-                />
-                <p className="text-lg text-gray-600">
-                  security record
-                </p>
-              </div>
+
+              {/* Stat 3 - Morpho vault TVL (live) */}
+              {stats.vaultTvlUsd !== null && (
+                <div className="flex-1">
+                  <CountUpAnimation 
+                    target={stats.vaultTvlUsd} 
+                    duration={2000} 
+                    prefix="$" 
+                  />
+                  <p className="text-lg text-gray-600">
+                    in Morpho vaults
+                  </p>
+                </div>
+              )}
+
           </div>
         </div>
 
@@ -192,35 +189,33 @@ const MuscadineHome = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
             {/* Service 1 - Our App (Top Left) */}
-            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="space-y-6">
                 {/* 3D Shape Container */}
                 <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
-                  <PyramidShape path="https://app.muscadine.xyz" />
+                  <PyramidShape path="/app" />
                 </div>
                 
                 <h3 className="text-2xl font-light text-gray-900 font-serif">
                   Our App
                 </h3>
                 <p className="text-base text-gray-600 leading-relaxed">
-                  Access our Morpho vaults on Base for secure yield on USDC, Bitcoin, and Ethereum. Built for financial freedom with flexible deposits/withdrawals of any amount, anytime.
+                  Access our Morpho vaults on Base for secure yield on USDC, Bitcoin, and Ethereum. Deposit or withdraw any amount, at any time.
                 </p>
-                <a 
-                  href="https://app.muscadine.xyz"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/app"
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
-                  Launch App
+                  View and Access our Morpho vaults
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
 
             {/* Service 2 - Bitcoin Node (Top Right) */}
-            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="space-y-6">
                 {/* 3D Shape Container */}
                 <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
@@ -246,7 +241,7 @@ const MuscadineHome = () => {
             </div>
 
             {/* Service 3 - Self Custody (Bottom Left) */}
-            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="space-y-6">
                 {/* 3D Shape Container */}
                 <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
@@ -272,7 +267,7 @@ const MuscadineHome = () => {
             </div>
 
             {/* Service 4 - Portfolio (Bottom Right) */}
-            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="space-y-6">
                 {/* 3D Shape Container */}
                 <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
@@ -297,45 +292,6 @@ const MuscadineHome = () => {
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
-
-      {/* Analytics Section */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-x-hidden">
-        <div className="absolute inset-0 bg-gray-900" 
-             style={{ clipPath: 'polygon(0 10%, 100% 0%, 100% 100%, 0% 100%)' }}>
-          <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <PixelBlast />
-          </div>
-        </div>
-        <div className="relative py-16 md:py-20 mt-12 md:mt-16">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-2xl sm:text-3xl font-light text-white mb-4 font-serif">
-              Analytics
-            </h2>
-            <p className="text-gray-200 leading-relaxed mb-6">
-              Explore metrics and dashboards at{' '}
-              <a 
-                href="https://analytics.muscadine.xyz" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white font-medium underline underline-offset-2 hover:no-underline"
-              >
-                analytics.muscadine.xyz
-              </a>
-            </p>
-            <a 
-              href="https://analytics.muscadine.xyz" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm"
-            >
-              Open Analytics
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
           </div>
         </div>
       </div>

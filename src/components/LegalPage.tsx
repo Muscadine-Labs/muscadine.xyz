@@ -13,15 +13,14 @@ const LegalPage: React.FC = () => {
           </h1>
           <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-yellow-800 mb-2">⚠️ IMPORTANT LEGAL NOTICE</h2>
-            <p className="text-yellow-800 font-semibold mb-2">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">IMPORTANT LEGAL NOTICE</h2>
+            <p className="text-gray-800 font-semibold mb-2">
               READ THIS DISCLAIMER CAREFULLY BEFORE USING OUR SERVICES.
             </p>
-            <p className="text-yellow-800">
+            <p className="text-gray-800">
               Muscadine Labs LLC is a DeFi vault curator and technology provider — not a bank, broker, investment adviser, or custodian. For operational risk framework and vault exposure summaries, see our{' '}
-              <Link href="/risk" className="underline font-semibold">Risk</Link> page. Live vault configuration, roles, and performance data are on{' '}
-              <a href="https://analytics.muscadine.xyz/" target="_blank" rel="noopener noreferrer" className="underline font-semibold">analytics.muscadine.xyz</a>.
+              <Link href="/risk" className="underline font-semibold">Risk</Link> page.
             </p>
           </div>
 
@@ -45,12 +44,12 @@ const LegalPage: React.FC = () => {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. No Financial Advice</h2>
-            <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-4">
-              <p className="text-red-800 font-semibold mb-2">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-4">
+              <p className="text-gray-800 font-semibold mb-2">
                 WE DO NOT PROVIDE FINANCIAL ADVICE, INVESTMENT ADVICE, OR TRADING ADVICE.
               </p>
-              <p className="text-red-700 mb-2">Nothing on this website or in our communications constitutes:</p>
-              <ul className="text-red-700 list-disc list-inside space-y-1">
+              <p className="text-gray-700 mb-2">Nothing on this website or in our communications constitutes:</p>
+              <ul className="text-gray-700 list-disc list-inside space-y-1">
                 <li>Financial advice or recommendations</li>
                 <li>Investment advice or recommendations</li>
                 <li>Trading advice or recommendations</li>
@@ -85,12 +84,12 @@ const LegalPage: React.FC = () => {
               All assets remain in your control through non-custodial smart contracts. We provide risk curation and educational guidance only. 
               Users are responsible for their own asset security and custody.
             </p>
-            <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-4">
-              <p className="text-red-800 font-semibold mb-2">CRITICAL VAULT SERVICES DISCLAIMER:</p>
-              <p className="text-red-700 mb-2 font-semibold">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-4">
+              <p className="text-gray-800 font-semibold mb-2">CRITICAL VAULT SERVICES DISCLAIMER:</p>
+              <p className="text-gray-700 mb-2 font-semibold">
                 Despite our risk curation efforts, non-custodial vault services involve significant risks including potential total loss of assets.
               </p>
-              <ul className="text-red-700 list-disc list-inside space-y-1">
+              <ul className="text-gray-700 list-disc list-inside space-y-1">
                 <li><strong>We do not custody, hold, or store your digital assets</strong> - All assets remain in your control through non-custodial smart contracts</li>
                 <li>Vault services are provided through third-party protocols (such as Morpho) - We do not operate these protocols</li>
                 <li>Smart contract vulnerabilities may result in total loss of funds, even after our risk assessment</li>
@@ -127,12 +126,12 @@ const LegalPage: React.FC = () => {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Seed Phrase and Security Risks</h2>
-            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-4">
-              <p className="text-yellow-800 font-semibold mb-2">CRITICAL SECURITY WARNING:</p>
-              <p className="text-yellow-700 mb-2">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-4">
+              <p className="text-gray-800 font-semibold mb-2">CRITICAL SECURITY WARNING:</p>
+              <p className="text-gray-700 mb-2">
                 Seed phrase compromise can result in permanent loss of all cryptocurrency holdings. Users must understand these risks:
               </p>
-              <ul className="text-yellow-700 list-disc list-inside space-y-1">
+              <ul className="text-gray-700 list-disc list-inside space-y-1">
                 <li>Seed phrases provide complete access to wallet funds</li>
                 <li>Compromise through phishing, malware, or social engineering</li>
                 <li>Physical theft of hardware wallets or written seed phrases</li>
@@ -176,8 +175,8 @@ const LegalPage: React.FC = () => {
               <li><strong>Tax Implications:</strong> Tax reporting requirements and potential tax liabilities</li>
               <li><strong>Risk Curation Limitations:</strong> Our risk curation does not eliminate these risks and cannot guarantee safety</li>
             </ul>
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-sm mt-4">
-              <p className="text-red-800 font-semibold">
+            <div className="bg-gray-50 border border-gray-200 p-4 rounded-sm mt-4">
+              <p className="text-gray-800 font-semibold">
                 <strong>WARNING:</strong> Participation in DeFi protocols and non-custodial vaults can result in total loss of your assets. 
                 Never invest more than you can afford to lose.
               </p>
@@ -271,9 +270,9 @@ const LegalPage: React.FC = () => {
             </div>
           </section>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-yellow-800 mb-2">Final Warning</h2>
-            <p className="text-yellow-800 font-semibold">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">Final Warning</h2>
+            <p className="text-gray-800 font-semibold">
               By continuing to use our services, you acknowledge that you have read, understood, and agree to be 
               bound by this legal disclaimer. If you do not agree with any part of this disclaimer, you must not use our services.
             </p>

@@ -30,30 +30,49 @@ const SolutionsPage = () => {
         {/* Solutions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Our App */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
             <div className="space-y-6">
               <h3 className="text-2xl font-light text-gray-900 font-serif">
                 Our App
               </h3>
               <p className="text-base text-gray-600 leading-relaxed">
-                Access our Morpho vaults on Base for secure yield on USDC, Bitcoin, and Ethereum. Built for financial freedom with flexible deposits/withdrawals of any amount, anytime.
+                Access our Morpho vaults on Base for secure yield on USDC, Bitcoin, and Ethereum. Deposit or withdraw any amount, at any time.
               </p>
-              <a 
-                href="https://app.muscadine.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/app"
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
-                Launch App
+                View and Access our Morpho vaults
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
+            </div>
+          </div>
+
+          {/* Bitcoin Node */}
+          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-light text-gray-900 font-serif">
+                Bitcoin Node
+              </h3>
+              <p className="text-base text-gray-600 leading-relaxed">
+                Connect to our self-hosted Bitcoin node for secure transactions and enhanced privacy. Access a full Bitcoin node for verification and transaction broadcasting.
+              </p>
+              <Link 
+                href="/node"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              >
+                Connect to our Bitcoin Node
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </div>
           </div>
 
           {/* Self Custody */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
             <div className="space-y-6">
               <h3 className="text-2xl font-light text-gray-900 font-serif">
                 Self Custody
@@ -74,7 +93,7 @@ const SolutionsPage = () => {
           </div>
 
           {/* Portfolio */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
+          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
             <div className="space-y-6">
               <h3 className="text-2xl font-light text-gray-900 font-serif">
                 Portfolio
@@ -87,27 +106,6 @@ const SolutionsPage = () => {
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
                 Contact us for more information
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-
-          {/* Bitcoin Node */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-400 hover:scale-105 transition-all duration-300 ease-in-out">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-light text-gray-900 font-serif">
-                Bitcoin Node
-              </h3>
-              <p className="text-base text-gray-600 leading-relaxed">
-                Connect to our self-hosted Bitcoin node for secure transactions and enhanced privacy. Access a full Bitcoin node for verification and transaction broadcasting.
-              </p>
-              <Link 
-                href="/node"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-              >
-                Connect to our Bitcoin Node
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

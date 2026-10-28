@@ -5,16 +5,16 @@ import Link from 'next/link';
 
 const TermsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div>
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="prose prose-lg max-w-none">
-          <h1 className="text-4xl font-semibold text-gray-900 mb-4 text-center font-serif">
+          <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
             Terms of Service
           </h1>
-          <p className="text-gray-600 mb-8 text-center"><strong>Last updated:</strong> May 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
 
-          <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 mb-8 rounded-sm">
-            <p className="text-yellow-800 font-semibold">
+          <div className="bg-gray-50 border border-gray-200 p-6 mb-8 rounded-sm">
+            <p className="text-gray-800 font-semibold">
               <strong>IMPORTANT DISCLAIMER:</strong> Muscadine Labs LLC is a DeFi vault curator and technology provider — not a bank, broker, investment adviser, or custodian. All content is for educational and informational purposes only. We do not provide financial, investment, tax, or legal advice. Use of our services does not create any professional relationship. Read our{' '}
               <Link href="/risk" className="underline">Risk</Link> page and{' '}
               <Link href="/legal" className="underline">Legal disclaimer</Link> before using vaults or related products.
@@ -22,7 +22,7 @@ const TermsPage: React.FC = () => {
           </div>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               1. Acceptance of Terms
             </h2>
             <p className="text-gray-700 mb-4">
@@ -32,7 +32,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               2. Our Services
             </h2>
             <p className="text-gray-700 mb-4">
@@ -41,11 +41,10 @@ const TermsPage: React.FC = () => {
             <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
               <li><strong>muscadine.xyz</strong> — company site, legal documents, and risk disclosures (authoritative source)</li>
               <li><strong>app.muscadine.xyz</strong> — non-custodial interface to interact with curated Morpho vaults on Base</li>
-              <li><strong>analytics.muscadine.xyz</strong> — vault configuration, roles, and performance data</li>
             </ul>
             <p className="text-gray-700 mb-4">Our services include:</p>
             <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li><strong>Risk curation for non-custodial Morpho vaults</strong> on Base — market selection, parameters, and monitoring (see <Link href="/risk" className="text-orange-600 underline">/risk</Link>)</li>
+              <li><strong>Risk curation for non-custodial Morpho vaults</strong> on Base — market selection, parameters, and monitoring (see <Link href="/risk" className="text-blue-600 underline">/risk</Link>)</li>
               <li><strong>Bitcoin security &amp; self-custody</strong> — educational guidance only; users hold their own keys</li>
               <li><strong>Bitcoin node access</strong> — optional connectivity to our self-hosted node</li>
               <li><strong>Educational content</strong> about cryptocurrency, blockchain, and DeFi</li>
@@ -56,7 +55,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               3. Risk Curation for Non-Custodial Vaults
             </h2>
             <div className="bg-blue-100 border-l-4 border-blue-500 p-6 mb-4 rounded-sm">
@@ -77,11 +76,11 @@ const TermsPage: React.FC = () => {
               <li>Risk scoring and categorization of vault strategies</li>
               <li>Educational guidance on protocol risks and best practices</li>
             </ul>
-            <div className="bg-red-100 border-l-4 border-red-500 p-6 mb-4 rounded-sm mt-6">
-              <p className="text-red-800 font-semibold mb-2">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-4 rounded-sm mt-6">
+              <p className="text-gray-800 font-semibold mb-2">
                 <strong>CRITICAL DISCLAIMER:</strong> Despite our risk curation efforts, non-custodial vault services involve significant risks including potential total loss of assets.
               </p>
-              <ul className="text-red-700 list-disc list-inside space-y-2">
+              <ul className="text-gray-700 list-disc list-inside space-y-2">
                 <li><strong>We do not custody, hold, or store your digital assets</strong> - All assets remain in your control through non-custodial smart contracts</li>
                 <li>Vault services are provided through third-party protocols (such as Morpho) - We do not operate these protocols</li>
                 <li>Smart contract vulnerabilities may result in total loss of funds, even after our risk assessment</li>
@@ -99,11 +98,11 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               4. Bitcoin Security and Self-Custody Risks
             </h2>
-            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 mb-4 rounded-sm">
-              <p className="text-yellow-800 font-semibold">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-4 rounded-sm">
+              <p className="text-gray-800 font-semibold">
                 <strong>SECURITY DISCLAIMER:</strong> Bitcoin self-custody involves significant security risks. 
                 We provide educational guidance only and are not responsible for security failures.
               </p>
@@ -120,11 +119,11 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               5. Frontend and Interface Risks
             </h2>
-            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 mb-4 rounded-sm">
-              <p className="text-yellow-800 font-semibold">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-4 rounded-sm">
+              <p className="text-gray-800 font-semibold">
                 <strong>INTERFACE DISCLAIMER:</strong> Our frontend interfaces may be vulnerable to attacks that could compromise user funds.
               </p>
             </div>
@@ -139,7 +138,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               6. No Professional Relationship
             </h2>
             <p className="text-gray-700 mb-4">
@@ -151,7 +150,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               7. User Responsibilities
             </h2>
             <p className="text-gray-700 mb-4">You agree to:</p>
@@ -169,7 +168,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               8. Limitation of Liability
             </h2>
             <p className="text-gray-700 mb-4">To the maximum extent permitted by law, Muscadine Labs LLC shall not be liable for any:</p>
@@ -191,7 +190,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               9. Indemnification
             </h2>
             <p className="text-gray-700 mb-4">
@@ -200,7 +199,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               10. Intellectual Property
             </h2>
             <p className="text-gray-700 mb-4">
@@ -209,7 +208,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               11. Third-Party Links
             </h2>
             <p className="text-gray-700 mb-4">
@@ -218,7 +217,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               12. Service Availability
             </h2>
             <p className="text-gray-700 mb-4">
@@ -227,7 +226,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               13. Changes to Terms
             </h2>
             <p className="text-gray-700 mb-4">
@@ -236,7 +235,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               14. Governing Law
             </h2>
             <p className="text-gray-700 mb-4">
@@ -245,14 +244,14 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               15. Contact Information
             </h2>
             <div className="bg-gray-50 p-6 rounded-lg mb-4">
               <p className="text-gray-700 mb-2">For questions about these terms, contact us:</p>
               <p className="text-gray-700"><strong>Company:</strong> Muscadine Labs LLC</p>
               <p className="text-gray-700"><strong>Email:</strong>{' '}
-                <a href="mailto:muscadinelabs@gmail.com" className="text-orange-600 hover:text-orange-800 underline">
+                <a href="mailto:muscadinelabs@gmail.com" className="text-blue-600 hover:text-blue-700 underline">
                   muscadinelabs@gmail.com
                 </a>
               </p>
@@ -260,7 +259,7 @@ const TermsPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-orange-500 pb-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               16. Severability
             </h2>
             <p className="text-gray-700 mb-4">
@@ -271,7 +270,7 @@ const TermsPage: React.FC = () => {
           <div className="mt-12 pt-8 border-t border-gray-200">
             <Link 
               href="/" 
-              className="inline-flex items-center text-orange-600 hover:text-orange-800 font-semibold transition-colors"
+              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

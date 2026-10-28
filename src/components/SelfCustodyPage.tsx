@@ -11,7 +11,7 @@ export default function SelfCustodyPage() {
   const mempoolExplanation = "The mempool (memory pool) is where unconfirmed Bitcoin transactions wait before being added to a block. It helps the network manage and prioritize pending transactions.";
 
   return (
-    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 sm:p-8">
+    <div>
       {/* Back Arrow */}
       <div className="mb-6">
         <Link 
@@ -126,8 +126,8 @@ export default function SelfCustodyPage() {
             </div>
           </div>
           
-          <div className="bg-red-50 border-l-4 border-red-400 p-4 mt-6">
-            <p className="text-red-800 font-bold text-lg">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
+            <p className="text-gray-800 font-medium">
               Remember: Not your keys, not your coins. Take control of your financial future.
             </p>
           </div>
@@ -219,8 +219,8 @@ export default function SelfCustodyPage() {
                         Most modern wallets like Sparrow Wallet default to Segwit addresses. Always verify your wallet is generating bc1q... addresses for new deposits.
                       </p>
                     </div>
-                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                      <p className="text-yellow-800 font-medium">
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <p className="text-gray-700 font-medium">
                         Always write down your seed phrase on paper and store it securely.
                       </p>
                     </div>
@@ -249,8 +249,8 @@ export default function SelfCustodyPage() {
                 </div>
               </div>
               
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 mt-8">
-                <p className="text-red-800 font-bold text-lg">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-8">
+                <p className="text-gray-800 font-medium">
                   Not your keys, not your coins.
                 </p>
               </div>
@@ -360,8 +360,8 @@ export default function SelfCustodyPage() {
                       Seedsigner
                     </a>
                   </div>
-                  <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
-                    <p className="text-sm text-yellow-800">
+                  <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                    <p className="text-sm text-gray-700">
                       <strong>Important:</strong> Always buy hardware wallets directly from the manufacturer to avoid tampering.
                     </p>
                   </div>
@@ -454,8 +454,8 @@ export default function SelfCustodyPage() {
                 </div>
               </div>
               
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 mt-8">
-                <p className="text-red-800 font-bold text-lg">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-8">
+                <p className="text-gray-800 font-medium">
                   Proceed carefully—only interact with projects you've vetted.
                 </p>
               </div>
@@ -631,7 +631,7 @@ export default function SelfCustodyPage() {
                   </a>
                 </div>
                 
-                <div className="bg-white border border-orange-200 rounded-lg p-6">
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Hardware Wallets</h3>
                   <p className="text-gray-600 mb-4">Maximum security for DeFi interactions</p>
                   <div className="space-y-2">
@@ -639,8 +639,8 @@ export default function SelfCustodyPage() {
                     <p className="text-sm text-gray-500">• Trezor</p>
                     <p className="text-sm text-gray-500">• Works with software wallets</p>
                   </div>
-                  <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
-                    <p className="text-sm text-yellow-800">
+                  <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                    <p className="text-sm text-gray-700">
                       <strong>Tip:</strong> Use hardware wallets with software wallets like Rabby for the best security and convenience.
                     </p>
                   </div>

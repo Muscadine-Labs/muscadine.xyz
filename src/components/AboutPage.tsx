@@ -5,10 +5,10 @@ import Image from 'next/image';
 const AboutPage = () => {
   return (
     <>
-      <main className="max-w-6xl mx-auto px-4 pt-20">
+      <div>
         {/* Header Section */}
-        <div className="text-center py-20">
-          <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-8 font-serif">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl sm:text-4xl font-light text-gray-900 mb-6 font-serif">
             A Team You Can Trust
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
@@ -96,11 +96,11 @@ const AboutPage = () => {
             <div className="bg-white border-2 border-gray-200 rounded-lg p-8 text-center hover:border-gray-400 transition-all duration-300">
             <div className="mx-auto mb-6 h-64 w-64 overflow-hidden rounded-lg relative">
                     <Image 
-                      src="/Nicholas.connelly.headshot.jpg" 
+                      src="/nicholas-connelly-headshot.jpg" 
                       alt="Nicholas Connelly" 
                       fill
-                      sizes="256px"
-                      className="object-cover object-top" 
+                      sizes="512px"
+                      className="object-cover object-center" 
                     />
                   </div>
               <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Nicholas Connelly</h3>
@@ -130,7 +130,7 @@ const AboutPage = () => {
           </div>
         </div>
 
-      </main>
+      </div>
     </>
   );
 };

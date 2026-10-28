@@ -22,7 +22,7 @@ export default function NodePage() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-4 sm:p-8">
+    <div>
       {/* Back Arrow */}
       <div className="mb-6">
         <Link 
@@ -45,26 +45,26 @@ export default function NodePage() {
       
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Node Information */}
-        <div className="bg-linear-to-r from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200">
-          <h2 className="text-2xl font-bold text-orange-900 mb-4">About This Node</h2>
-          <p className="text-orange-800 text-lg leading-relaxed mb-4">
+        <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h2 className="text-2xl font-light text-gray-900 mb-4 font-serif">About This Node</h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-4">
             This is my personal Bitcoin node running 24/7 to support the Bitcoin network. By connecting to my node, you can:
           </p>
-          <ul className="text-orange-800 space-y-2 ml-4">
+          <ul className="text-gray-700 space-y-2 ml-4">
             <li className="flex items-start">
-              <span className="text-orange-600 mr-2">•</span>
+              <span className="text-gray-400 mr-2">•</span>
               <span>Send and receive Bitcoin transactions with enhanced privacy</span>
             </li>
             <li className="flex items-start">
-              <span className="text-orange-600 mr-2">•</span>
+              <span className="text-gray-400 mr-2">•</span>
               <span>Validate your own transactions without trusting third parties</span>
             </li>
             <li className="flex items-start">
-              <span className="text-orange-600 mr-2">•</span>
+              <span className="text-gray-400 mr-2">•</span>
               <span>Access the Bitcoin network through a trusted, non-custodial service</span>
             </li>
             <li className="flex items-start">
-              <span className="text-orange-600 mr-2">•</span>
+              <span className="text-gray-400 mr-2">•</span>
               <span>Reduce reliance on centralized Bitcoin services</span>
             </li>
           </ul>
@@ -82,7 +82,7 @@ export default function NodePage() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <code className="bg-gray-100 px-3 py-2 rounded-sm text-sm min-w-0 break-all font-mono">gq6fwuul5vdayoy5wutvavelt5bglezmohypuxdb7bfk2tayitpllvid.onion</code>
                 <button 
-                  className="bg-blue-600 text-white px-3 py-2 rounded-sm text-sm hover:bg-blue-700 transition-colors shrink-0 touch-manipulation" 
+                  className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-800 transition-colors shrink-0 touch-manipulation" 
                   onClick={() => copyToClipboard('gq6fwuul5vdayoy5wutvavelt5bglezmohypuxdb7bfk2tayitpllvid.onion')}
                 >
                   Copy
@@ -94,7 +94,7 @@ export default function NodePage() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <span className="bg-gray-100 px-3 py-2 rounded-sm text-sm font-mono">50002</span>
                 <button 
-                  className="bg-green-600 text-white px-3 py-2 rounded-sm text-sm hover:bg-green-700 transition-colors shrink-0 touch-manipulation" 
+                  className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-800 transition-colors shrink-0 touch-manipulation" 
                   onClick={() => copyToClipboard('50002')}
                 >
                   Copy
@@ -106,7 +106,7 @@ export default function NodePage() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <span className="bg-gray-100 px-3 py-2 rounded-sm text-sm font-mono">SSL</span>
                 <button 
-                  className="bg-green-600 text-white px-3 py-2 rounded-sm text-sm hover:bg-green-700 transition-colors shrink-0 touch-manipulation" 
+                  className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-800 transition-colors shrink-0 touch-manipulation" 
                   onClick={() => copyToClipboard('SSL')}
                 >
                   Copy
@@ -117,12 +117,12 @@ export default function NodePage() {
         </div>
 
         {/* How to Connect */}
-        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-          <h3 className="text-xl font-semibold text-blue-900 mb-4">How to Connect</h3>
+        <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 className="text-xl font-light text-gray-900 mb-4 font-serif">How to Connect</h3>
           <div className="space-y-4">
             <div>
-              <h4 className="font-semibold text-blue-800 mb-2">For Sparrow Wallet:</h4>
-              <ol className="text-blue-700 space-y-1 ml-4">
+              <h4 className="font-medium text-gray-900 mb-2">For Sparrow Wallet:</h4>
+              <ol className="text-gray-700 space-y-1 ml-4">
                 <li>1. Open Sparrow wallet</li>
                 <li>2. Go to Settings → Server</li>
                 <li>3. Enter the hostname and port above</li>
