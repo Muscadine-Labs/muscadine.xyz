@@ -56,6 +56,9 @@ const LegalPage: React.FC = () => {
                 <li>Tax advice or recommendations</li>
                 <li>Legal advice or recommendations</li>
               </ul>
+              <p className="text-gray-700 mt-4">
+                Nothing on this website is an offer to sell or a solicitation to buy any product, service, or investment. Past performance is not a reliable indicator of future results. Yields are variable and not guaranteed. Seek your own professional advice before making any decision.
+              </p>
             </div>
           </section>
 
