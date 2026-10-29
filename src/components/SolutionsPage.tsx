@@ -36,7 +36,7 @@ const SolutionsPage = () => {
                 Our App
               </h3>
               <p className="text-base text-gray-600 leading-relaxed">
-                Non-custodial Morpho vaults on Base for USDC, cbBTC and WETH. Yield comes from overcollateralized lending, changes with the market and is not guaranteed.
+                Non-custodial Morpho vaults on Base network.
               </p>
               <Link
                 href="/app"
