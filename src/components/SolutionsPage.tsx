@@ -23,7 +23,7 @@ const SolutionsPage = () => {
             Muscadine Solutions
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
-            Comprehensive financial self-sovereignty solutions designed to help you take complete control of your digital assets. From Bitcoin security to DeFi strategies, our structured approach ensures you maintain security while maximizing opportunities in the decentralized economy.
+            Tools and education for holding and using your own digital assets, from Bitcoin self-custody to DeFi. You keep your keys and make your own decisions.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ const SolutionsPage = () => {
                 Our App
               </h3>
               <p className="text-base text-gray-600 leading-relaxed">
-                Access our Morpho vaults on Base for secure yield on USDC, Bitcoin, and Ethereum. Deposit or withdraw any amount, at any time.
+                Non-custodial Morpho vaults on Base for USDC, cbBTC and WETH. Yield comes from overcollateralized lending, changes with the market and is not guaranteed.
               </p>
               <Link
                 href="/app"
@@ -92,27 +92,6 @@ const SolutionsPage = () => {
             </div>
           </div>
 
-          {/* Portfolio */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-light text-gray-900 font-serif">
-                Portfolio
-              </h3>
-              <p className="text-base text-gray-600 leading-relaxed">
-                Track, manage, and plan your net worth, assets, liabilities, cash, and more. A unified view of your financial picture to help you make informed decisions.
-              </p>
-              <Link 
-                href="/contact"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-              >
-                Contact us for more information
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-
         </div>
 
         {/* Other Solutions Section */}
@@ -121,10 +100,10 @@ const SolutionsPage = () => {
             Other Solutions
           </h3>
           <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto mb-4">
-            Building new DeFi infrastructure and exploring cutting-edge solutions for the decentralized economy. From protocol development to innovative financial instruments that push the boundaries of what&apos;s possible in crypto.
+            Open-source DeFi tools and experiments, built in the open.
           </p>
           <p className="text-gray-500 italic text-sm">
-            Coming Soon — Advanced DeFi Infrastructure
+            More tools as they are built
           </p>
         </div>
       </div>

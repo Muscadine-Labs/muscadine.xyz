@@ -3,273 +3,145 @@
 import React from 'react';
 import Link from 'next/link';
 
+const SECTION_HEADING = 'text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2';
+const BODY = 'text-gray-700 mb-4';
+const LIST = 'text-gray-700 list-disc list-inside space-y-2 mb-4';
+
 const TermsPage: React.FC = () => {
   return (
     <div>
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="prose prose-lg max-w-none">
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
-            Terms of Service
+            Terms of Use
           </h1>
-          <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: October 2026</p>
 
           <div className="bg-gray-50 border border-gray-200 p-6 mb-8 rounded-sm">
             <p className="text-gray-800 font-semibold">
-              <strong>IMPORTANT DISCLAIMER:</strong> Muscadine Labs LLC is a DeFi vault curator and technology provider — not a bank, broker, investment adviser, or custodian. All content is for educational and informational purposes only. We do not provide financial, investment, tax, or legal advice. Use of our services does not create any professional relationship. Read our{' '}
-              <Link href="/risk" className="underline">Risk</Link> page and{' '}
-              <Link href="/legal" className="underline">Legal disclaimer</Link> before using vaults or related products.
+              Muscadine is a personal, non-commercial project. It is not a business, has no clients and offers no
+              services for hire. Nothing here is financial, investment, tax or legal advice, or an offer to sell or a
+              solicitation to buy anything. Read the{' '}
+              <Link href="/risk" className="underline">Risk</Link> page and the{' '}
+              <Link href="/legal" className="underline">Legal disclaimer</Link> before using a vault.
             </p>
           </div>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              1. Acceptance of Terms
-            </h2>
-            <p className="text-gray-700 mb-4">
-              By accessing and using Muscadine Labs LLC's website and services, you accept and agree to be bound by these Terms of Service. 
-              If you do not agree to these terms, please do not use our services.
+            <h2 className={SECTION_HEADING}>1. Acceptance</h2>
+            <p className={BODY}>
+              By using muscadine.xyz or app.muscadine.xyz (the &quot;sites&quot;), you agree to these terms. If you
+              do not agree, do not use the sites. &quot;Muscadine&quot;, &quot;we&quot; and &quot;us&quot; mean the
+              individual who runs the sites.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              2. Our Services
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Muscadine Labs LLC, a limited liability company, is a <strong>DeFi vault curator and technology provider</strong>. We do not take custody of user deposits, guarantee returns, or operate as a bank or registered investment adviser. Our properties include:
-            </p>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li><strong>muscadine.xyz</strong> — company site, legal documents, and risk disclosures (authoritative source)</li>
-              <li><strong>app.muscadine.xyz</strong> — non-custodial interface to interact with curated Morpho vaults on Base</li>
+            <h2 className={SECTION_HEADING}>2. What the sites are</h2>
+            <ul className={LIST}>
+              <li><strong>muscadine.xyz</strong>: notes, guides and open-source tools about Bitcoin self-custody and DeFi, shared for free.</li>
+              <li><strong>app.muscadine.xyz</strong>: an open-source interface to Morpho vaults on Base that we set up for our own and our family&apos;s funds.</li>
+              <li><strong>Bitcoin node</strong>: a self-hosted node we run for ourselves and leave open to connect to, free and with no guarantee it stays up.</li>
             </ul>
-            <p className="text-gray-700 mb-4">Our services include:</p>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li><strong>Risk curation for non-custodial Morpho vaults</strong> on Base — market selection, parameters, and monitoring (see <Link href="/risk" className="text-blue-600 underline">/risk</Link>)</li>
-              <li><strong>Bitcoin security &amp; self-custody</strong> — educational guidance only; users hold their own keys</li>
-              <li><strong>Bitcoin node access</strong> — optional connectivity to our self-hosted node</li>
-              <li><strong>Educational content</strong> about cryptocurrency, blockchain, and DeFi</li>
-            </ul>
-            <p className="text-gray-700 mb-4">
-              Yields are variable and not guaranteed. All content is for educational and informational purposes only.
+            <p className={BODY}>
+              We are not a bank, broker, investment adviser, fund or custodian. We do not charge anyone for anything,
+              take payment, manage anyone else&apos;s money or enter into any professional or advisory relationship
+              with you.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              3. Risk Curation for Non-Custodial Vaults
-            </h2>
-            <div className="bg-blue-100 border-l-4 border-blue-500 p-6 mb-4 rounded-sm">
-              <p className="text-blue-800 font-semibold mb-2">
-                <strong>OUR RISK CURATION SERVICE:</strong> Muscadine Labs LLC curates risk for non-custodial vault services (including Morpho vaults) by evaluating, assessing, and managing risks associated with DeFi protocols and smart contracts.
-              </p>
-              <p className="text-blue-700">
-                We conduct thorough due diligence on protocols, analyze smart contract security, monitor protocol health, and provide risk assessments to help users make informed decisions about non-custodial vault participation.
-              </p>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">What Risk Curation Includes:</h3>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li>Protocol evaluation and security assessment</li>
-              <li>Smart contract audit review and analysis</li>
-              <li>Liquidation risk assessment and monitoring</li>
-              <li>Protocol health monitoring and alerts</li>
-              <li>Due diligence on protocol teams and governance</li>
-              <li>Risk scoring and categorization of vault strategies</li>
-              <li>Educational guidance on protocol risks and best practices</li>
-            </ul>
-            <div className="bg-gray-50 border border-gray-200 p-6 mb-4 rounded-sm mt-6">
-              <p className="text-gray-800 font-semibold mb-2">
-                <strong>CRITICAL DISCLAIMER:</strong> Despite our risk curation efforts, non-custodial vault services involve significant risks including potential total loss of assets.
-              </p>
-              <ul className="text-gray-700 list-disc list-inside space-y-2">
-                <li><strong>We do not custody, hold, or store your digital assets</strong> - All assets remain in your control through non-custodial smart contracts</li>
-                <li>Vault services are provided through third-party protocols (such as Morpho) - We do not operate these protocols</li>
-                <li>Smart contract vulnerabilities may result in total loss of funds, even after our risk assessment</li>
-                <li>Liquidation risks exist in lending protocols and can cause immediate loss of collateral</li>
-                <li>Frontend attacks may compromise user interactions with vault interfaces</li>
-                <li>Protocol failures, exploits, or governance attacks may occur despite our curation efforts</li>
-                <li>Our risk curation does not guarantee safety or eliminate all risks</li>
-                <li>Users must understand DeFi risks before participating and accept full responsibility for their decisions</li>
-                <li>We are not responsible for protocol failures, exploits, or losses incurred through vault participation</li>
-              </ul>
-            </div>
-            <p className="text-gray-700 mb-4 mt-4">
-              <strong>Your Responsibility:</strong> While we curate risk and provide assessments, you are solely responsible for your decisions to participate in any non-custodial vault service. Our risk curation is a tool to help inform your decisions, not a guarantee of safety or performance.
+            <h2 className={SECTION_HEADING}>3. The vaults</h2>
+            <p className={BODY}>
+              The vaults are Morpho Vault V2 smart contracts on Base. We chose their markets and caps for our own
+              use. Deposits are open to approved wallets only, and every vault&apos;s performance and management fee
+              is set to 0%.
             </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              4. Bitcoin Security and Self-Custody Risks
-            </h2>
-            <div className="bg-gray-50 border border-gray-200 p-6 mb-4 rounded-sm">
-              <p className="text-gray-800 font-semibold">
-                <strong>SECURITY DISCLAIMER:</strong> Bitcoin self-custody involves significant security risks. 
-                We provide educational guidance only and are not responsible for security failures.
-              </p>
-            </div>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li>Seed phrase compromise can result in total loss of funds</li>
-              <li>Hardware wallet failures or damage may cause asset loss</li>
-              <li>User error in transaction execution is irreversible</li>
-              <li>Social engineering attacks target cryptocurrency holders</li>
-              <li>Physical security risks exist for hardware wallets</li>
-              <li>We are not responsible for lost or stolen seed phrases</li>
-              <li>Users must implement their own security measures</li>
+            <ul className={LIST}>
+              <li>You keep custody. We never hold your keys or your assets; you sign every transaction yourself.</li>
+              <li>The vault, market and Morpho contracts are third-party, open-source code that we do not control. On-chain state is the source of truth.</li>
+              <li>Yields are variable and not guaranteed. Past APY is not a reliable indicator of future results.</li>
+              <li>A large withdrawal can wait for market liquidity, and you can lose some or all of what you deposit.</li>
+              <li>We can change markets, caps and other settings at any time, within the vault&apos;s on-chain rules.</li>
             </ul>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              5. Frontend and Interface Risks
-            </h2>
-            <div className="bg-gray-50 border border-gray-200 p-6 mb-4 rounded-sm">
-              <p className="text-gray-800 font-semibold">
-                <strong>INTERFACE DISCLAIMER:</strong> Our frontend interfaces may be vulnerable to attacks that could compromise user funds.
-              </p>
-            </div>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li>Frontend applications may be subject to phishing attacks</li>
-              <li>Malicious browser extensions can intercept transactions</li>
-              <li>DNS hijacking may redirect users to fake interfaces</li>
-              <li>Man-in-the-middle attacks can compromise wallet connections</li>
-              <li>Users must verify all URLs and transaction details</li>
-              <li>We are not responsible for frontend-based security breaches</li>
+            <h2 className={SECTION_HEADING}>4. Your responsibility</h2>
+            <ul className={LIST}>
+              <li>You decide whether to use a vault, a guide or the node, and you accept the risks of doing so.</li>
+              <li>You do your own research and get your own professional advice before any financial decision.</li>
+              <li>You keep your keys, devices and seed phrases secure, and check every URL, address and transaction before you sign.</li>
+              <li>You follow the laws that apply to you, including tax and sanctions laws.</li>
             </ul>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              6. No Professional Relationship
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Use of our services does not create any professional relationship between you and Muscadine Labs LLC. 
-              We are not your financial advisors, investment advisors, or legal counsel. Our risk curation 
-              services and educational content are provided for informational purposes only and do not constitute 
-              financial, investment, or legal advice.
+            <h2 className={SECTION_HEADING}>5. No warranty</h2>
+            <p className={BODY}>
+              The sites, the code, the node and all content are provided &quot;as is&quot; and &quot;as
+              available&quot;, without any warranty, express or implied, including merchantability, fitness for a
+              particular purpose, accuracy and non-infringement. They can be wrong, out of date, unavailable or
+              changed at any time.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              7. User Responsibilities
-            </h2>
-            <p className="text-gray-700 mb-4">You agree to:</p>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li>Use our services responsibly and understand the risks associated with cryptocurrency and DeFi</li>
-              <li>Conduct your own research and due diligence before making any financial decisions</li>
-              <li>Consult appropriate professionals (financial advisors, legal counsel) for financial or legal decisions</li>
-              <li>Understand that our risk curation does not eliminate risks or guarantee safety</li>
-              <li>Accept full responsibility for your decisions to participate in any non-custodial vault or DeFi protocol</li>
-              <li>Understand that all information is provided "as is" without warranties</li>
-              <li>Not hold Muscadine Labs LLC liable for any losses incurred through use of our services or participation in curated protocols</li>
-              <li>Maintain proper security practices for your digital assets and wallet credentials</li>
-              <li>Verify all transaction details and protocol addresses before interacting with smart contracts</li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              8. Limitation of Liability
-            </h2>
-            <p className="text-gray-700 mb-4">To the maximum extent permitted by law, Muscadine Labs LLC shall not be liable for any:</p>
-            <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
-              <li>Direct, indirect, incidental, or consequential damages</li>
-              <li>Loss of digital assets or cryptocurrency holdings</li>
-              <li>Vault liquidation events, protocol failures, or smart contract exploits</li>
-              <li>Losses incurred despite our risk curation efforts or assessments</li>
-              <li>Decisions made based on our educational content, risk assessments, or protocol recommendations</li>
-              <li>Inaccuracies or errors in our risk curation analysis or protocol evaluations</li>
-              <li>Interruption or cessation of service</li>
-              <li>Third-party protocol failures, hacks, or governance issues</li>
-              <li>Frontend attacks, phishing attempts, or user interface compromises</li>
-              <li>User errors in transaction execution or wallet management</li>
-            </ul>
-            <p className="text-gray-700 mb-4 mt-4">
-              <strong>No Warranty:</strong> Our risk curation services and all other services are provided "as is" without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.
+            <h2 className={SECTION_HEADING}>6. Limitation of liability</h2>
+            <p className={BODY}>
+              To the maximum extent permitted by law, we are not liable for any direct, indirect, incidental, special
+              or consequential loss arising from your use of the sites, the vaults, the node or any content, including
+              loss of digital assets, smart-contract exploits, liquidations, oracle or market failures, interface or
+              phishing attacks, downtime, and errors in anything we publish.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              9. Indemnification
-            </h2>
-            <p className="text-gray-700 mb-4">
-              You agree to indemnify and hold harmless Muscadine Labs LLC from any claims, damages, or expenses arising from your use of our services or violation of these terms.
+            <h2 className={SECTION_HEADING}>7. Indemnity</h2>
+            <p className={BODY}>
+              You agree to indemnify and hold us harmless from any claim, loss or expense arising from your use of the
+              sites or your breach of these terms.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              10. Intellectual Property
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Our content is provided under open-source licenses. You may use, modify, and distribute our code according to the applicable license terms.
+            <h2 className={SECTION_HEADING}>8. Open source and third parties</h2>
+            <p className={BODY}>
+              Our code is published under open-source licenses; use it under those licenses. The sites link to and
+              rely on third parties (Morpho, wallets, RPC providers, block explorers and others) with their own terms
+              and risks. We are not responsible for them.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              11. Third-Party Links
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Our website may contain links to third-party websites. We are not responsible for the content, privacy policies, or practices of these external sites.
+            <h2 className={SECTION_HEADING}>9. Changes</h2>
+            <p className={BODY}>
+              We can change or take down the sites, and change these terms, at any time. Continuing to use the sites
+              means you accept the current terms.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              12. Service Availability
-            </h2>
-            <p className="text-gray-700 mb-4">
-              We strive to maintain service availability but do not guarantee uninterrupted access. We may modify, suspend, or discontinue services at any time.
+            <h2 className={SECTION_HEADING}>10. Governing law</h2>
+            <p className={BODY}>
+              These terms are governed by the laws of the United States and of the U.S. state where the operator of
+              the sites resides, without regard to conflict-of-law rules. If any part of these terms is unenforceable,
+              the rest stays in effect.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              13. Changes to Terms
-            </h2>
-            <p className="text-gray-700 mb-4">
-              We may update these terms from time to time. Continued use of our services constitutes acceptance of any changes.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              14. Governing Law
-            </h2>
-            <p className="text-gray-700 mb-4">
-              These terms are governed by the laws of the United States. Any disputes shall be resolved in courts of competent jurisdiction.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              15. Contact Information
-            </h2>
-            <div className="bg-gray-50 p-6 rounded-lg mb-4">
-              <p className="text-gray-700 mb-2">For questions about these terms, contact us:</p>
-              <p className="text-gray-700"><strong>Company:</strong> Muscadine Labs LLC</p>
-              <p className="text-gray-700"><strong>Email:</strong>{' '}
-                <a href="mailto:muscadinelabs@gmail.com" className="text-blue-600 hover:text-blue-700 underline">
-                  muscadinelabs@gmail.com
-                </a>
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
-              16. Severability
-            </h2>
-            <p className="text-gray-700 mb-4">
-              If any provision of these terms is found to be unenforceable, the remaining provisions will continue in full force and effect.
+            <h2 className={SECTION_HEADING}>11. Contact</h2>
+            <p className="text-gray-700"><strong>Email:</strong>{' '}
+              <a href="mailto:muscadinelabs@gmail.com" className="text-blue-600 hover:text-blue-700 underline">
+                muscadinelabs@gmail.com
+              </a>
             </p>
           </section>
 
           <div className="mt-12 pt-8 border-t border-gray-200">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

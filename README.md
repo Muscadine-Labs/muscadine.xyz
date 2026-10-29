@@ -1,6 +1,6 @@
 # muscadine.xyz
 
-Next.js marketing site for Muscadine Labs platform.
+Next.js site for Muscadine.
 
 
 ## Tech Stack

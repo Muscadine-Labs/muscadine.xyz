@@ -6,8 +6,6 @@ export const REVALIDATE_SECONDS = 300;
 export const BASE_CHAIN_ID = 8453;
 
 const MORPHO_GRAPHQL_URL = 'https://api.morpho.org/graphql';
-const DEFILLAMA_SUPPLY_SIDE_URL =
-  'https://api.llama.fi/summary/fees/muscadine?dataType=dailySupplySideRevenue&excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true';
 
 export type VaultKind = 'vault' | 'wrapper';
 
@@ -57,8 +55,6 @@ export interface VaultRow {
 }
 
 export interface AppVaults {
-  tvlUsd: number | null;
-  revenueToTokenHoldersUsd: number | null;
   vaults: VaultRow[];
 }
 
@@ -151,31 +147,6 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
   }
 }
 
-// DefiLlama supply-side revenue: yield distributed to vault depositors.
-async function fetchRevenueToTokenHoldersUsd(): Promise<number | null> {
-  try {
-    const res = await fetch(DEFILLAMA_SUPPLY_SIDE_URL, {
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (!res.ok) return null;
-    const json = (await res.json()) as { totalAllTime?: number | null };
-    return typeof json.totalAllTime === 'number' ? json.totalAllTime : null;
-  } catch {
-    return null;
-  }
-}
-
 export async function getAppVaults(): Promise<AppVaults> {
-  const [vaults, revenueToTokenHoldersUsd] = await Promise.all([
-    fetchVaultRows(),
-    fetchRevenueToTokenHoldersUsd(),
-  ]);
-
-  const underlying = vaults.filter((vault) => vault.kind === 'vault');
-  const tvlValues = underlying.map((vault) => vault.tvlUsd);
-  const tvlUsd = tvlValues.some((value) => typeof value !== 'number')
-    ? null
-    : (tvlValues as number[]).reduce((sum, value) => sum + value, 0);
-
-  return { tvlUsd, revenueToTokenHoldersUsd, vaults };
+  return { vaults: await fetchVaultRows() };
 }
