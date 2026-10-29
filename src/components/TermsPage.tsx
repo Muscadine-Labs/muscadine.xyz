@@ -40,7 +40,7 @@ const TermsPage: React.FC = () => {
             <h2 className={SECTION_HEADING}>2. What the sites are</h2>
             <ul className={LIST}>
               <li><strong>muscadine.xyz</strong>: notes, guides and open-source tools about Bitcoin self-custody and DeFi, shared for free.</li>
-              <li><strong>app.muscadine.xyz</strong>: an open-source interface to Morpho vaults on Base that we set up for our own and our family&apos;s funds.</li>
+              <li><strong>app.muscadine.xyz</strong>: an open-source interface to Morpho vaults on Base that we set up for our own funds.</li>
               <li><strong>Bitcoin node</strong>: a self-hosted node we run for ourselves and leave open to connect to, free and with no guarantee it stays up.</li>
             </ul>
             <p className={BODY}>

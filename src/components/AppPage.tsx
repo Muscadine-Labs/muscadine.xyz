@@ -60,7 +60,6 @@ const ROLES = [
 const LEARN_LINKS = [
   { label: 'What is Morpho?', href: 'https://docs.morpho.org/learn/' },
   { label: 'What is a vault?', href: 'https://docs.morpho.org/learn/concepts/vault-v2/' },
-  { label: 'What is a wrapper vault?', href: 'https://docs.morpho.org/developers/earn/concepts/fee-wrapper/' },
   { label: 'What is a curator?', href: 'https://docs.morpho.org/learn/concepts/curator/' },
   { label: 'Variable-rate markets', href: 'https://docs.morpho.org/learn/concepts/blue/' },
   { label: 'Fixed-rate markets', href: 'https://docs.morpho.org/learn/concepts/midnight/' },

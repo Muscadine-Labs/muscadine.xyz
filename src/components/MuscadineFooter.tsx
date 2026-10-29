@@ -1,89 +1,31 @@
 import Link from 'next/link';
 
+const LEGAL_LINKS = [
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/legal', label: 'Legal Disclaimer' },
+  { href: '/terms', label: 'Terms of Use' },
+  { href: '/risk', label: 'Risk' },
+] as const;
+
 export default function MuscadineFooter() {
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
-          {/* Brand */}
-          <div>
-            <h3 className="text-lg font-light text-white mb-4 font-serif">Muscadine</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Free guides and open-source tools for Bitcoin self-custody and DeFi. A personal project.
-            </p>
-          </div>
-          
-          {/* Navigation */}
-          <div>
-            <h4 className="text-sm font-medium text-white mb-4 uppercase tracking-wide">Navigation</h4>
-            <nav className="space-y-2">
-              <Link 
-                href="/"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Home
-              </Link>
-              <Link 
-                href="/about"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                About Us
-              </Link>
-              <Link 
-                href="/solutions"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Solutions
-              </Link>
-              <Link 
-                href="/contact"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Contact
-              </Link>
-            </nav>
-          </div>
-          
-          {/* Legal */}
-          <div>
-            <h4 className="text-sm font-medium text-white mb-4 uppercase tracking-wide">Legal</h4>
-            <div className="space-y-2">
-              <Link 
-                href="/privacy"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Privacy Policy
-              </Link>
-              <Link 
-                href="/legal"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Legal Disclaimer
-              </Link>
-              <Link 
-                href="/terms"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Terms of Use
-              </Link>
-              <Link 
-                href="/risk"
-                className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Risk
-              </Link>
-            </div>
-          </div>
-        </div>
-        
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-xs text-gray-400 mb-4 max-w-3xl mx-auto leading-relaxed">
-            Muscadine is a personal, non-commercial project. Disclaimer: Nothing on this website is an offer to sell or a solicitation to buy any product, service, or investment. Past performance is not a reliable indicator of future results. Yields are variable and not guaranteed. Muscadine does not provide investment advice and does not hold your assets; seek your own professional advice before making any decision.
-          </p>
-          <p className="text-sm text-gray-400">
-            © 2026 Muscadine. All rights reserved.
-          </p>
-        </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-4">
+          {LEGAL_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <p className="text-xs text-gray-400 mb-3 max-w-3xl mx-auto leading-relaxed">
+          Muscadine is a personal, non-commercial project. Disclaimer: Nothing on this website is an offer to sell or a solicitation to buy any product, service, or investment. Past performance is not a reliable indicator of future results. Yields are variable and not guaranteed. Muscadine does not provide investment advice and does not hold your assets; seek your own professional advice before making any decision.
+        </p>
+        <p className="text-xs text-gray-500">© 2026 Muscadine. All rights reserved.</p>
       </div>
     </footer>
   );

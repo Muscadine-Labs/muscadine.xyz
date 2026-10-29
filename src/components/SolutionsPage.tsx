@@ -92,19 +92,20 @@ const SolutionsPage = () => {
             </div>
           </div>
 
-        </div>
-
-        {/* Other Solutions Section */}
-        <div className="mt-12 py-8 px-6 rounded-lg border-2 border-gray-200 text-center">
-          <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">
-            Other Solutions
-          </h3>
-          <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto mb-4">
-            Open-source DeFi tools and experiments, built in the open.
-          </p>
-          <p className="text-gray-500 italic text-sm">
-            More tools as they are built
-          </p>
+          {/* Other Solutions */}
+          <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-light text-gray-900 font-serif">
+                Other Solutions
+              </h3>
+              <p className="text-base text-gray-600 leading-relaxed">
+                Open-source DeFi tools and experiments, built in the open.
+              </p>
+              <p className="text-gray-500 italic text-sm">
+                Many more things in development
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
