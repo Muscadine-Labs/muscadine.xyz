@@ -1,630 +1,178 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
+
+type ExternalLink = { label: string; href: string };
+
+const WALLET_TYPES = [
+  {
+    name: 'Software (hot) wallet',
+    body: 'An app on your phone or computer. Easy for everyday use and small amounts, but the keys sit on a device that is online.',
+  },
+  {
+    name: 'Hardware wallet',
+    body: 'A small device that keeps the keys offline and signs on its own screen. The usual choice for savings. Pair it with a software wallet to see balances and build transactions.',
+  },
+  {
+    name: 'Air-gapped signer',
+    body: 'A hardware signer that never connects by USB or Bluetooth; it passes transactions by QR code. SeedSigner works this way.',
+  },
+  {
+    name: 'Multisig',
+    body: 'Spending needs several keys, such as 2 of 3, kept on different devices and in different places. One lost or stolen key does not lose the funds. More setup, worth it for large amounts.',
+  },
+  {
+    name: 'Smart wallet',
+    body: 'On Ethereum-style networks, a wallet that is a contract, often secured by a passkey instead of a seed phrase. Base Account and Safe are examples. Recovery depends on that wallet, so learn how it works before funding it.',
+  },
+] as const;
+
+const BACKUP_RULES = [
+  'Most wallets give you a 12 or 24 word seed phrase. Anyone with those words has your funds.',
+  'Write it on paper or stamp it in metal. Never photograph it, type it into a website, or store it in the cloud.',
+  'Keep at least two copies in different places.',
+  'An optional passphrase adds a secret “25th word”. It protects a found seed, but forgetting it loses the funds, so back it up separately.',
+  'Practice a recovery with a small amount before you rely on a wallet.',
+  'Leave instructions for someone you trust, without the seed itself, so your funds are not lost with you.',
+] as const;
+
+const HABITS = [
+  'Buy hardware wallets from the maker, never second hand.',
+  'Check the receive address on the device screen, and send a small test first.',
+  'No real support person will ever ask for your seed phrase.',
+  'Keep firmware and wallet apps up to date.',
+] as const;
+
+const BITCOIN_LINKS: readonly ExternalLink[] = [
+  { label: 'Sparrow Wallet (desktop)', href: 'https://sparrowwallet.com/' },
+  { label: 'SeedSigner (DIY air-gapped signer)', href: 'https://seedsigner.com/' },
+  { label: 'Trezor (hardware)', href: 'https://trezor.io/' },
+  { label: 'mempool.space (block explorer)', href: 'https://mempool.space/' },
+  { label: 'Start9 (run your own node)', href: 'https://start9.com/' },
+];
+
+const DEFI_LINKS: readonly ExternalLink[] = [
+  { label: 'Rabby (browser and mobile wallet)', href: 'https://rabby.io/' },
+  { label: 'Phantom', href: 'https://phantom.com/' },
+  { label: 'Trezor (hardware)', href: 'https://trezor.io/' },
+  { label: 'Ledger (hardware)', href: 'https://www.ledger.com/' },
+  { label: 'DeBank (portfolio view)', href: 'https://debank.com/' },
+];
+
+function ExternalIcon() {
+  return (
+    <svg className="w-4 h-4 shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    </svg>
+  );
+}
+
+function LinkList({ links }: { links: readonly ExternalLink[] }) {
+  return (
+    <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 border-t border-gray-200">
+      {links.map((link) => (
+        <li key={link.href} className="border-b border-gray-200">
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between gap-3 py-3 text-gray-900 hover:text-gray-600"
+          >
+            {link.label}
+            <ExternalIcon />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section id={id} className="mt-14 scroll-mt-24">
+      <h2 className="text-2xl font-light text-gray-900 font-serif mb-4">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function BulletList({ items }: { items: readonly string[] }) {
+  return (
+    <ul className="space-y-2 text-gray-700 leading-relaxed list-disc pl-5">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
 
 export default function SelfCustodyPage() {
-  const [mainTab, setMainTab] = useState<'about' | 'bitcoin' | 'defi'>('about');
-  const [bitcoinTab, setBitcoinTab] = useState<'about' | 'explore' | 'wallet' | 'transfer'>('about');
-  const [defiTab, setDefiTab] = useState<'about' | 'lending' | 'swap' | 'wallet'>('about');
-
-  const mempoolExplanation = "The mempool (memory pool) is where unconfirmed Bitcoin transactions wait before being added to a block. It helps the network manage and prioritize pending transactions.";
-
   return (
-    <div>
-      {/* Back Arrow */}
-      <div className="mb-6">
-        <Link 
-          href="/solutions" 
-          className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-        >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Solutions
-        </Link>
-      </div>
-      
-      {/* Main Tabs */}
-      <div className="flex border-b border-gray-200 mb-8 overflow-x-auto justify-center">
-        <button 
-          onClick={() => setMainTab('about')} 
-          className={`flex-1 px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${mainTab === 'about' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-        >
-          About
-        </button>
-        <button 
-          onClick={() => setMainTab('bitcoin')} 
-          className={`flex-1 px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${mainTab === 'bitcoin' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-        >
-          Bitcoin
-        </button>
-        <button 
-          onClick={() => setMainTab('defi')} 
-          className={`flex-1 px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${mainTab === 'defi' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-        >
-          DeFi
-        </button>
-      </div>
+    <div className="max-w-3xl mx-auto py-8">
+      <p className="text-sm font-medium text-gray-500 mb-2">Guide</p>
+      <h1 className="font-light text-gray-900 leading-tight font-serif text-3xl sm:text-4xl">Self-custody</h1>
+      <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+        Self-custody means you hold the keys to your own coins, so no exchange or bank can freeze, lose or lend them.
+        It also means nobody can recover them for you. These are the notes we follow ourselves. Start small and learn
+        each step before moving real savings.
+      </p>
 
-      {/* About Tab Content */}
-      {mainTab === 'about' && (
-        <div className="prose prose-lg max-w-none">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">How to Achieve Self Custody</h2>
-          <p className="text-gray-700 mb-6">
-            Self custody means having complete control over your digital assets without relying on third parties. 
-            Here's how to implement proper self custody with advanced security practices for you and your family.
+      <Section id="wallets" title="Kinds of wallets">
+        <p className="text-gray-700 leading-relaxed mb-4">
+          A wallet holds keys, not coins; the coins live on the blockchain. Wallets differ in where the keys are kept.
+          A common setup is a hardware wallet for savings and a software wallet with a small balance for daily use.
+        </p>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {WALLET_TYPES.map((type) => (
+            <div key={type.name} className="border border-gray-200 rounded-xl bg-white p-5">
+              <dt className="font-medium text-gray-900">{type.name}</dt>
+              <dd className="mt-1 text-gray-700 leading-relaxed">{type.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
+
+      <Section id="backup" title="Back up your seed">
+        <BulletList items={BACKUP_RULES} />
+        <details className="mt-6 border border-gray-200 rounded-xl bg-white p-5">
+          <summary className="cursor-pointer font-medium text-gray-900">Advanced: one seed for several wallets (BIP-85)</summary>
+          <p className="mt-3 text-gray-700 leading-relaxed">
+            BIP-85 lets one master seed create separate child seeds, each its own wallet. You back up the master once,
+            and any child can be re-created from it. The trade-off: the master controls every child, so it needs your
+            best protection. SeedSigner and some other signers support it.
           </p>
-          
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">BIP-85: Hierarchical Key Management</h2>
-          
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Master/Child Key Strategy</h3>
-              <p className="text-gray-700 mb-4">
-                BIP-85 allows you to create a hierarchical wallet structure where a single master seed generates 
-                multiple child seeds. This enables secure family wallet management while maintaining centralized recovery control.
-              </p>
-              <ul className="text-gray-700 space-y-2 ml-4 list-disc">
-                <li><strong>Family Master Seed:</strong> One master seed generates all child master keys</li>
-                <li><strong>Unique Indices:</strong> Assign each family member a unique index (1=Dad, 2=Mom, 3=You)</li>
-                <li><strong>Individual Wallets:</strong> Each person derives their wallet using SeedSigner or a hardware wallet</li>
-                <li><strong>Recovery Benefits:</strong> Lost child seed can be re-derived from master + index</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Implementation Steps</h3>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <ol className="text-gray-700 space-y-2 list-decimal list-inside">
-                  <li><strong>Hardware Setup:</strong> Use SeedSigner for offline key generation</li>
-                  <li><strong>Master Seed Creation:</strong> Generate and securely backup your master seed phrase</li>
-                  <li><strong>Child Derivation:</strong> Use BIP-85 to create child wallets for each family member</li>
-                  <li><strong>Wallet Configuration:</strong> Connect to Sparrow Wallet for watch-only monitoring</li>
-                  <li><strong>Node Connection:</strong> Point wallets to our Bitcoin node for enhanced privacy</li>
-                </ol>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Security Best Practices</h3>
-              <p className="text-gray-700 mb-4">
-                Proper self custody requires multiple layers of security and regular maintenance:
-              </p>
-              <ul className="text-gray-700 space-y-1 ml-4 list-disc">
-                <li>Store seed phrases on metal or paper, never digitally</li>
-                <li>Maintain 2+ backups in different physical locations</li>
-                <li>Run annual recovery drills to test your backups</li>
-                <li>Keep hardware devices updated and in good condition</li>
-                <li>Use Segwit (bc1q...) addresses for new Bitcoin deposits</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
-            <p className="text-gray-800 font-medium">
-              Remember: Not your keys, not your coins. Take control of your financial future.
-            </p>
-          </div>
-        </div>
-      )}
+        </details>
+      </Section>
 
-      {/* Bitcoin Tab Content */}
-      {mainTab === 'bitcoin' && (
-        <div>
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-light text-gray-900 mb-2 font-serif">Bitcoin</h2>
-            <p className="text-lg text-gray-600">
-              The world's first and most secure digital currency
-            </p>
-          </div>
-          
-          {/* Bitcoin Sub-tabs */}
-          <div className="flex border-b border-gray-200 mb-8 overflow-x-auto">
-            <button 
-              onClick={() => setBitcoinTab('about')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${bitcoinTab === 'about' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              About
-            </button>
-            <button 
-              onClick={() => setBitcoinTab('explore')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${bitcoinTab === 'explore' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              Explore
-            </button>
-            <button 
-              onClick={() => setBitcoinTab('wallet')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${bitcoinTab === 'wallet' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              Wallet
-            </button>
-            <button 
-              onClick={() => setBitcoinTab('transfer')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${bitcoinTab === 'transfer' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              Transfer
-            </button>
-          </div>
+      <Section id="habits" title="Everyday habits">
+        <BulletList items={HABITS} />
+      </Section>
 
-          {/* Bitcoin Sub-tab Content */}
-          {bitcoinTab === 'about' && (
-            <div className="prose prose-lg max-w-none">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">What is Bitcoin?</h2>
-              <p className="text-gray-700 mb-6">
-                Bitcoin is a decentralized digital currency that enables peer-to-peer transactions 
-                without intermediaries, secured by cryptography and maintained on a distributed ledger (the blockchain).
-              </p>
-              
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Getting Started with Bitcoin</h2>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">1. Buy Bitcoin on an Exchange</h3>
-                  <p className="text-gray-700 mb-4">
-                    Choose a reputable exchange—Coinbase is user-friendly—and purchase Bitcoin there, then transfer it to your self-hosted wallet. Peer-to-peer platforms are another great way to stack sats.
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">2. Set Up Your Wallet</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-800 mb-2">Cold Wallet:</h4>
-                      <p className="text-gray-700 mb-2">
-                        Use a SeedSigner (for paper-wallet setups; record every seed word carefully) or a hardware wallet.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-800 mb-2">Hot Wallet:</h4>
-                      <p className="text-gray-700 mb-2">
-                        Sparrow Wallet works well for both watch-only (cold) setups and live transactions. Mobile options like BlueWallet are convenient too.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-800 mb-2">Address Types: Segwit</h4>
-                      <p className="text-gray-700 mb-2">
-                        When creating new Bitcoin addresses, use <strong>Segwit addresses (bc1q...)</strong> for new Bitcoin deposits. 
-                        Segwit offers improved efficiency and lower transaction fees compared to legacy addresses.
-                      </p>
-                      <ul className="text-gray-700 space-y-1 ml-4 list-disc mb-2">
-                        <li><strong>Segwit (bc1q...):</strong> Widely supported standard with better security and efficiency</li>
-                      </ul>
-                      <p className="text-gray-700 text-sm italic">
-                        Most modern wallets like Sparrow Wallet default to Segwit addresses. Always verify your wallet is generating bc1q... addresses for new deposits.
-                      </p>
-                    </div>
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                      <p className="text-gray-700 font-medium">
-                        Always write down your seed phrase on paper and store it securely.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">3. Connect to a Node</h3>
-                  <p className="text-gray-700 mb-4">
-                    Point Sparrow Wallet (or your chosen wallet) to our self-hosted Electrum Server (details on the Transfer tab), or run your own full node for maximum sovereignty.
-                  </p>
-                  <p className="text-gray-700 mb-3">
-                    For your own infrastructure, a dedicated home server lets you host Bitcoin Core and an Electrum server on your network — you verify every transaction yourself without relying on a third party.
-                  </p>
-                  <a
-                    href="https://start9.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-                  >
-                    Start9 — run your own Bitcoin node
-                    <svg className="w-4 h-4 ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-8">
-                <p className="text-gray-800 font-medium">
-                  Not your keys, not your coins.
-                </p>
-              </div>
-            </div>
-          )}
+      <Section id="bitcoin" title="Bitcoin">
+        <p className="text-gray-700 leading-relaxed">
+          Use a hardware or air-gapped signer with Sparrow on your computer. New wallets use native SegWit (bc1q…) or
+          Taproot (bc1p…) addresses, which cost less to spend from. Your wallet asks a server for your balance, so
+          connecting it to your own node, or{' '}
+          <Link href="/node" className="text-gray-900 underline underline-offset-2 hover:text-gray-600">
+            ours
+          </Link>
+          , keeps your addresses private.
+        </p>
+        <LinkList links={BITCOIN_LINKS} />
+      </Section>
 
-          {bitcoinTab === 'transfer' && (
-            <div>
-              <div className="max-w-md mx-auto">
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Transfer on the Network</h3>
-                  <p className="text-gray-600 mb-4">
-                    Using an open source wallet like Sparrow, connect to a node to transact on the network.
-                  </p>
-                  <Link
-                    href="/node"
-                    className="inline-flex items-center justify-center w-full bg-blue-100 text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-200 transition-colors"
-                  >
-                    Connect to our Bitcoin Node
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          )}
+      <Section id="defi" title="DeFi">
+        <p className="text-gray-700 leading-relaxed">
+          On Ethereum, Base and similar networks, a browser wallet such as Rabby connects to apps, ideally with a
+          hardware wallet doing the signing. Every app you use asks for approval to move your tokens. Read what you
+          sign, approve only the amount you need, and remove approvals you no longer use (Rabby lists them under
+          Approvals). Keep a separate wallet with little in it for trying new apps.
+        </p>
+        <LinkList links={DEFI_LINKS} />
+      </Section>
 
-          {bitcoinTab === 'explore' && (
-            <div>
-              <div className="mb-4 p-4 bg-blue-50 rounded-lg">
-                <p className="text-blue-700 font-sans">{mempoolExplanation}</p>
-              </div>
-              
-              <div className="max-w-md mx-auto">
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Bitcoin Explorer</h3>
-                  <p className="text-gray-600 mb-4">Explore the Bitcoin blockchain and mempool in real-time</p>
-                  <a
-                    href="https://mempool.space"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center bg-blue-100 text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-200 transition-colors"
-                  >
-                    Open Mempool.space
-                  </a>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {bitcoinTab === 'wallet' && (
-            <div>
-              <div className="mb-6">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Bitcoin Wallets</h2>
-                <p className="text-gray-700 mb-6">
-                  Choose the right Bitcoin wallet for your needs. Hardware wallets offer the best security, 
-                  while software wallets provide convenience for everyday use.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white border border-green-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Sparrow Wallet</h3>
-                  <p className="text-gray-600 mb-4">Advanced Bitcoin wallet with excellent privacy features</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Full node support</p>
-                    <p className="text-sm text-gray-500">• Privacy features</p>
-                    <p className="text-sm text-gray-500">• Hardware wallet integration</p>
-                    <p className="text-sm text-gray-500">• Advanced transaction building</p>
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <a
-                      href="https://sparrowwallet.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full text-center bg-green-100 text-green-800 px-4 py-2 rounded-lg hover:bg-green-200 transition-colors"
-                    >
-                      Download Sparrow
-                    </a>
-                    <a
-                      href="https://sparrowwallet.com/docs/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full text-center bg-gray-100 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                    >
-                      View Documentation
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="bg-white border border-blue-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Hardware Wallets</h3>
-                  <p className="text-gray-600 mb-4">Cold storage for maximum security</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Trezor Model T or One</p>
-                    <p className="text-sm text-gray-500">• Ledger Nano S Plus or X</p>
-                    <p className="text-sm text-gray-500">• Seedsigner (DIY air-gapped)</p>
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <a
-                      href="https://seedsigner.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full text-center bg-purple-100 text-purple-800 px-4 py-2 rounded-lg hover:bg-purple-200 transition-colors"
-                    >
-                      Seedsigner
-                    </a>
-                  </div>
-                  <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-lg">
-                    <p className="text-sm text-gray-700">
-                      <strong>Important:</strong> Always buy hardware wallets directly from the manufacturer to avoid tampering.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* DeFi Tab Content */}
-      {mainTab === 'defi' && (
-        <div>
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-light text-gray-900 mb-2 font-serif">DeFi</h2>
-            <p className="text-lg text-gray-600">
-              Decentralized Finance - The Future of Financial Services
-            </p>
-          </div>
-          
-          {/* DeFi Sub-tabs */}
-          <div className="flex border-b border-gray-200 mb-8 overflow-x-auto">
-            <button 
-              onClick={() => setDefiTab('about')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${defiTab === 'about' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              About
-            </button>
-            <button 
-              onClick={() => setDefiTab('lending')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${defiTab === 'lending' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              Lending & Borrowing
-            </button>
-            <button 
-              onClick={() => setDefiTab('swap')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${defiTab === 'swap' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              Token Swap
-            </button>
-            <button 
-              onClick={() => setDefiTab('wallet')} 
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 whitespace-nowrap ${defiTab === 'wallet' ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              Wallet
-            </button>
-          </div>
-
-          {/* DeFi Sub-tab Content */}
-          {defiTab === 'about' && (
-            <div className="prose prose-lg max-w-none">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">What is DeFi?</h2>
-              <p className="text-gray-700 mb-6">
-                Decentralized finance (DeFi) is an open, permissionless ecosystem of financial applications built on blockchains, allowing anyone to lend, borrow, trade, and earn interest without traditional banks.
-              </p>
-              
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Getting Started with DeFi</h2>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">1. Acquire Crypto</h3>
-                  <p className="text-gray-700 mb-4">
-                    Use a centralized exchange like Coinbase or a decentralized exchange such as Uniswap (low fees) to obtain cryptocurrency.
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">2. Set Up Your Wallet</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-800 mb-2">Cold Wallet:</h4>
-                      <p className="text-gray-700 mb-2">
-                        Use a Trezor or Ledger hardware device; record your 24-word seed on paper and store it securely. Connect via Rabby, MetaMask, or Phantom for DeFi interactions.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-800 mb-2">Hot Wallet:</h4>
-                      <p className="text-gray-700 mb-2">
-                        MetaMask, Rabby, or Phantom work well—always back up your seed phrase in a safe place.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">3. Choose Your Network</h3>
-                  <p className="text-gray-700 mb-4">
-                    Decide which blockchain to use (Ethereum, Base, Solana, etc.) based on the protocols you plan to use.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-8">
-                <p className="text-gray-800 font-medium">
-                  Proceed carefully—only interact with projects you've vetted.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {defiTab === 'lending' && (
-            <div>
-              <div className="mb-6">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Lending & Borrowing Protocols</h2>
-                <p className="text-gray-700 mb-6">
-                  Earn interest on your crypto assets or borrow against them using these trusted DeFi protocols. 
-                  Always start with small amounts and understand the risks involved.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white border border-green-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Morpho</h3>
-                  <p className="text-gray-600 mb-4">Peer-to-peer lending with better rates</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• P2P lending model</p>
-                    <p className="text-sm text-gray-500">• Better rates than traditional AMMs</p>
-                    <p className="text-sm text-gray-500">• Available on multiple networks</p>
-                  </div>
-                  <a
-                    href="https://app.morpho.org/base/earn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-green-100 text-green-800 px-4 py-2 rounded-lg hover:bg-green-200 transition-colors"
-                  >
-                    Open Morpho
-                  </a>
-                </div>
-                
-                <div className="bg-white border border-blue-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Aave</h3>
-                  <p className="text-gray-600 mb-4">Leading lending protocol with multiple networks</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Lend and borrow various assets</p>
-                    <p className="text-sm text-gray-500">• Variable and stable interest rates</p>
-                    <p className="text-sm text-gray-500">• Available on Ethereum, Base, and more</p>
-                  </div>
-                  <a
-                    href="https://app.aave.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-blue-100 text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-200 transition-colors"
-                  >
-                    Open Aave
-                  </a>
-                </div>
-                
-              </div>
-            </div>
-          )}
-
-          {defiTab === 'swap' && (
-            <div>
-              <div className="mb-6">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Decentralized Exchanges</h2>
-                <p className="text-gray-700 mb-6">
-                  Trade cryptocurrencies directly with other users without centralized intermediaries. 
-                  Compare rates and choose the best option for your trades.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white border border-cyan-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Aero</h3>
-                  <p className="text-gray-600 mb-4">Leading DEX on Base and other networks (formerly Aerodrome)</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Available across multiple networks</p>
-                    <p className="text-sm text-gray-500">• Low fees and fast transactions</p>
-                    <p className="text-sm text-gray-500">• Liquidity mining rewards</p>
-                  </div>
-                  <a
-                    href="https://app.aero.xyz/swap"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-cyan-100 text-cyan-800 px-4 py-2 rounded-lg hover:bg-cyan-200 transition-colors"
-                  >
-                    Open Aero
-                  </a>
-                </div>
-                
-                <div className="bg-white border border-pink-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Uniswap</h3>
-                  <p className="text-gray-600 mb-4">Most popular DEX across multiple networks</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Available on many networks</p>
-                    <p className="text-sm text-gray-500">• Large liquidity pools</p>
-                    <p className="text-sm text-gray-500">• Well-established and trusted</p>
-                  </div>
-                  <a
-                    href="https://app.uniswap.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-pink-100 text-pink-800 px-4 py-2 rounded-lg hover:bg-pink-200 transition-colors"
-                  >
-                    Open Uniswap
-                  </a>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {defiTab === 'wallet' && (
-            <div>
-              <div className="mb-6">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">DeFi Wallets</h2>
-                <p className="text-gray-700 mb-6">
-                  Choose the right wallet for DeFi interactions. These wallets support multiple networks 
-                  and provide easy access to DeFi protocols.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white border border-blue-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Rabby Wallet</h3>
-                  <p className="text-gray-600 mb-4">Multi-chain wallet optimized for DeFi</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Support for 100+ networks</p>
-                    <p className="text-sm text-gray-500">• Built-in DeFi portfolio tracking</p>
-                    <p className="text-sm text-gray-500">• Hardware wallet integration</p>
-                    <p className="text-sm text-gray-500">• Gas optimization features</p>
-                  </div>
-                  <a
-                    href="https://rabby.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-blue-100 text-blue-800 px-4 py-2 rounded-lg hover:bg-blue-200 transition-colors"
-                  >
-                    Open Rabby
-                  </a>
-                </div>
-                
-                <div className="bg-white border border-purple-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Phantom</h3>
-                  <p className="text-gray-600 mb-4">Popular wallet for Solana and Ethereum</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Solana and Ethereum support</p>
-                    <p className="text-sm text-gray-500">• Built-in DEX integration</p>
-                    <p className="text-sm text-gray-500">• NFT support</p>
-                    <p className="text-sm text-gray-500">• User-friendly interface</p>
-                  </div>
-                  <a
-                    href="https://phantom.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-purple-100 text-purple-800 px-4 py-2 rounded-lg hover:bg-purple-200 transition-colors"
-                  >
-                    Open Phantom
-                  </a>
-                </div>
-                
-                <div className="bg-white border border-green-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">DeBank</h3>
-                  <p className="text-gray-600 mb-4">DeFi portfolio management</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Portfolio tracking across chains</p>
-                    <p className="text-sm text-gray-500">• Built-in DEX aggregator</p>
-                    <p className="text-sm text-gray-500">• DeFi protocol discovery</p>
-                    <p className="text-sm text-gray-500">• Mobile and desktop apps</p>
-                  </div>
-                  <a
-                    href="https://debank.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full mt-4 text-center bg-green-100 text-green-800 px-4 py-2 rounded-lg hover:bg-green-200 transition-colors"
-                  >
-                    Open DeBank
-                  </a>
-                </div>
-                
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Hardware Wallets</h3>
-                  <p className="text-gray-600 mb-4">Maximum security for DeFi interactions</p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Ledger</p>
-                    <p className="text-sm text-gray-500">• Trezor</p>
-                    <p className="text-sm text-gray-500">• Works with software wallets</p>
-                  </div>
-                  <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-lg">
-                    <p className="text-sm text-gray-700">
-                      <strong>Tip:</strong> Use hardware wallets with software wallets like Rabby for the best security and convenience.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+      <p className="mt-14 text-sm text-gray-500">
+        General information only, not advice. Products named here are examples; check each one yourself.
+      </p>
     </div>
   );
 }

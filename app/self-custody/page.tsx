@@ -1,12 +1,10 @@
-import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
+import SelfCustodyPage from '@/src/components/SelfCustodyPage';
 
-const SelfCustodyPage = dynamic(() => import('@/src/components/SelfCustodyPage'), {
-  loading: () => (
-    <div className="flex items-center justify-center min-h-[50vh]">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-stone-800" />
-    </div>
-  ),
-});
+export const metadata: Metadata = {
+  description:
+    'How to hold your own Bitcoin and crypto: kinds of wallets, seed backups, everyday habits, and tools for Bitcoin and DeFi.',
+};
 
 export default function SelfCustody() {
   return <SelfCustodyPage />;

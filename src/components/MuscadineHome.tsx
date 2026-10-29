@@ -51,20 +51,20 @@ const MuscadineHome = () => {
         </div>
       </div>
 
-      {/* Solutions Section - Full Width Background with Gradient - Break out of container */}
+      {/* Projects Section - Full Width Background with Gradient - Break out of container */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-x-hidden bg-linear-to-b from-gray-50 via-blue-50 to-gray-50 py-12 md:py-20 my-12 md:my-16">
-        {/* Our Solutions Section */}
+        {/* Projects Section */}
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-gray-900 mb-6 font-serif">
-              Our Solutions
+              Projects
             </h2>
           </div>
 
-          {/* Solutions Grid */}
+          {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            {/* Service 1 - Our App (Top Left) */}
+            {/* Service 1 - Vaults (Top Left) */}
             <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="space-y-6">
                 {/* 3D Shape Container */}
@@ -73,16 +73,16 @@ const MuscadineHome = () => {
                 </div>
                 
                 <h3 className="text-2xl font-light text-gray-900 font-serif">
-                  Our App
+                  Vaults
                 </h3>
                 <p className="text-base text-gray-600 leading-relaxed">
-                  Non-custodial Morpho vaults on Base network through overcollateralized lending.
+                  Non-custodial Morpho vaults on Base, set up for our own funds.
                 </p>
                 <Link
                   href="/app"
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
-                  View and Access our Morpho vaults
+                  See the vaults
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -102,7 +102,7 @@ const MuscadineHome = () => {
                   Bitcoin Node
                 </h3>
                 <p className="text-base text-gray-600 leading-relaxed">
-                  Connect to our self-hosted Bitcoin node for secure transactions and enhanced privacy. Access a full Bitcoin node for verification and transaction broadcasting.
+                  Point your Bitcoin wallet at our node over Tor, so balances and transactions do not go through a public server.
                 </p>
                 <Link 
                   href="/node"
@@ -128,13 +128,13 @@ const MuscadineHome = () => {
                   Self Custody
                 </h3>
                 <p className="text-base text-gray-600 leading-relaxed">
-                  Complete control of your digital assets through Bitcoin security and DeFi strategies. Learn secure wallet management, hardware setup, and risk-aware approaches to decentralized finance.
+                  How to hold your own keys: kinds of wallets, seed backups and everyday habits, for Bitcoin and DeFi.
                 </p>
                 <Link 
                   href="/self-custody"
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
-                  Learn Self Custody
+                  Read the guide
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -142,25 +142,25 @@ const MuscadineHome = () => {
               </div>
             </div>
 
-            {/* Service 4 - Other Solutions (Bottom Right) */}
+            {/* Service 4 - Other Projects (Bottom Right) */}
             <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="space-y-6">
                 {/* 3D Shape Container */}
                 <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
-                  <PolyhedronShape path="/solutions" />
+                  <PolyhedronShape path="/projects" />
                 </div>
 
                 <h3 className="text-2xl font-light text-gray-900 font-serif">
-                  Other Solutions
+                  Other Projects
                 </h3>
                 <p className="text-base text-gray-600 leading-relaxed">
                   Open-source DeFi tools and experiments, built in the open. Many more things in development.
                 </p>
                 <Link
-                  href="/solutions"
+                  href="/projects"
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
-                  See all solutions
+                  See all projects
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
