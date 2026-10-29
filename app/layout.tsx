@@ -4,7 +4,6 @@ import MuscadineBanner from '@/src/components/MuscadineBanner';
 import MuscadineFooter from '@/src/components/MuscadineFooter';
 import ErrorBoundary from '@/src/components/ErrorBoundary';
 import ScrollToTop from '@/src/components/ScrollToTop';
-import DeferredAnalytics from '@/src/components/DeferredAnalytics';
 import './globals.css';
 
 const inter = Inter({
@@ -85,7 +84,6 @@ export default function RootLayout({
       </head>
       <body className="bg-gray-50 antialiased">
         <ErrorBoundary>
-          <DeferredAnalytics />
           <ScrollToTop />
           <div className="min-h-screen bg-gray-50 flex flex-col overflow-x-hidden">
             <MuscadineBanner />

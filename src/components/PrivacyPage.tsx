@@ -28,7 +28,7 @@ const PrivacyPage: React.FC = () => {
           <section className="mb-8">
             <h2 className={SECTION_HEADING}>1. What we see</h2>
             <ul className={LIST}>
-              <li><strong>Site analytics:</strong> muscadine.xyz and app.muscadine.xyz use Vercel Web Analytics and Speed Insights, which count page views and measure load times in aggregate without cookies.</li>
+              <li><strong>No analytics:</strong> the sites use no analytics, tracking pixels or advertising cookies.</li>
               <li><strong>Server logs:</strong> our hosting provider (Vercel) keeps standard request logs, such as IP address, browser and time, for a short period.</li>
               <li><strong>Wallet address:</strong> when you connect a wallet to app.muscadine.xyz, the app reads that public address&apos;s balances and vault positions. We do not tie it to your name or store it in a database.</li>
               <li><strong>Email:</strong> if you email us, we keep your message and address to reply.</li>
