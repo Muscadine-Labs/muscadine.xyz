@@ -39,7 +39,7 @@ export default function NodePage() {
       <div className="text-center mb-8">
         <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif">Bitcoin Node</h1>
         <p className="text-xl text-gray-600">
-          Connect to my self-hosted Bitcoin node for secure transactions
+          Connect your wallet to our self-hosted Bitcoin node
         </p>
       </div>
       
@@ -48,7 +48,7 @@ export default function NodePage() {
         <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
           <h2 className="text-2xl font-light text-gray-900 mb-4 font-serif">About This Node</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-4">
-            This is my personal Bitcoin node running 24/7 to support the Bitcoin network. By connecting to my node, you can:
+            This is the Bitcoin node we run for ourselves, left open for others to use for free, with no guarantee it stays up. By connecting to it, you can:
           </p>
           <ul className="text-gray-700 space-y-2 ml-4">
             <li className="flex items-start">
@@ -74,7 +74,7 @@ export default function NodePage() {
         <div className="bg-white border border-gray-200 rounded-lg p-6">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">Connection Details</h3>
           <p className="text-gray-600 mb-6">
-            Use these details to connect your Bitcoin wallet or Electrum client to my node:
+            Use these details to connect your Bitcoin wallet or Electrum client to our node:
           </p>
           <div className="space-y-4">
             <div>

@@ -56,8 +56,8 @@ const PrivacyPage: React.FC = () => {
           <section className="mb-8">
             <h2 className={SECTION_HEADING}>3. Stored in your browser</h2>
             <p className={BODY}>
-              The app keeps a few settings on your device only: your theme, your vault view settings, cached token
-              prices, and that you accepted the terms. You can clear them at any time in your browser settings.
+              The app keeps a few settings on your device only: your theme, cached token prices, and that you
+              accepted the terms. You can clear them at any time in your browser settings.
             </p>
           </section>
 
