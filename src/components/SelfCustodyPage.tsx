@@ -500,20 +500,20 @@ export default function SelfCustodyPage() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white border border-cyan-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Aerodrome</h3>
-                  <p className="text-gray-600 mb-4">Leading DEX on Base network</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Aero</h3>
+                  <p className="text-gray-600 mb-4">Leading DEX on Base and other networks (formerly Aerodrome)</p>
                   <div className="space-y-2">
-                    <p className="text-sm text-gray-500">• Optimized for Base ecosystem</p>
+                    <p className="text-sm text-gray-500">• Available across multiple networks</p>
                     <p className="text-sm text-gray-500">• Low fees and fast transactions</p>
                     <p className="text-sm text-gray-500">• Liquidity mining rewards</p>
                   </div>
                   <a
-                    href="https://aerodrome.finance/"
+                    href="https://app.aero.xyz/swap"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full mt-4 text-center bg-cyan-100 text-cyan-800 px-4 py-2 rounded-lg hover:bg-cyan-200 transition-colors"
                   >
-                    Open Aerodrome
+                    Open Aero
                   </a>
                 </div>
                 
