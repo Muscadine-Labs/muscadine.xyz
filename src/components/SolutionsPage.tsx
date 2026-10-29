@@ -103,7 +103,7 @@ const SolutionsPage = () => {
             Open-source DeFi tools and experiments, built in the open.
           </p>
           <p className="text-gray-500 italic text-sm">
-            Coming Soon — Advanced DeFi Infrastructure
+            More tools as they are built
           </p>
         </div>
       </div>

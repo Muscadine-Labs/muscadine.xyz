@@ -46,7 +46,7 @@ const STRATEGIES = [
   },
   {
     name: 'Frontier',
-    body: 'The higher-yield strategy. It optimizes for APY and allocates to other crypto and tokenized stocks.',
+    body: 'Aims for higher yield, with more risk. Allocates to a wider range of crypto and tokenized-stock collateral.',
   },
 ] as const;
 
@@ -307,7 +307,7 @@ export default function AppPage({ data }: { data: AppVaults }) {
             </div>
           ))}
         </div>
-        <p className="mt-3 mb-10 text-sm text-gray-600">Both are run with dedicated risk management.</p>
+        <p className="mt-3 mb-10 text-sm text-gray-600">Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds back.</p>
 
         <h3 className="text-sm font-medium text-gray-500 mb-3">Roles</h3>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">

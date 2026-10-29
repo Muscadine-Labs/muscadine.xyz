@@ -23,8 +23,8 @@ const RiskPage: React.FC = () => {
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
             <h2 className="text-xl font-light text-gray-900 mb-2 font-serif">Not a bank · Not advice</h2>
             <p className="text-gray-700">
-              Muscadine is a <strong>DeFi vault curator and technology provider</strong>, not a bank, broker,
-              investment adviser, or custodian. Nothing here is investment, tax, or legal advice. Digital asset
+              Muscadine is a <strong>personal, non-commercial project</strong>, not a business, bank, broker,
+              investment adviser, fund, or custodian. Nothing here is investment, tax, or legal advice. Digital asset
               strategies involve substantial risk, including total loss of principal. Past or projected yield is not a
               guarantee of future results. You retain custody of your assets and are solely responsible for wallet
               security, transaction signing, and eligibility in your jurisdiction. On-chain state is the source of
@@ -37,11 +37,11 @@ const RiskPage: React.FC = () => {
           </div>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">What we are</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">What this is</h2>
             <p className="text-gray-700 mb-4">
-              Muscadine publishes curated Morpho vault strategies on Base. We configure markets and risk parameters;
-              users deposit through non-custodial wallets. We do not hold user private keys, guarantee returns, or insure
-              deposits.
+              Muscadine runs a few Morpho vaults on Base for our own and our family&apos;s funds. We choose their
+              markets and caps; deposits are open to approved wallets only, signed from your own non-custodial wallet.
+              We do not hold private keys, charge fees to anyone, guarantee returns, or insure deposits.
             </p>
           </section>
 
@@ -69,9 +69,9 @@ const RiskPage: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Monitoring</h2>
             <p className="text-gray-700 mb-4">
-              We review utilization, collateral factors, and reported incidents on a recurring basis. Guardians can pause
-              vault operations per on-chain roles. We may update documentation, app notices, or parameters when risk
-              increases; we are not obligated to recover user funds in a failure event.
+              We review utilization, collateral factors, and reported incidents on a recurring basis. Sentinels can pull funds back
+              to idle or lower caps, per on-chain roles. We may update documentation, app notices, or parameters when risk
+              increases; we are not obligated to recover anyone&apos;s funds in a failure event.
             </p>
           </section>
 
@@ -92,7 +92,7 @@ const RiskPage: React.FC = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="p-3 font-medium text-gray-900 align-top">Muscadine</td>
-                    <td className="p-3 text-gray-700">Curate vault parameters and markets; operate interfaces; no custody of deposits</td>
+                    <td className="p-3 text-gray-700">Chooses vault markets and caps; runs the open-source interface; never holds deposits</td>
                   </tr>
                   <tr className="border-b">
                     <td className="p-3 font-medium text-gray-900 align-top">Morpho &amp; markets</td>
@@ -157,7 +157,7 @@ const RiskPage: React.FC = () => {
             <ul className="text-gray-700 list-disc list-inside space-y-2">
               <li>
                 <Link href="/terms" className="text-blue-600 underline">
-                  Terms of Service
+                  Terms of Use
                 </Link>
               </li>
               <li>
