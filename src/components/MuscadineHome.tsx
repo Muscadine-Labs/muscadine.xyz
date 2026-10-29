@@ -7,6 +7,7 @@ const IsometricNodes = dynamic(() => import('./IsometricNodes'), { ssr: false })
 const StarShape = dynamic(() => import('./3DShapes/StarShape'), { ssr: false });
 const TorusShape = dynamic(() => import('./3DShapes/TorusShape'), { ssr: false });
 const PyramidShape = dynamic(() => import('./3DShapes/PyramidShape'), { ssr: false });
+const PolyhedronShape = dynamic(() => import('./3DShapes/PolyhedronShape'), { ssr: false });
 
 const MuscadineHome = () => {
   return (
@@ -134,6 +135,32 @@ const MuscadineHome = () => {
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
                   Learn Self Custody
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Service 4 - Other Solutions (Bottom Right) */}
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
+              <div className="space-y-6">
+                {/* 3D Shape Container */}
+                <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
+                  <PolyhedronShape path="/solutions" />
+                </div>
+
+                <h3 className="text-2xl font-light text-gray-900 font-serif">
+                  Other Solutions
+                </h3>
+                <p className="text-base text-gray-600 leading-relaxed">
+                  Open-source DeFi tools and experiments, built in the open. Many more things in development.
+                </p>
+                <Link
+                  href="/solutions"
+                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                >
+                  See all solutions
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
