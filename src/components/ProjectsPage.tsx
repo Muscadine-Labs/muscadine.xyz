@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const SolutionsPage = () => {
+const ProjectsPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
@@ -20,14 +20,14 @@ const SolutionsPage = () => {
         
         <div className="text-center mb-12">
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif">
-            Muscadine Solutions
+            Projects
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
             Tools and education for holding and using your own digital assets, from Bitcoin self-custody to DeFi. You keep your keys and make your own decisions.
           </p>
         </div>
 
-        {/* Solutions Grid */}
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Vaults */}
           <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
@@ -92,11 +92,11 @@ const SolutionsPage = () => {
             </div>
           </div>
 
-          {/* Other Solutions */}
+          {/* Other Projects */}
           <div className="bg-white rounded-lg border-2 border-gray-200 p-8 hover:border-gray-300 transition-colors">
             <div className="space-y-6">
               <h3 className="text-2xl font-light text-gray-900 font-serif">
-                Other Solutions
+                Other Projects
               </h3>
               <p className="text-base text-gray-600 leading-relaxed">
                 Open-source DeFi tools and experiments, built in the open.
@@ -113,4 +113,4 @@ const SolutionsPage = () => {
   );
 };
 
-export default SolutionsPage;
+export default ProjectsPage;

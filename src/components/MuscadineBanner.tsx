@@ -42,10 +42,10 @@ const MuscadineBanner = () => {
             </Link>
             
             <Link
-              href="/solutions"
+              href="/projects"
               className="inline-flex items-center text-sm justify-center px-4 py-2 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:outline-hidden transition-all duration-300"
             >
-              Solutions
+              Projects
             </Link>
             
             <Link
@@ -89,11 +89,11 @@ const MuscadineBanner = () => {
               </Link>
               
               <Link
-                href="/solutions"
+                href="/projects"
                 className="inline-flex items-center text-sm justify-center px-4 py-2 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:outline-hidden transition-all duration-300"
                 onClick={() => setIsOpen(false)}
               >
-                Solutions
+                Projects
               </Link>
               
               <Link
