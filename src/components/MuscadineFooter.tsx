@@ -9,7 +9,7 @@ export default function MuscadineFooter() {
           <div>
             <h3 className="text-lg font-light text-white mb-4 font-serif">Muscadine</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Muscadine helps individuals take control of their financial future through Bitcoin, self-custody, and DeFi solutions.
+              Free guides and open-source tools for Bitcoin self-custody and DeFi. A personal project.
             </p>
           </div>
           
@@ -64,7 +64,7 @@ export default function MuscadineFooter() {
                 href="/terms"
                 className="block text-sm text-gray-300 hover:text-white transition-colors duration-200"
               >
-                Terms of Service
+                Terms of Use
               </Link>
               <Link 
                 href="/risk"
@@ -77,11 +77,11 @@ export default function MuscadineFooter() {
         </div>
         
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-sm text-gray-400 mb-4">
-            Education & security guidance only—no investment advice, no asset custody.
+          <p className="text-xs text-gray-400 mb-4 max-w-3xl mx-auto leading-relaxed">
+            Muscadine is a personal, non-commercial project. Disclaimer: Nothing on this website is an offer to sell or a solicitation to buy any product, service, or investment. Past performance is not a reliable indicator of future results. Yields are variable and not guaranteed. Muscadine does not provide investment advice and does not hold your assets; seek your own professional advice before making any decision.
           </p>
           <p className="text-sm text-gray-400">
-            © 2026 Muscadine Labs LLC. All rights reserved.
+            © 2026 Muscadine. All rights reserved.
           </p>
         </div>
       </div>

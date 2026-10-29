@@ -1,7 +1,7 @@
 {
-  "name": "Muscadine Labs",
-  "short_name": "Muscadine Labs",
-  "description": "Muscadine Labs - Blockchain Solutions",
+  "name": "Muscadine",
+  "short_name": "Muscadine",
+  "description": "Muscadine — Bitcoin self-custody and DeFi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafaf9",

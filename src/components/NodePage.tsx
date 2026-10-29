@@ -61,7 +61,7 @@ export default function NodePage() {
             </li>
             <li className="flex items-start">
               <span className="text-gray-400 mr-2">•</span>
-              <span>Access the Bitcoin network through a trusted, non-custodial service</span>
+              <span>Reach the Bitcoin network over Tor without running a node yourself</span>
             </li>
             <li className="flex items-start">
               <span className="text-gray-400 mr-2">•</span>

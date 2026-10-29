@@ -4,7 +4,7 @@ export default function ContactPage() {
       <div className="text-center mb-12 sm:mb-16">
         <h1 className="font-light text-gray-900 leading-tight mb-6 sm:mb-8 font-serif text-3xl sm:text-4xl">Contact</h1>
         <p className="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto px-4">
-          Questions or a partnership? Email us and we&apos;ll get back to you.
+          Questions about the guides, the node or the vaults? Email us. This is a personal project, so we don&apos;t take business inquiries.
         </p>
       </div>
 

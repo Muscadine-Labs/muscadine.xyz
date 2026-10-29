@@ -46,7 +46,7 @@ const STRATEGIES = [
   },
   {
     name: 'Frontier',
-    body: 'The higher-yield strategy. It optimizes for APY and allocates to other crypto and tokenized stocks.',
+    body: 'Aims for higher yield, with more risk. Allocates to a wider range of crypto and tokenized-stock collateral.',
   },
 ] as const;
 
@@ -141,25 +141,16 @@ export default function AppPage({ data }: { data: AppVaults }) {
     .filter((vault) => vault.kind === 'vault')
     .filter((vault) => vault.tvlUsd === null || vault.tvlUsd >= MIN_LIST_TVL_USD);
 
-  const stats = [
-    { label: 'Total deposits', value: data.tvlUsd === null ? '—' : formatUsd(data.tvlUsd) },
-    {
-      label: 'Interest earned by depositors',
-      value: data.revenueToTokenHoldersUsd === null ? '—' : formatUsd(data.revenueToTokenHoldersUsd),
-    },
-    { label: 'Vaults on Base', value: String(listedVaults.length) },
-  ];
-
   return (
     <div className="max-w-5xl mx-auto py-8">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
         <div className="max-w-2xl">
           <p className="text-sm font-medium text-gray-500 mb-2">Morpho vaults on Base</p>
           <h1 className="font-light text-gray-900 leading-tight font-serif text-3xl sm:text-4xl">
             Vaults
           </h1>
           <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-            Muscadine vaults are non-custodial Morpho vaults on Base. Assets stay in your control and earn yield from overcollateralized lending. Deposit or withdraw any amount, at any time.
+            Muscadine vaults are non-custodial Morpho vaults on Base. You keep control of your assets. Yield comes from overcollateralized lending, changes with the market and is not guaranteed, and you can lose money. Deposits are open to approved wallets only, and a large withdrawal can wait for market liquidity.
           </p>
         </div>
         <a
@@ -172,15 +163,6 @@ export default function AppPage({ data }: { data: AppVaults }) {
           <ExternalIcon />
         </a>
       </div>
-
-      <dl className="grid grid-cols-1 sm:grid-cols-3 border border-gray-200 rounded-xl bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-12">
-        {stats.map((stat) => (
-          <div key={stat.label} className="p-5">
-            <dt className="text-sm text-gray-500">{stat.label}</dt>
-            <dd className="mt-1 text-2xl sm:text-3xl font-light text-gray-900 font-serif tabular-nums">{stat.value}</dd>
-          </div>
-        ))}
-      </dl>
 
       <h2 className="text-2xl font-light text-gray-900 font-serif mb-4">Curated vaults</h2>
 
@@ -325,7 +307,7 @@ export default function AppPage({ data }: { data: AppVaults }) {
             </div>
           ))}
         </div>
-        <p className="mt-3 mb-10 text-sm text-gray-600">Both are run with dedicated risk management.</p>
+        <p className="mt-3 mb-10 text-sm text-gray-600">Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds back.</p>
 
         <h3 className="text-sm font-medium text-gray-500 mb-3">Roles</h3>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">

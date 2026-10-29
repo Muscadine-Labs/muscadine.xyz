@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 const AboutPage = () => {
   return (
     <>
@@ -9,41 +7,29 @@ const AboutPage = () => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-light text-gray-900 mb-6 font-serif">
-            A Team You Can Trust
+            About Muscadine
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
-            Founded by two university students, Muscadine is dedicated to helping individuals take control of their financial future through Bitcoin security, self-custody, and DeFi solutions. We provide support with Bitcoin node deployment, secure asset management, and onboarding into decentralized finance, ensuring people can navigate the new financial system.
+            Muscadine is a personal, non-commercial project about Bitcoin self-custody and DeFi. It shares free guides and open-source tools for running a Bitcoin node, holding your own keys and understanding on-chain protocols. It is not a business and offers no services or advice.
           </p>
         </div>
 
         {/* Mission Section */}
         <div className="py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-3xl mx-auto">
             <div>
               <h2 className="text-4xl font-light text-gray-900 mb-6 font-serif">
-                Our Mission
+                Why this exists
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                We founded Muscadine with a clear belief: financial freedom should not be reserved for the few—it should be accessible to anyone willing to take control of their future. Today's financial system creates dependence and limits opportunity. We're building a new path—one powered by self-custody, transparency, and personal sovereignty.
+                Muscadine started from a simple belief: you should be able to hold and use your own money without asking permission. Self-custody, open-source software and transparent on-chain systems make that possible.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Muscadine helps individuals and families move beyond traditional banking constraints by leveraging secure Bitcoin infrastructure and decentralized finance. We empower people to protect, grow, and control their wealth without relying on intermediaries.
+                The guides here are the notes and tools we use ourselves, published so others can learn from them. The vaults on app.muscadine.xyz are set up for our own and our family's funds.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
-                <strong>Our mission is simple:</strong><br />
-                Enable true financial independence—through education, technology, and disciplined on-chain systems. It's about ownership, security, and long-term freedom.
+                Everything here is information only. Do your own research and get your own professional advice before any financial decision.
               </p>
-            </div>
-            <div className="flex items-center justify-center">
-              <Image 
-                src="/IMG_6794.jpeg" 
-                alt="Muscadine Mission" 
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-lg shadow-lg"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
             </div>
           </div>
         </div>
@@ -52,7 +38,7 @@ const AboutPage = () => {
         <div className="py-16 bg-gray-50 rounded-lg my-16">
           <div className="px-8">
             <h2 className="text-4xl font-light text-gray-900 mb-12 text-center font-serif">
-              Our Values
+              Principles
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
@@ -62,7 +48,7 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">Security First</h3>
-                <p className="text-gray-600">We prioritize the safety of your digital assets above all else, implementing industry-leading security practices.</p>
+                <p className="text-gray-600">Your keys, your coins. Every guide starts from keeping control of your own keys.</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -71,7 +57,7 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">Education Focus</h3>
-                <p className="text-gray-600">We believe in empowering you with knowledge, not just services. Understanding the technology is key to long-term success.</p>
+                <p className="text-gray-600">Understand the technology and its risks before you rely on it.</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -79,53 +65,9 @@ const AboutPage = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">Trust & Transparency</h3>
-                <p className="text-gray-600">We maintain complete transparency in our practices and build lasting relationships based on trust and mutual respect.</p>
+                <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">Transparency</h3>
+                <p className="text-gray-600">The code is open source and the vaults are on-chain, so anyone can check how they work.</p>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Team Section */}
-        <div className="py-16">
-          <h2 className="text-4xl font-light text-gray-900 mb-12 text-center font-serif">
-            Meet Our Team
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Team Member 1 */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-8 text-center hover:border-gray-400 transition-all duration-300">
-            <div className="mx-auto mb-6 h-64 w-64 overflow-hidden rounded-lg relative">
-                    <Image 
-                      src="/nicholas-connelly-headshot.jpg" 
-                      alt="Nicholas Connelly" 
-                      fill
-                      sizes="512px"
-                      className="object-cover object-center" 
-                    />
-                  </div>
-              <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Nicholas Connelly</h3>
-              <p className="text-blue-600 font-medium mb-4">Co-Founder & CEO</p>
-              <p className="text-gray-600 leading-relaxed">
-                Bitcoin security expert with over 7 years of experience in digital asset protection. Specializes in self-custody solutions and institutional-grade security practices.
-              </p>
-            </div>
-
-            {/* Team Member 2 */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-8 text-center hover:border-gray-400 transition-all duration-300">
-                  <div className="mx-auto mb-6 h-64 w-64 overflow-hidden rounded-lg relative">
-                    <Image 
-                      src="/Ignas.panavas.headshot.jpg" 
-                      alt="Ignas Panavas" 
-                      fill
-                      sizes="256px"
-                      className="object-cover object-top scale-150" 
-                    />
-                  </div>
-              <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Ignas Panavas</h3>
-              <p className="text-blue-600 font-medium mb-4">Co-Founder & CTO</p>
-              <p className="text-gray-600 leading-relaxed">
-                DeFi protocol specialist and security auditor with extensive experience in smart contract analysis and risk assessment across multiple blockchain networks.
-              </p>
             </div>
           </div>
         </div>

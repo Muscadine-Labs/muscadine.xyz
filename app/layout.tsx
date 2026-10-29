@@ -4,7 +4,6 @@ import MuscadineBanner from '@/src/components/MuscadineBanner';
 import MuscadineFooter from '@/src/components/MuscadineFooter';
 import ErrorBoundary from '@/src/components/ErrorBoundary';
 import ScrollToTop from '@/src/components/ScrollToTop';
-import DeferredAnalytics from '@/src/components/DeferredAnalytics';
 import './globals.css';
 
 const inter = Inter({
@@ -28,22 +27,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://muscadine.xyz'),
-  title: 'Muscadine Labs',
+  title: 'Muscadine',
   description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
   keywords: 'DeFi, Bitcoin, Base, Morpho, vault, yield, crypto, finance, self-sovereignty, dashboard',
-  authors: [{ name: 'Muscadine Labs' }],
+  authors: [{ name: 'Muscadine' }],
   openGraph: {
-    title: 'Muscadine Labs',
+    title: 'Muscadine',
     description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
     type: 'website',
     url: 'https://muscadine.xyz',
-    siteName: 'Muscadine Labs',
+    siteName: 'Muscadine',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muscadine Labs',
+    title: 'Muscadine',
     description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
-    creator: '@muscadinelabs',
   },
   robots: {
     index: true,
@@ -69,15 +67,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebApplication',
-              name: 'Muscadine Labs',
+              name: 'Muscadine',
               url: 'https://muscadine.xyz',
               description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
               applicationCategory: 'FinanceApplication',
               operatingSystem: 'Web Browser',
               author: {
                 '@type': 'Organization',
-                name: 'Muscadine Labs',
-                url: 'https://x.com/muscadinelabs',
+                name: 'Muscadine',
               },
             }),
           }}
@@ -85,7 +82,6 @@ export default function RootLayout({
       </head>
       <body className="bg-gray-50 antialiased">
         <ErrorBoundary>
-          <DeferredAnalytics />
           <ScrollToTop />
           <div className="min-h-screen bg-gray-50 flex flex-col overflow-x-hidden">
             <MuscadineBanner />

@@ -101,31 +101,6 @@ export default function SelfCustodyPage() {
             </div>
           </div>
           
-          <div className="bg-green-50 border-l-4 border-green-400 p-6 mt-8">
-            <h3 className="text-xl font-semibold text-green-900 mb-3">Need Guidance? We're Here to Help</h3>
-            <p className="text-green-800 mb-4">
-              Self custody setup can be complex. Our team provides personalized guidance to help you implement 
-              secure self custody solutions tailored to your needs and technical comfort level.
-            </p>
-            <div className="space-y-2">
-              <p className="text-green-800">
-                <strong>Contact us for consultation:</strong>
-              </p>
-              <a 
-                href="mailto:muscadinelabs@gmail.com?subject=Self Custody Consultation"
-                className="inline-flex items-center text-green-700 hover:text-green-900 font-medium transition-colors"
-              >
-                muscadinelabs@gmail.com
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-              <p className="text-green-700 text-sm">
-                We'll guide you through hardware selection, setup procedures, backup strategies, and ongoing maintenance.
-              </p>
-            </div>
-          </div>
-          
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
             <p className="text-gray-800 font-medium">
               Remember: Not your keys, not your coins. Take control of your financial future.
