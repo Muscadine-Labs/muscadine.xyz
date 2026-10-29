@@ -32,8 +32,11 @@ function shortAddress(address: string): string {
   return `${address.slice(0, 6)}…${address.slice(-4)}`;
 }
 
-function vaultAppUrl(address: string): string {
-  return `${APP_URL}/vault/v2/${address}`;
+/** Same slug Morpho uses in its vault URLs (Muscadine USDC Prime → muscadine-usdc-prime). */
+function morphoVaultUrl(vault: VaultRow): string {
+  const network = vault.network.toLowerCase();
+  const slug = vault.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `https://app.morpho.org/${network}/vault/${vault.address}/${slug}`;
 }
 
 // Hides empty vaults. A vault whose TVL failed to load stays listed with dashes.
@@ -42,27 +45,18 @@ const MIN_LIST_TVL_USD = 1000;
 const STRATEGIES = [
   {
     name: 'Prime',
-    body: 'Generally allocates to lower-risk DeFi markets, such as Bitcoin and Ether collateral.',
+    body: 'Lower-risk markets, such as Bitcoin and Ether collateral.',
   },
   {
     name: 'Frontier',
-    body: 'Aims for higher yield, with more risk. Allocates to a wider range of crypto and tokenized-stock collateral.',
+    body: 'Higher yield and more risk, across a wider range of crypto and tokenized-stock collateral.',
   },
-] as const;
-
-const ROLES = [
-  { name: 'Owner', body: 'Appoints the curator and sentinels. Does not move funds or set risk.' },
-  { name: 'Curator', body: 'Muscadine. Chooses which markets a vault may use, and the cap on each. Changes that add risk wait out a timelock.' },
-  { name: 'Allocator', body: 'Moves funds among the markets the curator allowed, inside those caps.' },
-  { name: 'Sentinel', body: 'Can pull funds back, lower a cap, or cancel a pending change. Cannot add risk.' },
 ] as const;
 
 const LEARN_LINKS = [
   { label: 'What is Morpho?', href: 'https://docs.morpho.org/learn/' },
   { label: 'What is a vault?', href: 'https://docs.morpho.org/learn/concepts/vault-v2/' },
   { label: 'What is a curator?', href: 'https://docs.morpho.org/learn/concepts/curator/' },
-  { label: 'Variable-rate markets', href: 'https://docs.morpho.org/learn/concepts/blue/' },
-  { label: 'Fixed-rate markets', href: 'https://docs.morpho.org/learn/concepts/midnight/' },
 ] as const;
 
 function ExternalIcon({ className = 'w-4 h-4' }: { className?: string }) {
@@ -81,57 +75,53 @@ function StrategyPill({ strategy }: { strategy: VaultRow['strategy'] }) {
   );
 }
 
-function AmountWithUsd({ amount, usd }: { amount: string; usd: number | null }) {
+function VaultName({ vault }: { vault: VaultRow }) {
   return (
     <>
-      <span className="block text-gray-900 tabular-nums">{amount}</span>
-      <span className="block text-xs text-gray-500 tabular-nums">{usd === null ? '—' : formatUsd(usd)}</span>
+      <a
+        href={morphoVaultUrl(vault)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${vault.name} on Morpho`}
+        className="font-medium text-gray-900 hover:underline underline-offset-2"
+      >
+        {vault.name}
+      </a>
+      <div className="mt-1 flex items-center gap-2">
+        <StrategyPill strategy={vault.strategy} />
+        <a
+          href={`https://basescan.org/address/${vault.address}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${vault.name} contract ${vault.address} on Basescan`}
+          className="whitespace-nowrap font-mono text-xs text-gray-500 hover:text-gray-900"
+        >
+          {shortAddress(vault.address)}
+        </a>
+      </div>
     </>
   );
 }
 
 function Deposits({ vault }: { vault: VaultRow }) {
   return (
-    <AmountWithUsd
-      amount={vault.totalAssets === null ? '—' : formatTokenAmount(vault.totalAssets, vault.assetSymbol)}
-      usd={vault.tvlUsd}
-    />
-  );
-}
-
-function Apy({ vault, prominent = false }: { vault: VaultRow; prominent?: boolean }) {
-  return (
     <>
-      <span className={`block font-medium text-gray-900 tabular-nums ${prominent ? 'text-lg' : ''}`}>
-        {vault.apy === null ? '—' : formatPercent(vault.apy)}
+      <span className="block text-gray-900 tabular-nums">
+        {vault.totalAssets === null ? '—' : formatTokenAmount(vault.totalAssets, vault.assetSymbol)}
       </span>
       <span className="block text-xs text-gray-500 tabular-nums">
-        {vault.apy90 === null ? '—' : `${formatPercent(vault.apy90)} 90D`}
+        {vault.tvlUsd === null ? '—' : formatUsd(vault.tvlUsd)}
       </span>
     </>
   );
 }
 
-function SharePrice({ vault }: { vault: VaultRow }) {
+function Apy({ vault }: { vault: VaultRow }) {
   return (
-    <AmountWithUsd
-      amount={formatSharePrice(vault.sharePrice, vault.assetSymbol)}
-      usd={vault.sharePriceUsd}
-    />
+    <span className="font-medium text-gray-900 tabular-nums">
+      {vault.apy === null ? '—' : formatPercent(vault.apy)}
+    </span>
   );
-}
-
-function feePercent(value: number | null): string {
-  return value === null ? '—' : formatPercent(value);
-}
-
-function formatSharePrice(value: number | null, symbol: string | null): string {
-  if (value === null) return '—';
-  const amount = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 4,
-    maximumFractionDigits: 4,
-  }).format(value);
-  return symbol ? `${amount} ${symbol}` : amount;
 }
 
 export default function AppPage({ data }: { data: AppVaults }) {
@@ -149,7 +139,7 @@ export default function AppPage({ data }: { data: AppVaults }) {
             Vaults
           </h1>
           <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-            Muscadine vaults are non-custodial Morpho vaults on Base. You keep control of your assets. Yield comes from overcollateralized lending, changes with the market and is not guaranteed, and you can lose money. Deposits are open to approved wallets only, and a large withdrawal can wait for market liquidity.
+            Non-custodial Morpho vaults on Base, set up for our own funds. Deposits are open to approved wallets only. Yield comes from overcollateralized lending, is not guaranteed, and you can lose money. A large withdrawal can wait for market liquidity.
           </p>
         </div>
         <a
@@ -163,139 +153,41 @@ export default function AppPage({ data }: { data: AppVaults }) {
         </a>
       </div>
 
-      <h2 className="text-2xl font-light text-gray-900 font-serif mb-4">Curated vaults</h2>
+      <h2 className="text-2xl font-light text-gray-900 font-serif mb-4">Current vaults</h2>
 
-      {/* Desktop: table */}
-      <div className="hidden lg:block border border-gray-200 rounded-xl bg-white overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-gray-200 text-left text-xs font-medium text-gray-500">
-              <th className="px-3 py-3 font-medium lg:px-5">Vault</th>
-              <th className="px-3 py-3 font-medium text-right lg:px-5">Deposits</th>
-              <th className="px-3 py-3 font-medium text-right lg:px-5">Performance fee</th>
-              <th className="px-3 py-3 font-medium text-right lg:px-5">Management fee</th>
-              <th className="px-3 py-3 font-medium text-right lg:px-5">APY</th>
-              <th className="px-3 py-3 font-medium text-right lg:px-5">Share price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listedVaults.map((vault) => (
-              <tr key={vault.address} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
-                <td className="px-3 py-4 align-top lg:px-5">
-                  <a
-                    href={vaultAppUrl(vault.address)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-gray-900 hover:underline underline-offset-2"
-                  >
-                    {vault.name}
-                  </a>
-                  <div className="mt-1 flex items-center gap-2">
-                    <StrategyPill strategy={vault.strategy} />
-                    <a
-                      href={`https://basescan.org/address/${vault.address}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${vault.name} contract ${vault.address} on Basescan`}
-                      className="whitespace-nowrap font-mono text-xs text-gray-500 hover:text-gray-900"
-                    >
-                      {shortAddress(vault.address)}
-                    </a>
-                  </div>
-                </td>
-                <td className="px-3 py-4 text-right align-top whitespace-nowrap lg:px-5">
-                  <Deposits vault={vault} />
-                </td>
-                <td className="px-3 py-4 text-right align-top text-gray-700 tabular-nums whitespace-nowrap lg:px-5">
-                  {feePercent(vault.performanceFee)}
-                </td>
-                <td className="px-3 py-4 text-right align-top text-gray-700 tabular-nums whitespace-nowrap lg:px-5">
-                  {feePercent(vault.managementFee)}
-                </td>
-                <td className="px-3 py-4 text-right align-top whitespace-nowrap lg:px-5">
-                  <Apy vault={vault} />
-                </td>
-                <td className="px-3 py-4 text-right align-top whitespace-nowrap lg:px-5">
-                  <SharePrice vault={vault} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Mobile: cards */}
-      <ul className="lg:hidden space-y-3">
+      <ul className="border border-gray-200 rounded-xl bg-white divide-y divide-gray-100">
+        <li className="hidden sm:grid grid-cols-[1fr_10rem_6rem] gap-4 px-5 py-3 text-xs font-medium text-gray-500">
+          <span>Vault</span>
+          <span className="text-right">Deposits</span>
+          <span className="text-right">APY</span>
+        </li>
         {listedVaults.map((vault) => (
-          <li key={vault.address} className="border border-gray-200 rounded-xl bg-white p-4">
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <a
-                  href={vaultAppUrl(vault.address)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-gray-900 hover:underline underline-offset-2"
-                >
-                  {vault.name}
-                </a>
-                <div className="mt-1 flex items-center gap-2">
-                  <StrategyPill strategy={vault.strategy} />
-                  <a
-                    href={`https://basescan.org/address/${vault.address}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${vault.name} contract ${vault.address} on Basescan`}
-                    className="font-mono text-xs text-gray-500 hover:text-gray-900"
-                  >
-                    {shortAddress(vault.address)}
-                  </a>
-                </div>
-              </div>
-              <div className="shrink-0 text-right">
-                <Apy vault={vault} prominent />
+          <li
+            key={vault.address}
+            className="grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_10rem_6rem] gap-x-4 gap-y-3 px-4 py-4 sm:px-5"
+          >
+            <div className="min-w-0">
+              <VaultName vault={vault} />
+            </div>
+            <div className="order-last col-span-2 flex items-baseline justify-between text-sm sm:order-none sm:col-span-1 sm:block sm:text-right">
+              <span className="text-xs text-gray-500 sm:hidden">Deposits</span>
+              <div className="text-right">
+                <Deposits vault={vault} />
               </div>
             </div>
-            <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-              <div>
-                <dt className="text-xs text-gray-500 mb-0.5">Deposits</dt>
-                <dd>
-                  <Deposits vault={vault} />
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs text-gray-500 mb-0.5">Share price</dt>
-                <dd>
-                  <SharePrice vault={vault} />
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs text-gray-500 mb-0.5">Performance fee</dt>
-                <dd className="text-gray-900 tabular-nums">{feePercent(vault.performanceFee)}</dd>
-              </div>
-              <div>
-                <dt className="text-xs text-gray-500 mb-0.5">Management fee</dt>
-                <dd className="text-gray-900 tabular-nums">{feePercent(vault.managementFee)}</dd>
-              </div>
-            </dl>
+            <div className="text-right">
+              <Apy vault={vault} />
+            </div>
           </li>
         ))}
       </ul>
 
       <p className="mt-3 text-sm text-gray-600">
-        APY is the current net rate after fees and moves with market rates. It is not a promised return. 90D APY is the realized average of that rate over the last 90 days. Share price is what one share is worth in the vault asset. The performance fee is taken from the yield. The management fee is charged on assets over the year. Allocations, liquidity, and risk details for each vault are in the{' '}
-        <a
-          href={APP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-900 underline underline-offset-2 hover:text-gray-600"
-        >
-          app
-        </a>
-        .
+        APY is the current net rate and moves with market rates. It is not a promised return. The vaults charge no fees. Vault names link to Morpho, where you can see each vault&apos;s markets, liquidity and history.
       </p>
 
       <section className="mt-16 border-t border-gray-200 pt-12">
-        <h2 className="text-2xl font-light text-gray-900 font-serif mb-8">How these vaults work</h2>
+        <h2 className="text-2xl font-light text-gray-900 font-serif mb-8">How the vaults work</h2>
 
         <h3 className="text-sm font-medium text-gray-500 mb-3">Strategies</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -307,16 +199,6 @@ export default function AppPage({ data }: { data: AppVaults }) {
           ))}
         </div>
         <p className="mt-3 mb-10 text-sm text-gray-600">Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds back.</p>
-
-        <h3 className="text-sm font-medium text-gray-500 mb-3">Roles</h3>
-        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-          {ROLES.map((role) => (
-            <div key={role.name} className="border border-gray-200 rounded-xl bg-white p-5">
-              <dt className="font-medium text-gray-900">{role.name}</dt>
-              <dd className="mt-1 text-gray-700 leading-relaxed">{role.body}</dd>
-            </div>
-          ))}
-        </dl>
 
         <h3 className="text-sm font-medium text-gray-500 mb-3">Learn more</h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 border-t border-gray-200">

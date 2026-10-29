@@ -43,14 +43,6 @@ export interface VaultRow {
   /** Total deposits in the vault asset (human units). */
   totalAssets: number | null;
   apy: number | null;
-  /** Realized average net APY over the last 90 days, in percentage points. */
-  apy90: number | null;
-  /** Value of one share, quoted in the vault asset. */
-  sharePrice: number | null;
-  /** Dollar value of one share. */
-  sharePriceUsd: number | null;
-  performanceFee: number | null;
-  managementFee: number | null;
   tvlUsd: number | null;
 }
 
@@ -73,7 +65,7 @@ function toTokenAmount(raw: number | string | null | undefined, decimals: number
 async function fetchVaultRows(): Promise<VaultRow[]> {
   const fields = VAULTS.map(
     (vault, i) =>
-      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssets totalAssetsUsd sharePrice netApy avgNetApy(lookback: NINETY_DAYS) performanceFee managementFee chain { network } asset { symbol decimals price { usd } } }`
+      `v${i}: vaultV2ByAddress(address: "${vault.address}", chainId: ${BASE_CHAIN_ID}) { name totalAssets totalAssetsUsd netApy chain { network } asset { symbol decimals } }`
   ).join('\n');
 
   try {
@@ -91,25 +83,17 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
           name: string | null;
           totalAssets: number | string | null;
           totalAssetsUsd: number | null;
-          sharePrice: number | null;
           netApy: number | null;
-          avgNetApy: number | null;
-          performanceFee: number | null;
-          managementFee: number | null;
           chain: { network: string | null } | null;
-          asset: { symbol: string | null; decimals: number | null; price: { usd: number | null } | null } | null;
+          asset: { symbol: string | null; decimals: number | null } | null;
         } | null
       >;
     };
     if (!json.data) throw new Error('morpho');
     return VAULTS.map((vault, i) => {
       const row = json.data?.[`v${i}`];
-      // Spot net APY. The 90-day figure is avgNetApy(lookback: NINETY_DAYS), not this rate.
+      // Spot net APY, after fees.
       const apy = row?.netApy;
-      const sharePrice = typeof row?.sharePrice === 'number' ? row.sharePrice : null;
-      const assetPriceUsd = row?.asset?.price?.usd;
-      const sharePriceUsd =
-        sharePrice !== null && typeof assetPriceUsd === 'number' ? sharePrice * assetPriceUsd : null;
       return {
         name: displayName(vault.name, row?.name, vault.kind),
         address: vault.address,
@@ -119,11 +103,6 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
         assetSymbol: row?.asset?.symbol ?? null,
         totalAssets: toTokenAmount(row?.totalAssets, row?.asset?.decimals),
         apy: typeof apy === 'number' ? apy * 100 : null,
-        apy90: typeof row?.avgNetApy === 'number' ? row.avgNetApy * 100 : null,
-        sharePrice,
-        sharePriceUsd,
-        performanceFee: typeof row?.performanceFee === 'number' ? row.performanceFee * 100 : null,
-        managementFee: typeof row?.managementFee === 'number' ? row.managementFee * 100 : null,
         tvlUsd: typeof row?.totalAssetsUsd === 'number' ? row.totalAssetsUsd : null,
       };
     });
@@ -137,11 +116,6 @@ async function fetchVaultRows(): Promise<VaultRow[]> {
       assetSymbol: null,
       totalAssets: null,
       apy: null,
-      apy90: null,
-      sharePrice: null,
-      sharePriceUsd: null,
-      performanceFee: null,
-      managementFee: null,
       tvlUsd: null,
     }));
   }
