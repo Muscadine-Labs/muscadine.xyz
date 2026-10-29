@@ -42,17 +42,6 @@ function morphoVaultUrl(vault: VaultRow): string {
 // Hides empty vaults. A vault whose TVL failed to load stays listed with dashes.
 const MIN_LIST_TVL_USD = 1000;
 
-const STRATEGIES = [
-  {
-    name: 'Prime',
-    body: 'Lower-risk markets, such as Bitcoin and Ether collateral.',
-  },
-  {
-    name: 'Frontier',
-    body: 'Higher yield and more risk, across a wider range of crypto and tokenized-stock collateral.',
-  },
-] as const;
-
 const LEARN_LINKS = [
   { label: 'What is Morpho?', href: 'https://docs.morpho.org/learn/' },
   { label: 'What is a vault?', href: 'https://docs.morpho.org/learn/concepts/vault-v2/' },
@@ -182,24 +171,16 @@ export default function AppPage({ data }: { data: AppVaults }) {
         ))}
       </ul>
 
-      <p className="mt-3 text-sm text-gray-600">
-        APY is the current net rate and moves with market rates. It is not a promised return. The vaults charge no fees. Vault names link to Morpho, where you can see each vault&apos;s markets, liquidity and history.
-      </p>
+      <div className="mt-4 space-y-2 text-sm text-gray-600 leading-relaxed">
+        <p>
+          <strong className="font-medium text-gray-900">Prime</strong> lends against lower-risk collateral such as Bitcoin and Ether. <strong className="font-medium text-gray-900">Frontier</strong> aims for more yield with more risk. Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds back.
+        </p>
+        <p>
+          APY is the current net rate and changes with the market. The vaults charge no fees. Vault names open the vault on Morpho, with its markets, liquidity and history.
+        </p>
+      </div>
 
-      <section className="mt-16 border-t border-gray-200 pt-12">
-        <h2 className="text-2xl font-light text-gray-900 font-serif mb-8">How the vaults work</h2>
-
-        <h3 className="text-sm font-medium text-gray-500 mb-3">Strategies</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {STRATEGIES.map((strategy) => (
-            <div key={strategy.name} className="border border-gray-200 rounded-xl bg-white p-5">
-              <p className="text-xl font-light text-gray-900 font-serif">{strategy.name}</p>
-              <p className="mt-2 text-gray-700 leading-relaxed">{strategy.body}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-3 mb-10 text-sm text-gray-600">Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds back.</p>
-
+      <section className="mt-12">
         <h3 className="text-sm font-medium text-gray-500 mb-3">Learn more</h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 border-t border-gray-200">
           {LEARN_LINKS.map((link) => (

@@ -3,13 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-const VAULT_EXPOSURE = [
-  { name: 'USDC Prime (V2)', protocols: 'Morpho markets (overcollateralized lending)' },
-  { name: 'Muscadine USDC Frontier (V2)', protocols: 'Morpho markets (overcollateralized lending)' },
-  { name: 'WETH Prime (V2)', protocols: 'Morpho markets (overcollateralized lending)' },
-  { name: 'cbBTC Prime (V2)', protocols: 'Morpho markets (overcollateralized lending)' },
-];
-
 const RiskPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
@@ -61,8 +54,8 @@ const RiskPage: React.FC = () => {
             <p className="text-gray-700 mb-4">
               We list Morpho markets that meet minimum liquidity, collateralization, and operational criteria.
               Concentration limits, asset type, and oracle dependencies are reviewed before onboarding. Markets can be
-              removed or capped when conditions change. Ratings in the exposure table are qualitative summaries — not
-              investment grades.
+              removed or capped when conditions change. Every vault supplies only to Morpho markets (overcollateralized
+              lending).
             </p>
           </section>
 
@@ -108,31 +101,6 @@ const RiskPage: React.FC = () => {
             <p className="text-gray-700 text-sm">
               On-chain roles and contract addresses are set per vault. Verify them on-chain before depositing.
             </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Vault exposure (summary)</h2>
-            <p className="text-gray-700 text-sm mb-4">
-              For documentation purposes only. Verify live allocation on-chain.
-            </p>
-            <div className="overflow-x-auto border border-gray-200 rounded-lg">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left p-3 font-medium text-gray-900">Vault</th>
-                    <th className="text-left p-3 font-medium text-gray-900">Exposure</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {VAULT_EXPOSURE.map((vault) => (
-                    <tr key={vault.name} className="border-b last:border-0">
-                      <td className="p-3 font-medium text-gray-900">{vault.name}</td>
-                      <td className="p-3 text-gray-700">{vault.protocols}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </section>
 
           <section className="mb-8">
