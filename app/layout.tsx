@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Muscadine',
     description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
-    creator: '@muscadinelabs',
   },
   robots: {
     index: true,
@@ -76,7 +75,6 @@ export default function RootLayout({
               author: {
                 '@type': 'Organization',
                 name: 'Muscadine',
-                url: 'https://x.com/muscadinelabs',
               },
             }),
           }}
