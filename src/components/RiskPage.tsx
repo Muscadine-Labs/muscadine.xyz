@@ -39,7 +39,7 @@ const RiskPage: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">What this is</h2>
             <p className="text-gray-700 mb-4">
-              Muscadine runs a few Morpho vaults on Base for our own and our family&apos;s funds. We choose their
+              Muscadine runs a few Morpho vaults on Base for our own funds. We choose their
               markets and caps; deposits are open to approved wallets only, signed from your own non-custodial wallet.
               We do not hold private keys, charge fees to anyone, guarantee returns, or insure deposits.
             </p>

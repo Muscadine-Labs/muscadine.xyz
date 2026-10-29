@@ -34,7 +34,7 @@ const LegalPage: React.FC = () => {
             <p className={BODY}>
               Muscadine is a personal, non-commercial project run by an individual. It is not a company and has no
               clients, customers or employees. We do not sell anything, charge fees to anyone, take payment, or manage
-              money for other people. The vaults hold our own and our family&apos;s funds and are open to approved
+              money for other people. The vaults hold our own funds and are open to approved
               wallets only.
             </p>
           </section>

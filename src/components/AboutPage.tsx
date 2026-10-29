@@ -25,7 +25,7 @@ const AboutPage = () => {
                 Muscadine started from a simple belief: you should be able to hold and use your own money without asking permission. Self-custody, open-source software and transparent on-chain systems make that possible.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                The guides here are the notes and tools we use ourselves, published so others can learn from them. The vaults on app.muscadine.xyz are set up for our own and our family's funds.
+                The guides here are the notes and tools we use ourselves, published so others can learn from them. The vaults on app.muscadine.xyz are set up for our own funds.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Everything here is information only. Do your own research and get your own professional advice before any financial decision.
