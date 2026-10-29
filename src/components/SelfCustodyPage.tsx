@@ -14,7 +14,7 @@ const WALLET_TYPES = [
   },
   {
     name: 'Air-gapped signer',
-    body: 'A hardware signer that never connects by USB or Bluetooth; it passes transactions by QR code or microSD. SeedSigner and Coldcard work this way.',
+    body: 'A hardware signer that never connects by USB or Bluetooth; it passes transactions by QR code. SeedSigner works this way.',
   },
   {
     name: 'Multisig',
@@ -138,7 +138,7 @@ export default function SelfCustodyPage() {
           <p className="mt-3 text-gray-700 leading-relaxed">
             BIP-85 lets one master seed create separate child seeds, each its own wallet. You back up the master once,
             and any child can be re-created from it. The trade-off: the master controls every child, so it needs your
-            best protection. Supported by Coldcard, SeedSigner and others.
+            best protection. SeedSigner and some other signers support it.
           </p>
         </details>
       </Section>
@@ -164,8 +164,8 @@ export default function SelfCustodyPage() {
         <p className="text-gray-700 leading-relaxed">
           On Ethereum, Base and similar networks, a browser wallet such as Rabby connects to apps, ideally with a
           hardware wallet doing the signing. Every app you use asks for approval to move your tokens. Read what you
-          sign, approve only the amount you need, and revoke old approvals. Keep a separate wallet with little in it for
-          trying new apps.
+          sign, approve only the amount you need, and remove approvals you no longer use (Rabby lists them under
+          Approvals). Keep a separate wallet with little in it for trying new apps.
         </p>
         <LinkList links={DEFI_LINKS} />
       </Section>
