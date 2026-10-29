@@ -1,94 +1,14 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import type { HomeStats } from '@/src/lib/stats';
 
 const IsometricNodes = dynamic(() => import('./IsometricNodes'), { ssr: false });
-const PolyhedronShape = dynamic(() => import('./3DShapes/PolyhedronShape'), { ssr: false });
 const StarShape = dynamic(() => import('./3DShapes/StarShape'), { ssr: false });
 const TorusShape = dynamic(() => import('./3DShapes/TorusShape'), { ssr: false });
 const PyramidShape = dynamic(() => import('./3DShapes/PyramidShape'), { ssr: false });
 
-const CountUpAnimation = ({ target, duration = 2000, suffix = '', prefix = '' }: { 
-  target: number; 
-  duration?: number; 
-  suffix?: string; 
-  prefix?: string; 
-}) => {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    let raf = 0;
-    let started = false;
-
-    const startCountUp = () => {
-      const startTime = performance.now();
-      const animate = (now: number) => {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        setCount(Math.floor(target * easeOutQuart));
-        if (progress < 1) {
-          raf = requestAnimationFrame(animate);
-        } else {
-          setCount(target);
-        }
-      };
-      raf = requestAnimationFrame(animate);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) {
-          started = true;
-          setIsVisible(true);
-          startCountUp();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(el);
-
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(raf);
-    };
-  }, [duration, target]);
-
-  const formatNumber = (num: number) => {
-    if (target >= 1000000) {
-      const millions = num / 1000000;
-      return Number.isInteger(millions) ? String(millions) : millions.toFixed(1);
-    }
-    if (target >= 1000) {
-      const thousands = num / 1000;
-      return target < 100000 ? thousands.toFixed(1) : thousands.toFixed(0);
-    }
-    return num.toString();
-  };
-
-  const unit = target >= 1000000 ? 'M' : target >= 1000 ? 'K' : '';
-
-  return (
-    <div ref={ref} className="flex-1">
-      <h2 className="text-5xl sm:text-6xl lg:text-7xl font-light leading-none text-gray-900 mb-3 font-serif lining-nums tabular-nums tracking-tight">
-        {prefix}
-        {isVisible ? formatNumber(count) : '0'}
-        {unit}
-        {suffix}
-      </h2>
-    </div>
-  );
-};
-
-const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
+const MuscadineHome = () => {
   return (
     <>
       {/* Hero Section - Full Width Background */}
@@ -116,7 +36,7 @@ const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
               Take the First Step. <span className=" underline">Confidently.</span>
             </h1>
             <p className="text-lg text-gray-600 leading-relaxed">
-              We're here to make sure your crypto journey is safe and secure. From Bitcoin self-custody to DeFi protocols, we provide expert guidance and institutional-grade security solutions that protect your digital assets through proper education and secure practices.
+              Education and open-source tools for Bitcoin self-custody and DeFi. Learn to hold your own keys, run your own node, and understand the risks before you use on-chain protocols.
             </p>
           </div>
 
@@ -130,53 +50,8 @@ const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
         </div>
       </div>
 
-      {/* Stats & Solutions Section - Full Width Background with Gradient - Break out of container */}
+      {/* Solutions Section - Full Width Background with Gradient - Break out of container */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-x-hidden bg-linear-to-b from-gray-50 via-blue-50 to-gray-50 py-12 md:py-20 my-12 md:my-16">
-        {/* Stats Section */}
-        <div className="max-w-6xl mx-auto px-4 mb-16 md:mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-3 items-start gap-8 text-center">
-              {/* Stat 1 - Clients */}
-              <div className="flex-1">
-                <CountUpAnimation 
-                  target={12} 
-                  duration={1500} 
-                  suffix="+" 
-                />
-                <p className="text-lg text-gray-600">
-                  clients advised
-                </p>
-              </div>
-              
-              {/* Stat 2 - Assets */}
-              <div className="flex-1">
-                <CountUpAnimation 
-                  target={16000000} 
-                  duration={2000} 
-                  prefix="$" 
-                  suffix="+" 
-                />
-                <p className="text-lg text-gray-600">
-                  in digital assets &amp; self-custody solutions
-                </p>
-              </div>
-
-              {/* Stat 3 - Morpho vault TVL (live) */}
-              {stats.vaultTvlUsd !== null && (
-                <div className="flex-1">
-                  <CountUpAnimation 
-                    target={stats.vaultTvlUsd} 
-                    duration={2000} 
-                    prefix="$" 
-                  />
-                  <p className="text-lg text-gray-600">
-                    in Morpho vaults
-                  </p>
-                </div>
-              )}
-
-          </div>
-        </div>
-
         {/* Our Solutions Section */}
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -200,7 +75,7 @@ const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
                   Our App
                 </h3>
                 <p className="text-base text-gray-600 leading-relaxed">
-                  Access our Morpho vaults on Base for secure yield on USDC, Bitcoin, and Ethereum. Deposit or withdraw any amount, at any time.
+                  Non-custodial Morpho vaults on Base for USDC, cbBTC and WETH. Yield comes from overcollateralized lending, changes with the market and is not guaranteed.
                 </p>
                 <Link
                   href="/app"
@@ -259,32 +134,6 @@ const MuscadineHome = ({ stats }: { stats: HomeStats }) => {
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
                   Learn Self Custody
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-
-            {/* Service 4 - Portfolio (Bottom Right) */}
-            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 sm:p-8 hover:border-gray-300 transition-colors">
-              <div className="space-y-6">
-                {/* 3D Shape Container */}
-                <div className="w-full h-48 bg-gray-50 rounded-lg border border-gray-200">
-                  <PolyhedronShape path="/contact" />
-                </div>
-                
-                <h3 className="text-2xl font-light text-gray-900 font-serif">
-                  Portfolio
-                </h3>
-                <p className="text-base text-gray-600 leading-relaxed">
-                  Track, manage, and plan your net worth, assets, liabilities, cash, and more. A unified view of your financial picture to help you make informed decisions.
-                </p>
-                <Link 
-                  href="/contact"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-                >
-                  Contact us for more information
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>

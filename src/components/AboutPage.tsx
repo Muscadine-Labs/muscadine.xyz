@@ -12,7 +12,7 @@ const AboutPage = () => {
             A Team You Can Trust
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
-            Founded by two university students, Muscadine is dedicated to helping individuals take control of their financial future through Bitcoin security, self-custody, and DeFi solutions. We provide support with Bitcoin node deployment, secure asset management, and onboarding into decentralized finance, ensuring people can navigate the new financial system.
+            Founded by two university students, Muscadine is dedicated to helping individuals take control of their financial future through Bitcoin security, self-custody, and DeFi solutions. We share guides and open-source tools for running a Bitcoin node, holding your own keys and using decentralized finance.
           </p>
         </div>
 
@@ -27,7 +27,7 @@ const AboutPage = () => {
                 We founded Muscadine with a clear belief: financial freedom should not be reserved for the few—it should be accessible to anyone willing to take control of their future. Today's financial system creates dependence and limits opportunity. We're building a new path—one powered by self-custody, transparency, and personal sovereignty.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Muscadine helps individuals and families move beyond traditional banking constraints by leveraging secure Bitcoin infrastructure and decentralized finance. We empower people to protect, grow, and control their wealth without relying on intermediaries.
+                Muscadine helps individuals and families move beyond traditional banking constraints by leveraging secure Bitcoin infrastructure and decentralized finance. We share tools and education so people can hold and use their digital assets without relying on intermediaries.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
                 <strong>Our mission is simple:</strong><br />
@@ -106,7 +106,7 @@ const AboutPage = () => {
               <h3 className="text-2xl font-light text-gray-900 mb-2 font-serif">Nicholas Connelly</h3>
               <p className="text-blue-600 font-medium mb-4">Co-Founder & CEO</p>
               <p className="text-gray-600 leading-relaxed">
-                Bitcoin security expert with over 7 years of experience in digital asset protection. Specializes in self-custody solutions and institutional-grade security practices.
+                Bitcoin security expert with over 7 years of experience in digital asset protection. Focuses on self-custody and security practices.
               </p>
             </div>
 

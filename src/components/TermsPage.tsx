@@ -11,11 +11,11 @@ const TermsPage: React.FC = () => {
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
             Terms of Service
           </h1>
-          <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: October 2026</p>
 
           <div className="bg-gray-50 border border-gray-200 p-6 mb-8 rounded-sm">
             <p className="text-gray-800 font-semibold">
-              <strong>IMPORTANT DISCLAIMER:</strong> Muscadine Labs LLC is a DeFi vault curator and technology provider — not a bank, broker, investment adviser, or custodian. All content is for educational and informational purposes only. We do not provide financial, investment, tax, or legal advice. Use of our services does not create any professional relationship. Read our{' '}
+              <strong>IMPORTANT DISCLAIMER:</strong> Muscadine is a DeFi vault curator and technology provider — not a bank, broker, investment adviser, or custodian. All content is for educational and informational purposes only. We do not provide financial, investment, tax, or legal advice. Use of our services does not create any professional relationship. Read our{' '}
               <Link href="/risk" className="underline">Risk</Link> page and{' '}
               <Link href="/legal" className="underline">Legal disclaimer</Link> before using vaults or related products.
             </p>
@@ -26,7 +26,7 @@ const TermsPage: React.FC = () => {
               1. Acceptance of Terms
             </h2>
             <p className="text-gray-700 mb-4">
-              By accessing and using Muscadine Labs LLC's website and services, you accept and agree to be bound by these Terms of Service. 
+              By accessing and using Muscadine's website and services, you accept and agree to be bound by these Terms of Service. 
               If you do not agree to these terms, please do not use our services.
             </p>
           </section>
@@ -36,7 +36,7 @@ const TermsPage: React.FC = () => {
               2. Our Services
             </h2>
             <p className="text-gray-700 mb-4">
-              Muscadine Labs LLC, a limited liability company, is a <strong>DeFi vault curator and technology provider</strong>. We do not take custody of user deposits, guarantee returns, or operate as a bank or registered investment adviser. Our properties include:
+              Muscadine is a <strong>DeFi vault curator and technology provider</strong>. We do not take custody of user deposits, guarantee returns, or operate as a bank or registered investment adviser. Our properties include:
             </p>
             <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
               <li><strong>muscadine.xyz</strong> — company site, legal documents, and risk disclosures (authoritative source)</li>
@@ -60,7 +60,7 @@ const TermsPage: React.FC = () => {
             </h2>
             <div className="bg-blue-100 border-l-4 border-blue-500 p-6 mb-4 rounded-sm">
               <p className="text-blue-800 font-semibold mb-2">
-                <strong>OUR RISK CURATION SERVICE:</strong> Muscadine Labs LLC curates risk for non-custodial vault services (including Morpho vaults) by evaluating, assessing, and managing risks associated with DeFi protocols and smart contracts.
+                <strong>OUR RISK CURATION SERVICE:</strong> Muscadine curates risk for non-custodial vault services (including Morpho vaults) by evaluating, assessing, and monitoring risks associated with DeFi protocols and smart contracts.
               </p>
               <p className="text-blue-700">
                 We conduct thorough due diligence on protocols, analyze smart contract security, monitor protocol health, and provide risk assessments to help users make informed decisions about non-custodial vault participation.
@@ -142,7 +142,7 @@ const TermsPage: React.FC = () => {
               6. No Professional Relationship
             </h2>
             <p className="text-gray-700 mb-4">
-              Use of our services does not create any professional relationship between you and Muscadine Labs LLC. 
+              Use of our services does not create any professional relationship between you and Muscadine. 
               We are not your financial advisors, investment advisors, or legal counsel. Our risk curation 
               services and educational content are provided for informational purposes only and do not constitute 
               financial, investment, or legal advice.
@@ -161,7 +161,7 @@ const TermsPage: React.FC = () => {
               <li>Understand that our risk curation does not eliminate risks or guarantee safety</li>
               <li>Accept full responsibility for your decisions to participate in any non-custodial vault or DeFi protocol</li>
               <li>Understand that all information is provided "as is" without warranties</li>
-              <li>Not hold Muscadine Labs LLC liable for any losses incurred through use of our services or participation in curated protocols</li>
+              <li>Not hold Muscadine liable for any losses incurred through use of our services or participation in curated protocols</li>
               <li>Maintain proper security practices for your digital assets and wallet credentials</li>
               <li>Verify all transaction details and protocol addresses before interacting with smart contracts</li>
             </ul>
@@ -171,7 +171,7 @@ const TermsPage: React.FC = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
               8. Limitation of Liability
             </h2>
-            <p className="text-gray-700 mb-4">To the maximum extent permitted by law, Muscadine Labs LLC shall not be liable for any:</p>
+            <p className="text-gray-700 mb-4">To the maximum extent permitted by law, Muscadine shall not be liable for any:</p>
             <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
               <li>Direct, indirect, incidental, or consequential damages</li>
               <li>Loss of digital assets or cryptocurrency holdings</li>
@@ -194,7 +194,7 @@ const TermsPage: React.FC = () => {
               9. Indemnification
             </h2>
             <p className="text-gray-700 mb-4">
-              You agree to indemnify and hold harmless Muscadine Labs LLC from any claims, damages, or expenses arising from your use of our services or violation of these terms.
+              You agree to indemnify and hold harmless Muscadine from any claims, damages, or expenses arising from your use of our services or violation of these terms.
             </p>
           </section>
 
@@ -249,7 +249,6 @@ const TermsPage: React.FC = () => {
             </h2>
             <div className="bg-gray-50 p-6 rounded-lg mb-4">
               <p className="text-gray-700 mb-2">For questions about these terms, contact us:</p>
-              <p className="text-gray-700"><strong>Company:</strong> Muscadine Labs LLC</p>
               <p className="text-gray-700"><strong>Email:</strong>{' '}
                 <a href="mailto:muscadinelabs@gmail.com" className="text-blue-600 hover:text-blue-700 underline">
                   muscadinelabs@gmail.com

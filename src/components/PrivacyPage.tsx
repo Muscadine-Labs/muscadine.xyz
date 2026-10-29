@@ -11,12 +11,12 @@ const PrivacyPage: React.FC = () => {
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
             Privacy Policy
           </h1>
-          <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: October 2026</p>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Information We Collect</h2>
             <p className="text-gray-700 mb-4">
-              Muscadine Labs LLC ("we," "our," or "us"), a limited liability company, is committed to protecting your privacy. We collect minimal information necessary to provide our services, which include risk curation for non-custodial Morpho vaults, Bitcoin security guidance, Bitcoin node connectivity, DeFi protocol access, and educational content:
+              Muscadine ("we," "our," or "us") is committed to protecting your privacy. We collect minimal information necessary to provide our services, which include risk curation for non-custodial Morpho vaults, Bitcoin security guidance, Bitcoin node connectivity, DeFi protocol access, and educational content:
             </p>
             <ul className="text-gray-700 list-disc list-inside space-y-2 mb-4">
               <li><strong>Contact Information:</strong> Email addresses provided voluntarily through contact forms or service inquiries</li>
@@ -90,7 +90,7 @@ const PrivacyPage: React.FC = () => {
               <p className="text-gray-800 font-semibold mb-2">Important Security Reminder:</p>
               <p className="text-gray-700">
                 We never request your wallet private keys, seed phrases, or passwords. Never share these credentials with anyone, 
-                including Muscadine Labs LLC. Your digital assets remain in your control through non-custodial smart contracts.
+                including Muscadine. Your digital assets remain in your control through non-custodial smart contracts.
               </p>
             </div>
           </section>
@@ -138,7 +138,6 @@ const PrivacyPage: React.FC = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Contact Us</h2>
             <div className="bg-gray-50 p-6 rounded-lg mb-4">
               <p className="text-gray-700 mb-2">If you have questions about this Privacy Policy, please contact us:</p>
-              <p className="text-gray-700"><strong>Company:</strong> Muscadine Labs LLC</p>
               <p className="text-gray-700"><strong>Email:</strong> muscadinelabs@gmail.com</p>
               <p className="text-gray-700"><strong>Website:</strong> muscadine.xyz</p>
             </div>
@@ -155,7 +154,7 @@ const PrivacyPage: React.FC = () => {
               </p>
             </div>
             <p className="text-gray-700 mb-4">
-              <strong>Important:</strong> Muscadine Labs LLC provides educational content and risk curation services. We do not provide 
+              <strong>Important:</strong> Muscadine provides educational content and risk curation services. We do not provide 
               financial advice, investment recommendations, or custody services. We do not custody, hold, or control your digital 
               assets. All information and risk assessments are for educational and informational purposes only. Users are 
               responsible for their own financial decisions and should consult with qualified professionals before making any 

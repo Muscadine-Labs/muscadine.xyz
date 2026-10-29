@@ -18,12 +18,12 @@ const RiskPage: React.FC = () => {
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
             Risk
           </h1>
-          <p className="text-gray-600 italic mb-8">Last updated: May 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: October 2026</p>
 
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
             <h2 className="text-xl font-light text-gray-900 mb-2 font-serif">Not a bank · Not advice</h2>
             <p className="text-gray-700">
-              Muscadine Labs LLC is a <strong>DeFi vault curator and technology provider</strong>, not a bank, broker,
+              Muscadine is a <strong>DeFi vault curator and technology provider</strong>, not a bank, broker,
               investment adviser, or custodian. Nothing here is investment, tax, or legal advice. Digital asset
               strategies involve substantial risk, including total loss of principal. Past or projected yield is not a
               guarantee of future results. You retain custody of your assets and are solely responsible for wallet
@@ -39,7 +39,7 @@ const RiskPage: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">What we are</h2>
             <p className="text-gray-700 mb-4">
-              Muscadine Labs publishes curated Morpho vault strategies on Base. We configure markets and risk parameters;
+              Muscadine publishes curated Morpho vault strategies on Base. We configure markets and risk parameters;
               users deposit through non-custodial wallets. We do not hold user private keys, guarantee returns, or insure
               deposits.
             </p>
@@ -91,7 +91,7 @@ const RiskPage: React.FC = () => {
                     <td className="p-3 text-gray-700">Custody keys, sign transactions, tax reporting, suitability, reading on-chain state</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3 font-medium text-gray-900 align-top">Muscadine Labs</td>
+                    <td className="p-3 font-medium text-gray-900 align-top">Muscadine</td>
                     <td className="p-3 text-gray-700">Curate vault parameters and markets; operate interfaces; no custody of deposits</td>
                   </tr>
                   <tr className="border-b">

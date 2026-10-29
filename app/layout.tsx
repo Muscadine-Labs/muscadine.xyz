@@ -28,20 +28,20 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://muscadine.xyz'),
-  title: 'Muscadine Labs',
+  title: 'Muscadine',
   description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
   keywords: 'DeFi, Bitcoin, Base, Morpho, vault, yield, crypto, finance, self-sovereignty, dashboard',
-  authors: [{ name: 'Muscadine Labs' }],
+  authors: [{ name: 'Muscadine' }],
   openGraph: {
-    title: 'Muscadine Labs',
+    title: 'Muscadine',
     description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
     type: 'website',
     url: 'https://muscadine.xyz',
-    siteName: 'Muscadine Labs',
+    siteName: 'Muscadine',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muscadine Labs',
+    title: 'Muscadine',
     description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
     creator: '@muscadinelabs',
   },
@@ -69,14 +69,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebApplication',
-              name: 'Muscadine Labs',
+              name: 'Muscadine',
               url: 'https://muscadine.xyz',
               description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
               applicationCategory: 'FinanceApplication',
               operatingSystem: 'Web Browser',
               author: {
                 '@type': 'Organization',
-                name: 'Muscadine Labs',
+                name: 'Muscadine',
                 url: 'https://x.com/muscadinelabs',
               },
             }),
