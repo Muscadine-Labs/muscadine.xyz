@@ -45,7 +45,6 @@ const HABITS = [
 const BITCOIN_LINKS: readonly ExternalLink[] = [
   { label: 'Sparrow Wallet (desktop)', href: 'https://sparrowwallet.com/' },
   { label: 'SeedSigner (DIY air-gapped signer)', href: 'https://seedsigner.com/' },
-  { label: 'Coldcard (hardware)', href: 'https://coldcard.com/' },
   { label: 'Trezor (hardware)', href: 'https://trezor.io/' },
   { label: 'mempool.space (block explorer)', href: 'https://mempool.space/' },
   { label: 'Start9 (run your own node)', href: 'https://start9.com/' },
@@ -53,10 +52,9 @@ const BITCOIN_LINKS: readonly ExternalLink[] = [
 
 const DEFI_LINKS: readonly ExternalLink[] = [
   { label: 'Rabby (browser and mobile wallet)', href: 'https://rabby.io/' },
-  { label: 'MetaMask', href: 'https://metamask.io/' },
   { label: 'Phantom', href: 'https://phantom.com/' },
+  { label: 'Trezor (hardware)', href: 'https://trezor.io/' },
   { label: 'Ledger (hardware)', href: 'https://www.ledger.com/' },
-  { label: 'Revoke.cash (review token approvals)', href: 'https://revoke.cash/' },
   { label: 'DeBank (portfolio view)', href: 'https://debank.com/' },
 ];
 
