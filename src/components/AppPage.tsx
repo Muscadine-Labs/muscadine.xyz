@@ -114,10 +114,7 @@ function Apy({ vault }: { vault: VaultRow }) {
 }
 
 export default function AppPage({ data }: { data: AppVaults }) {
-  // Wrappers hold their deposits in an underlying vault, so only underlying vaults are listed.
-  const listedVaults = data.vaults
-    .filter((vault) => vault.kind === 'vault')
-    .filter((vault) => vault.tvlUsd === null || vault.tvlUsd >= MIN_LIST_TVL_USD);
+  const listedVaults = data.vaults.filter((vault) => vault.tvlUsd === null || vault.tvlUsd >= MIN_LIST_TVL_USD);
 
   return (
     <div className="max-w-5xl mx-auto py-8">

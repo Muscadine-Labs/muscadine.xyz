@@ -9,7 +9,6 @@ Next.js site for Muscadine.
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **3D Graphics**: Three.js, React Three Fiber
-- **Analytics**: Vercel Analytics, Speed Insights
 
 ## Development
 
