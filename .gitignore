@@ -94,3 +94,5 @@ temp/
 .tsbuildinfo
 .vite
 .cache
+.env*
+!.env.example
