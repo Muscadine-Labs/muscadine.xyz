@@ -11,7 +11,7 @@ const RiskPage: React.FC = () => {
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
             Risk
           </h1>
-          <p className="text-gray-600 italic mb-8">Last updated: October 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: November 2026</p>
 
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
             <h2 className="text-xl font-light text-gray-900 mb-2 font-serif">Not a bank · Not advice</h2>
