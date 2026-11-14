@@ -15,7 +15,7 @@ const LegalPage: React.FC = () => {
           <h1 className="text-4xl font-light text-gray-900 mb-4 font-serif border-b-2 border-gray-200 pb-4">
             Legal Disclaimer
           </h1>
-          <p className="text-gray-600 italic mb-8">Last updated: October 2026</p>
+          <p className="text-gray-600 italic mb-8">Last updated: November 2026</p>
 
           <div className="bg-gray-50 border border-gray-200 p-6 mb-8 rounded-sm">
             <p className="text-gray-800 font-semibold mb-2">
