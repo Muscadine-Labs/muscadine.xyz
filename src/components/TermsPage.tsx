@@ -61,8 +61,9 @@ const TermsPage: React.FC = () => {
               <li>You keep custody. We never hold your keys or your assets; you sign every transaction yourself.</li>
               <li>The vault, market and Morpho contracts are third-party, open-source code that we do not control. On-chain state is the source of truth.</li>
               <li>Yields are variable and not guaranteed. Past APY is not a reliable indicator of future results.</li>
-              <li>A large withdrawal can wait for market liquidity, and you can lose some or all of what you deposit.</li>
-              <li>We can change markets, caps and other settings at any time, within the vault&apos;s on-chain rules.</li>
+              <li>A withdrawal larger than the vault&apos;s free cash waits for market liquidity, or can be forced out early for a penalty the app shows before you confirm. You can lose some or all of what you deposit.</li>
+              <li>A deposit can be limited by the vault&apos;s caps.</li>
+              <li>We can change markets, caps and other settings within the vault&apos;s on-chain rules. Many changes wait out a timelock first, and the app lists pending ones.</li>
             </ul>
           </section>
 

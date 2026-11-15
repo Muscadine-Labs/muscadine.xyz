@@ -64,7 +64,7 @@ const LegalPage: React.FC = () => {
             <ul className={LIST}>
               <li>Smart-contract bugs and exploits in the vault, market, oracle or Morpho contracts</li>
               <li>Liquidations, bad debt, oracle failures and depegs in the underlying markets</li>
-              <li>Withdrawals that wait for market liquidity</li>
+              <li>Withdrawals that wait for market liquidity, or pay a penalty to exit early</li>
               <li>Price volatility</li>
               <li>Phishing, fake sites, malicious browser extensions and compromised wallets</li>
               <li>Lost or stolen keys and seed phrases, and transactions that cannot be undone</li>
