@@ -44,8 +44,7 @@ const PrivacyPage: React.FC = () => {
             <ul className={LIST}>
               <li>Your wallet and Reown / WalletConnect, which connect it</li>
               <li>Alchemy and other Base RPC providers, for on-chain reads and sending transactions</li>
-              <li>Morpho&apos;s API, for vault and position data</li>
-              <li>CoinGecko, for token prices</li>
+              <li>Morpho&apos;s API, for vault and position data and token prices</li>
             </ul>
             <p className={BODY}>
               Blockchains are public. Anything you do on-chain, including vault deposits and withdrawals, is visible
