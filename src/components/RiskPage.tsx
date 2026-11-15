@@ -43,6 +43,7 @@ const RiskPage: React.FC = () => {
             <ul className="text-gray-700 list-disc list-inside space-y-2">
               <li>Smart contract bugs or exploits in vault, market, or dependency contracts</li>
               <li>Market, liquidity, and oracle failures (depegs, illiquid exits, bad prices)</li>
+              <li>Forced early withdrawals pay a penalty when markets lack free cash</li>
               <li>Curator decisions (market listings, parameters, pauses) — not a guarantee of safety</li>
               <li>Regulatory change and product availability in your jurisdiction</li>
               <li>User error (lost keys, phishing, wrong chain, unsigned transaction mistakes)</li>
@@ -63,7 +64,8 @@ const RiskPage: React.FC = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Monitoring</h2>
             <p className="text-gray-700 mb-4">
               We review utilization, collateral factors, and reported incidents on a recurring basis. Sentinels can pull funds back
-              to idle or lower caps, per on-chain roles. We may update documentation, app notices, or parameters when risk
+              to idle or lower caps, per on-chain roles. Most setting changes wait out an on-chain timelock before
+              they take effect, and the app shows pending changes on each vault&apos;s Overview. We may update documentation, app notices, or parameters when risk
               increases; we are not obligated to recover anyone&apos;s funds in a failure event.
             </p>
           </section>
@@ -93,7 +95,7 @@ const RiskPage: React.FC = () => {
                   </tr>
                   <tr>
                     <td className="p-3 font-medium text-gray-900 align-top">Third parties</td>
-                    <td className="p-3 text-gray-700">Wallets, RPCs, bridges, on/off-ramps — separate terms and risks</td>
+                    <td className="p-3 text-gray-700">Wallets, RPC providers, Morpho&apos;s API, block explorers — separate terms and risks</td>
                   </tr>
                 </tbody>
               </table>

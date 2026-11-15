@@ -28,7 +28,7 @@ const PrivacyPage: React.FC = () => {
           <section className="mb-8">
             <h2 className={SECTION_HEADING}>1. What we see</h2>
             <ul className={LIST}>
-              <li><strong>No analytics:</strong> the sites use no analytics, tracking pixels or advertising cookies.</li>
+              <li><strong>No analytics:</strong> the sites use no analytics, tracking pixels or advertising cookies, and the app turns off the wallet-connect analytics.</li>
               <li><strong>Server logs:</strong> our hosting provider (Vercel) keeps standard request logs, such as IP address, browser and time, for a short period.</li>
               <li><strong>Wallet address:</strong> when you connect a wallet to app.muscadine.xyz, the app reads that public address&apos;s balances and vault positions. We do not tie it to your name or store it in a database.</li>
               <li><strong>Email:</strong> if you email us, we keep your message and address to reply.</li>
@@ -44,8 +44,9 @@ const PrivacyPage: React.FC = () => {
             <ul className={LIST}>
               <li>Your wallet and Reown / WalletConnect, which connect it</li>
               <li>Alchemy and other Base RPC providers, for on-chain reads and sending transactions</li>
-              <li>Morpho&apos;s API, for vault and position data</li>
-              <li>CoinGecko, for token prices</li>
+              <li>An Ethereum RPC (Alchemy or a public node), to show your wallet&apos;s ENS name</li>
+              <li>Morpho&apos;s API, for vault data, positions and token prices. Our server makes these calls, so Morpho sees the wallet address but not your IP address.</li>
+              <li>Morpho&apos;s image server (cdn.morpho.org), for token logos the app does not bundle</li>
             </ul>
             <p className={BODY}>
               Blockchains are public. Anything you do on-chain, including vault deposits and withdrawals, is visible
@@ -56,8 +57,9 @@ const PrivacyPage: React.FC = () => {
           <section className="mb-8">
             <h2 className={SECTION_HEADING}>3. Stored in your browser</h2>
             <p className={BODY}>
-              The app keeps a few settings on your device only: your theme, cached token prices, and that you
-              accepted the terms. You can clear them at any time in your browser settings.
+              The app keeps a few settings on your device only: your theme, that you accepted the terms and when,
+              and the wallet connection your wallet software saves. You can clear them at any time in your browser
+              settings.
             </p>
           </section>
 
