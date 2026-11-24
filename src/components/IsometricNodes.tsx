@@ -31,13 +31,21 @@ const IsometricNodes = () => {
     camera.lookAt(0, 0, 0);
 
     // Renderer with performance optimizations
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: false, // Disable antialiasing for performance
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ 
+        antialias: false, // Disable antialiasing for performance
+        alpha: true,
+        powerPreference: 'default' // decorative: let phones keep their low-power GPU
+      });
+    } catch {
+      // No WebGL (hardware acceleration off, blocked, or the context failed): leave this
+      // decorative box empty instead of crashing the whole page into the error boundary.
+      return;
+    }
     renderer.setSize(Math.max(container.clientWidth, 1), Math.max(container.clientHeight, 1));
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Cap resolution on touch devices (phones): 2x canvases cost GPU and battery for decoration.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.matchMedia('(pointer: coarse)').matches ? 1.5 : 2));
     container.appendChild(renderer.domElement);
 
     // Lighting
@@ -192,6 +200,7 @@ const IsometricNodes = () => {
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
+      renderer.forceContextLoss(); // free the WebGL context now, not at GC
       renderer.dispose();
       octagonGeometry.dispose();
       blockMaterial1.dispose();
@@ -209,11 +218,9 @@ const IsometricNodes = () => {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full h-full"
-      style={{ touchAction: 'none' }}
-    />
+    // Decorative only (no touch or mouse handling). It must not capture touches:
+    // touch-action: none here made a 300px band of the phone home page unscrollable.
+    <div ref={containerRef} className="w-full h-full pointer-events-none" aria-hidden="true" />
   );
 };
 

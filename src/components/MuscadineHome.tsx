@@ -15,15 +15,15 @@ const MuscadineHome = () => {
       {/* Hero Section - Full Width Background */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen mt-20 mb-20 overflow-x-clip">
         {/* Nested rectangles effect - hidden on mobile; frames step outward from main content on desktop */}
-        <div className="absolute inset-0 hidden lg:flex items-center justify-center z-10 pointer-events-none">
+        <div className="absolute inset-0 hidden xl:flex items-center justify-center z-10 pointer-events-none">
           {/* Rectangle 4 - outermost frame (wider than main content) */}
           <div className="w-full max-w-[1240px] h-[780px] border-2 border-black rounded-lg" />
         </div>
-        <div className="absolute inset-0 hidden lg:flex items-center justify-center z-20 pointer-events-none">
+        <div className="absolute inset-0 hidden xl:flex items-center justify-center z-20 pointer-events-none">
           {/* Rectangle 3 */}
           <div className="w-full max-w-[1196px] h-[740px] border-2 border-black rounded-lg" />
         </div>
-        <div className="absolute inset-0 hidden lg:flex items-center justify-center z-30 pointer-events-none">
+        <div className="absolute inset-0 hidden xl:flex items-center justify-center z-30 pointer-events-none">
           {/* Rectangle 2 - innermost frame, fits around main content (1152px) */}
           <div className="w-full max-w-[1168px] h-[700px] border-2 border-black rounded-lg" />
         </div>

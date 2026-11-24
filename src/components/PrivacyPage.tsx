@@ -28,7 +28,7 @@ const PrivacyPage: React.FC = () => {
           <section className="mb-8">
             <h2 className={SECTION_HEADING}>1. What we see</h2>
             <ul className={LIST}>
-              <li><strong>No analytics:</strong> the sites use no analytics, tracking pixels or advertising cookies, and the app turns off Reown&apos;s optional wallet-connect analytics (see section 2 for the connection events Reown always receives).</li>
+              <li><strong>No analytics:</strong> the sites use no analytics, tracking pixels or advertising cookies, and the app turns off Reown&apos;s optional wallet-connect analytics (see section 2 for the events Reown always receives).</li>
               <li><strong>Server logs:</strong> our hosting provider (Vercel) keeps standard request logs, such as IP address, browser and time, for a short period.</li>
               <li><strong>Wallet address:</strong> when you connect a wallet to app.muscadine.xyz, the app reads that public address&apos;s balances and vault positions. We do not tie it to your name or store it in a database.</li>
               <li><strong>Email:</strong> if you email us, we keep your message and address to reply.</li>
@@ -43,7 +43,7 @@ const PrivacyPage: React.FC = () => {
               address:
             </p>
             <ul className={LIST}>
-              <li>Your wallet and Reown / WalletConnect, which connect it. Reown also receives basic connection events (the wallet list opening and a successful connect) that cannot be turned off.</li>
+              <li>Your wallet and Reown / WalletConnect, which connect it. Reown also receives events that cannot be turned off: one each time the app loads, plus wallet-list views and a successful connect.</li>
               <li>Alchemy and other Base RPC providers, for on-chain reads and sending transactions</li>
               <li>An Ethereum RPC (Alchemy or a public node), to show your wallet&apos;s ENS name</li>
               <li>Morpho&apos;s API, called from our server, for vault data, positions and token prices. Morpho sees the wallet address but not your IP address.</li>

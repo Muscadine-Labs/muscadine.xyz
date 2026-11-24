@@ -33,13 +33,21 @@ const StarShape = ({ path }: StarShapeProps) => {
     camera.position.set(5, 5, 5);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: false, // Disable for performance
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: false, // Disable for performance
+        alpha: true,
+        powerPreference: 'default' // decorative: let phones keep their low-power GPU
+      });
+    } catch {
+      // No WebGL (hardware acceleration off, blocked, or the context failed): leave this
+      // decorative box empty instead of crashing the whole page into the error boundary.
+      return;
+    }
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Cap resolution on touch devices (phones): 2x canvases cost GPU and battery for decoration.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.matchMedia('(pointer: coarse)').matches ? 1.5 : 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
     container.appendChild(renderer.domElement);
@@ -157,6 +165,8 @@ const StarShape = ({ path }: StarShapeProps) => {
     let rotationOffset = { x: 0, y: 0 };
 
     const onMouseMove = (event: MouseEvent) => {
+      // Off-screen and not dragging: skip the hover raycast (it runs for every mouse move on the page).
+      if (!isVisible && !isDragging) return;
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
 
@@ -273,6 +283,7 @@ const StarShape = ({ path }: StarShapeProps) => {
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
+      renderer.forceContextLoss(); // free the WebGL context now, not at GC
       renderer.dispose();
       geometry.dispose();
       material.dispose();
