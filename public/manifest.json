@@ -1,7 +1,7 @@
 {
   "name": "Muscadine",
   "short_name": "Muscadine",
-  "description": "A personal project fo self-custody and DeFi.",
+  "description": "A personal project for self-custody and DeFi.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafaf9",

@@ -2,6 +2,8 @@
 
 Static Next.js 16 (App Router) site for Muscadine. Tailwind CSS 4, Three.js shapes on the home page. No environment variables, no analytics.
 
+Security headers (CSP included) live in `vercel.json`. The CSP has no `'unsafe-eval'`: plain `three` and the Next production build do not need it. Re-check the home page shapes under that CSP if you add a 3D or animation library.
+
 ## What Muscadine is
 
 A personal, non-commercial project (the LLC is dissolved). Copy never mentions services, clients, a company, fees charged to anyone or an advisory relationship. The vaults are set up for our own funds; deposit access is controlled on-chain and may be limited to addresses we allow; performance/management fees 0% (gas and third-party costs still apply).

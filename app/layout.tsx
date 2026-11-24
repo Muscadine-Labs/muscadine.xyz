@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: 'Muscadine',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Muscadine',
     description: SITE_DESCRIPTION,
   },
@@ -74,10 +74,6 @@ export default function RootLayout({
               name: 'Muscadine',
               url: 'https://muscadine.xyz',
               description: SITE_DESCRIPTION,
-              author: {
-                '@type': 'Person',
-                name: 'Muscadine',
-              },
             }),
           }}
         />
