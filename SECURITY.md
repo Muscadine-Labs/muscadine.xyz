@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you believe you have discovered a security vulnerability in any Muscadine product, service, or infrastructure, please report it to us responsibly.
+If you believe you have discovered a security vulnerability in any Muscadine site, app, or infrastructure, please report it to us responsibly.
 
 **Contact:** [muscadinelabs@gmail.com](mailto:muscadinelabs@gmail.com)
 

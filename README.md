@@ -8,7 +8,7 @@ Next.js site for Muscadine.
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **3D Graphics**: Three.js, React Three Fiber
+- **3D Graphics**: Three.js
 
 ## Development
 

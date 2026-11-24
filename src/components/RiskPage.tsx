@@ -32,9 +32,10 @@ const RiskPage: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">What this is</h2>
             <p className="text-gray-700 mb-4">
-              Muscadine runs a few Morpho vaults on Base for our own funds. We choose their
-              markets and caps; deposits are open to approved wallets only, signed from your own non-custodial wallet.
-              We do not hold private keys, charge fees to anyone, guarantee returns, or insure deposits.
+              Muscadine runs a few Morpho vaults on Base for our own funds. We choose their markets and caps.
+              Deposit access is controlled on-chain and may be limited to addresses we allow. You sign every deposit
+              from your own non-custodial wallet. We do not hold private keys, charge fees to anyone, guarantee
+              returns, or insure deposits.
             </p>
           </section>
 
@@ -138,6 +139,11 @@ const RiskPage: React.FC = () => {
               <li>
                 <Link href="/privacy" className="text-blue-600 underline">
                   Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-blue-600 underline">
+                  Contact
                 </Link>
               </li>
             </ul>

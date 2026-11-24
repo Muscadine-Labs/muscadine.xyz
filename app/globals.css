@@ -1,43 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --breakpoint-xs: 475px;
-
-  --color-gold-50: #fefce8;
-  --color-gold-100: #fef9c3;
-  --color-gold-200: #fef08a;
-  --color-gold-300: #fde047;
-  --color-gold-400: #facc15;
-  --color-gold-500: #eab308;
-  --color-gold-600: #ca8a04;
-  --color-gold-700: #a16207;
-  --color-gold-800: #854d0e;
-  --color-gold-900: #713f12;
-
   --font-serif: var(--font-playfair), serif;
   --font-sans: var(--font-inter), sans-serif;
-
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-shimmer: shimmer 2s infinite;
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
 }
 
 /*
@@ -66,61 +31,10 @@
   @apply bg-white hover:bg-gray-50 text-gray-900 font-medium py-3 px-6 rounded-lg border border-gray-300 hover:border-gray-400 transition-all duration-75 inline-flex items-center justify-center;
 }
 
-@utility btn-outline {
-  @apply border border-gray-800 hover:bg-gray-800 hover:text-white text-gray-800 font-medium py-3 px-6 rounded-lg transition-all duration-75 inline-flex items-center justify-center;
-}
-
-@utility card {
-  @apply bg-white rounded-lg shadow-xs border border-gray-200 p-6;
-}
-
-@utility card-hover {
-  @apply hover:shadow-md hover:border-gray-300 transition-all duration-75;
-}
-
-@utility section-padding {
-  @apply py-16 md:py-20;
-}
-
-@utility container-padding {
-  @apply px-4 md:px-8;
-}
-
-@utility text-gradient {
-  @apply bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent;
-}
-
-@utility nav-link {
-  @apply text-sm font-medium transition-colors duration-75 hover:text-gray-900;
-}
-
-@utility nav-link-active {
-  @apply text-gray-900 font-semibold;
-}
-
-@utility text-balance {
-  text-wrap: balance;
-}
-
-@utility animate-fade-in {
-  animation: fadeIn 0.15s ease-out;
-}
-
-@utility animate-slide-up {
-  animation: slideUp 0.15s ease-out;
-}
-
-@utility animate-bounce-slow {
-  animation: bounce 0.5s infinite;
-}
-
 @layer base {
   :root {
     --background: #ffffff;
     --foreground: #374151;
-    --primary: #1f2937;
-    --secondary: #6b7280;
-    --accent: #3b82f6;
   }
 
   body {
@@ -136,43 +50,21 @@
     font-weight: 600;
     line-height: 1.2;
   }
-  
+
   h1 {
     @apply text-4xl md:text-6xl;
   }
-  
+
   h2 {
     @apply text-3xl md:text-4xl;
   }
-  
+
   h3 {
     @apply text-2xl md:text-3xl;
   }
-  
+
   h4 {
     @apply text-xl md:text-2xl;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -187,26 +79,13 @@
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   .touch-manipulation {
     touch-action: manipulation;
   }
-  
+
   input, select, textarea {
     font-size: 16px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .mobile-smooth-scroll {
-    scroll-behavior: smooth;
-  }
-}
-
-@supports (padding: max(0px)) {
-  .safe-area-padding {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
   }
 }
 
@@ -214,25 +93,9 @@
   p, li {
     line-height: 1.6;
   }
-  
-  .mobile-button-spacing {
-    margin-bottom: 0.75rem;
-  }
-  
+
   input, textarea, select {
     font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .dark-mode-support {
-    color-scheme: dark;
-  }
-}
-
-@media (prefers-contrast: high) {
-  .high-contrast-support {
-    border: 2px solid;
   }
 }
 
@@ -250,4 +113,3 @@
     padding-bottom: 80px;
   }
 }
-

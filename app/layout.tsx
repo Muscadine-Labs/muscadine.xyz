@@ -25,23 +25,26 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const SITE_DESCRIPTION =
+  'A personal, non-commercial project with free guides and open-source tools for Bitcoin self-custody and DeFi.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://muscadine.xyz'),
   title: 'Muscadine',
-  description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
-  keywords: 'DeFi, Bitcoin, Base, Morpho, vault, yield, crypto, finance, self-sovereignty, dashboard',
+  description: SITE_DESCRIPTION,
+  keywords: 'DeFi, Bitcoin, Base, Morpho, vault, yield, crypto, self-custody, education',
   authors: [{ name: 'Muscadine' }],
   openGraph: {
     title: 'Muscadine',
-    description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
+    description: SITE_DESCRIPTION,
     type: 'website',
     url: 'https://muscadine.xyz',
     siteName: 'Muscadine',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Muscadine',
-    description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -49,7 +52,8 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    icon: [{ url: '/favicon.png', type: 'image/png', sizes: '512x512' }],
+    apple: [{ url: '/favicon.png', type: 'image/png', sizes: '512x512' }],
   },
 };
 
@@ -66,16 +70,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'WebApplication',
+              '@type': 'WebSite',
               name: 'Muscadine',
               url: 'https://muscadine.xyz',
-              description: 'Empowering financial freedom through Bitcoin security and decentralized finance.',
-              applicationCategory: 'FinanceApplication',
-              operatingSystem: 'Web Browser',
-              author: {
-                '@type': 'Organization',
-                name: 'Muscadine',
-              },
+              description: SITE_DESCRIPTION,
             }),
           }}
         />

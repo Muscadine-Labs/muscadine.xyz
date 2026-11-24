@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import AppPage from '@/src/components/AppPage';
-import { getAppVaults } from '@/src/lib/vaults';
 
 export const metadata: Metadata = {
   description:
-    'Non-custodial Morpho vaults on Base: deposits, APY, and how the vaults work.',
+    'Non-custodial Morpho vaults on Base, set up for our own funds. Deposit access may be restricted; yields are not guaranteed.',
 };
 
-export default async function App() {
-  const data = await getAppVaults();
-  return <AppPage data={data} />;
+export default function App() {
+  return <AppPage />;
 }

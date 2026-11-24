@@ -32,7 +32,7 @@ const TermsPage: React.FC = () => {
             <p className={BODY}>
               By using muscadine.xyz or app.muscadine.xyz (the &quot;sites&quot;), you agree to these terms. If you
               do not agree, do not use the sites. &quot;Muscadine&quot;, &quot;we&quot; and &quot;us&quot; mean the
-              individual who runs the sites.
+              individuals who run the sites.
             </p>
           </section>
 
@@ -54,8 +54,8 @@ const TermsPage: React.FC = () => {
             <h2 className={SECTION_HEADING}>3. The vaults</h2>
             <p className={BODY}>
               The vaults are Morpho Vault V2 smart contracts on Base. We chose their markets and caps for our own
-              use. Deposits are open to approved wallets only, and every vault&apos;s performance and management fee
-              is set to 0%.
+              use. Deposit access is controlled on-chain and may be limited to addresses we allow. Every vault&apos;s
+              performance and management fee is set to 0%; you still pay network (gas) and any third-party costs.
             </p>
             <ul className={LIST}>
               <li>You keep custody. We never hold your keys or your assets; you sign every transaction yourself.</li>

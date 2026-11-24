@@ -23,7 +23,7 @@ const nextConfig = {
     return [{ source: '/solutions', destination: '/projects', permanent: true }];
   },
   experimental: {
-    optimizePackageImports: ['three', '@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: ['three'],
   },
 };
 
