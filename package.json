@@ -6,9 +6,9 @@
     "node": "26.x"
   },
   "scripts": {
-    "dev": "next dev -p 3002",
-    "build": "next build --webpack",
-    "start": "next start -p ${PORT:-3000}",
+    "dev": "NEXT_TELEMETRY_DISABLED=1 next dev -p 3002",
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build --webpack",
+    "start": "NEXT_TELEMETRY_DISABLED=1 next start -p ${PORT:-3000}",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
@@ -36,6 +36,8 @@
     }
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@next/eslint-plugin-next": "^16.4.6",
     "@tailwindcss/postcss": "^4.3.5",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",

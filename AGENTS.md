@@ -32,7 +32,7 @@ No Coldcard, Revoke.cash, exchange or protocol recommendations. Products named a
 ## Commands
 
 ```bash
-npm run dev     # http://localhost:3002
+npm run dev     # http://localhost:3002 (scripts set NEXT_TELEMETRY_DISABLED=1)
 npm run lint
 npm run build
 ```

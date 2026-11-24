@@ -22,7 +22,7 @@ const AboutPage = () => {
                 Why this exists
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Muscadine was started by two guys in university who loved the financial innovation and freedom in
+                Muscadine was started by two university students who loved the financial innovation and freedom in
                 Bitcoin and DeFi. It grew from a simple belief: you should be able to hold and use your own keys
                 without handing them to a custodian. Self-custody, open-source software and transparent on-chain
                 systems make that possible.
