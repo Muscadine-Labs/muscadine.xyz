@@ -8,6 +8,7 @@ Security headers (CSP included) live in `vercel.json`. The CSP has no `'unsafe-e
 
 - The shapes are decorative. Their containers must never capture touches: no `touch-action: none` (it made a 300px band of the phone home page unscrollable); `IsometricNodes` is `pointer-events-none` + `aria-hidden`. The card shapes only listen to mouse events on `window`, so touch scrolling and taps still work.
 - `new THREE.WebGLRenderer` is wrapped in try/catch in every shape: without WebGL the box stays empty instead of crashing the page into the error boundary. Cleanup calls `forceContextLoss()` before `dispose()` (the home page holds 5 contexts).
+- Renderers use `powerPreference: 'default'` and cap the pixel ratio at 1.5 on touch devices (`pointer: coarse`), 2 elsewhere. The card shapes skip their hover raycast while off-screen.
 - The hero's outer frames show from `xl` (1280px); at `lg` they clip on iPad landscape.
 - The mobile menu (`MuscadineBanner`) closes on any route change (logo, Back, links).
 

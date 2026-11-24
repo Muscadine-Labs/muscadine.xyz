@@ -36,7 +36,7 @@ const IsometricNodes = () => {
       renderer = new THREE.WebGLRenderer({ 
         antialias: false, // Disable antialiasing for performance
         alpha: true,
-        powerPreference: 'high-performance'
+        powerPreference: 'default' // decorative: let phones keep their low-power GPU
       });
     } catch {
       // No WebGL (hardware acceleration off, blocked, or the context failed): leave this
@@ -44,7 +44,8 @@ const IsometricNodes = () => {
       return;
     }
     renderer.setSize(Math.max(container.clientWidth, 1), Math.max(container.clientHeight, 1));
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Cap resolution on touch devices (phones): 2x canvases cost GPU and battery for decoration.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.matchMedia('(pointer: coarse)').matches ? 1.5 : 2));
     container.appendChild(renderer.domElement);
 
     // Lighting
