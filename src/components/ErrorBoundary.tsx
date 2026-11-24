@@ -61,7 +61,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, Error
               </button>
             </div>
             <p className="text-xs text-stone-500 mt-4">
-              If this problem persists, please contact support.
+              If this keeps happening, <a href="/contact" className="underline">let us know</a>.
             </p>
           </div>
         </div>

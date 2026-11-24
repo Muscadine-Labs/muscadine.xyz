@@ -2,11 +2,20 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import HamburgerIcon from './HamburgerIcon';
 
 const MuscadineBanner = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // Close the mobile menu on any navigation (logo, Back, links): the header is in the root
+  // layout and never re-mounts, so an open menu would cover the top of the next page.
+  const pathname = usePathname();
+  const [menuPath, setMenuPath] = useState(pathname);
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setIsOpen(false);
+  }
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gray-50 border-b border-gray-200 backdrop-blur-xs bg-gray-50/95">

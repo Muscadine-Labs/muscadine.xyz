@@ -33,11 +33,18 @@ const PyramidShape = ({ path }: PyramidShapeProps) => {
     camera.position.set(5, 5, 5);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: false, // Disable for performance
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: false, // Disable for performance
+        alpha: true,
+        powerPreference: 'high-performance'
+      });
+    } catch {
+      // No WebGL (hardware acceleration off, blocked, or the context failed): leave this
+      // decorative box empty instead of crashing the whole page into the error boundary.
+      return;
+    }
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -194,6 +201,7 @@ const PyramidShape = ({ path }: PyramidShapeProps) => {
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
+      renderer.forceContextLoss(); // free the WebGL context now, not at GC
       renderer.dispose();
       geometry.dispose();
       material.dispose();

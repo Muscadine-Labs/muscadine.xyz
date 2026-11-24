@@ -4,6 +4,13 @@ Static Next.js 16 (App Router) site for Muscadine. Tailwind CSS 4, Three.js shap
 
 Security headers (CSP included) live in `vercel.json`. The CSP has no `'unsafe-eval'`: plain `three` and the Next production build do not need it. Re-check the home page shapes under that CSP if you add a 3D or animation library.
 
+## Home page 3D (do not regress)
+
+- The shapes are decorative. Their containers must never capture touches: no `touch-action: none` (it made a 300px band of the phone home page unscrollable); `IsometricNodes` is `pointer-events-none` + `aria-hidden`. The card shapes only listen to mouse events on `window`, so touch scrolling and taps still work.
+- `new THREE.WebGLRenderer` is wrapped in try/catch in every shape: without WebGL the box stays empty instead of crashing the page into the error boundary. Cleanup calls `forceContextLoss()` before `dispose()` (the home page holds 5 contexts).
+- The hero's outer frames show from `xl` (1280px); at `lg` they clip on iPad landscape.
+- The mobile menu (`MuscadineBanner`) closes on any route change (logo, Back, links).
+
 ## What Muscadine is
 
 A personal, non-commercial project (the LLC is dissolved). Copy never mentions services, clients, a company, fees charged to anyone or an advisory relationship. The vaults are set up for our own funds; deposit access is controlled on-chain and may be limited to addresses we allow; performance/management fees 0% (gas and third-party costs still apply).
