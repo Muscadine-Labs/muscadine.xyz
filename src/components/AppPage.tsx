@@ -1,46 +1,6 @@
 import Link from 'next/link';
-import type { AppVaults, VaultRow } from '@/src/lib/vaults';
 
 const APP_URL = 'https://app.muscadine.xyz';
-
-function formatPercent(value: number): string {
-  return `${value.toFixed(2)}%`;
-}
-
-function formatUsd(value: number): string {
-  const digits = value >= 100 ? 0 : 2;
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits,
-  }).format(value);
-}
-
-function formatTokenAmount(value: number, symbol: string | null): string {
-  const amount =
-    value >= 1000
-      ? new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 2 }).format(value)
-      : new Intl.NumberFormat('en-US', {
-          maximumFractionDigits: value >= 1 ? 2 : 4,
-          maximumSignificantDigits: value >= 1 ? undefined : 4,
-        }).format(value);
-  return symbol ? `${amount} ${symbol}` : amount;
-}
-
-function shortAddress(address: string): string {
-  return `${address.slice(0, 6)}…${address.slice(-4)}`;
-}
-
-/** Same slug Morpho uses in its vault URLs (Muscadine USDC Prime → muscadine-usdc-prime). */
-function morphoVaultUrl(vault: VaultRow): string {
-  const network = vault.network.toLowerCase();
-  const slug = vault.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return `https://app.morpho.org/${network}/vault/${vault.address}/${slug}`;
-}
-
-// Hides empty vaults. A vault whose TVL failed to load stays listed with dashes.
-const MIN_LIST_TVL_USD = 1000;
 
 const LEARN_LINKS = [
   { label: 'What is Morpho?', href: 'https://docs.morpho.org/learn/' },
@@ -56,66 +16,7 @@ function ExternalIcon({ className = 'w-4 h-4' }: { className?: string }) {
   );
 }
 
-function StrategyPill({ strategy }: { strategy: VaultRow['strategy'] }) {
-  return (
-    <span className="inline-flex items-center rounded-full border border-gray-200 bg-white px-2 py-0.5 text-xs font-medium text-gray-700">
-      {strategy}
-    </span>
-  );
-}
-
-function VaultName({ vault }: { vault: VaultRow }) {
-  return (
-    <>
-      <a
-        href={morphoVaultUrl(vault)}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${vault.name} on Morpho`}
-        className="font-medium text-gray-900 hover:underline underline-offset-2"
-      >
-        {vault.name}
-      </a>
-      <div className="mt-1 flex items-center gap-2">
-        <StrategyPill strategy={vault.strategy} />
-        <a
-          href={`https://basescan.org/address/${vault.address}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${vault.name} contract ${vault.address} on Basescan`}
-          className="whitespace-nowrap font-mono text-xs text-gray-500 hover:text-gray-900"
-        >
-          {shortAddress(vault.address)}
-        </a>
-      </div>
-    </>
-  );
-}
-
-function Deposits({ vault }: { vault: VaultRow }) {
-  return (
-    <>
-      <span className="block text-gray-900 tabular-nums">
-        {vault.totalAssets === null ? '—' : formatTokenAmount(vault.totalAssets, vault.assetSymbol)}
-      </span>
-      <span className="block text-xs text-gray-500 tabular-nums">
-        {vault.tvlUsd === null ? '—' : formatUsd(vault.tvlUsd)}
-      </span>
-    </>
-  );
-}
-
-function Apy({ vault }: { vault: VaultRow }) {
-  return (
-    <span className="font-medium text-gray-900 tabular-nums">
-      {vault.apy === null ? '—' : formatPercent(vault.apy)}
-    </span>
-  );
-}
-
-export default function AppPage({ data }: { data: AppVaults }) {
-  const listedVaults = data.vaults.filter((vault) => vault.tvlUsd === null || vault.tvlUsd >= MIN_LIST_TVL_USD);
-
+export default function AppPage() {
   return (
     <div className="max-w-5xl mx-auto py-8">
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
@@ -125,7 +26,10 @@ export default function AppPage({ data }: { data: AppVaults }) {
             Vaults
           </h1>
           <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-            Non-custodial Morpho vaults on Base, set up for our own funds. Deposits are open to approved wallets only. Yield comes from overcollateralized lending, is not guaranteed, and you can lose money. A large withdrawal can wait for market liquidity.
+            Non-custodial Morpho vaults on Base, set up for our own funds. Deposit access is controlled on-chain and
+            may be limited to addresses we allow; check the vault on the app or on-chain before sending funds. Yield
+            comes from overcollateralized lending, is not guaranteed, and you can lose money. A large withdrawal can
+            wait for market liquidity.
           </p>
         </div>
         <a
@@ -139,41 +43,32 @@ export default function AppPage({ data }: { data: AppVaults }) {
         </a>
       </div>
 
-      <h2 className="text-2xl font-light text-gray-900 font-serif mb-4">Current vaults</h2>
-
-      <ul className="border border-gray-200 rounded-xl bg-white divide-y divide-gray-100">
-        <li className="hidden sm:grid grid-cols-[1fr_10rem_6rem] gap-4 px-5 py-3 text-xs font-medium text-gray-500">
-          <span>Vault</span>
-          <span className="text-right">Deposits</span>
-          <span className="text-right">APY</span>
-        </li>
-        {listedVaults.map((vault) => (
-          <li
-            key={vault.address}
-            className="grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_10rem_6rem] gap-x-4 gap-y-3 px-4 py-4 sm:px-5"
-          >
-            <div className="min-w-0">
-              <VaultName vault={vault} />
-            </div>
-            <div className="order-last col-span-2 flex items-baseline justify-between text-sm sm:order-none sm:col-span-1 sm:block sm:text-right">
-              <span className="text-xs text-gray-500 sm:hidden">Deposits</span>
-              <div className="text-right">
-                <Deposits vault={vault} />
-              </div>
-            </div>
-            <div className="text-right">
-              <Apy vault={vault} />
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-4 space-y-2 text-sm text-gray-600 leading-relaxed">
+      <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
         <p>
-          <strong className="font-medium text-gray-900">Prime</strong> lends against lower-risk collateral such as Bitcoin and Ether. <strong className="font-medium text-gray-900">Frontier</strong> aims for more yield with more risk. Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds back.
+          <strong className="font-medium text-gray-900">Prime</strong> lends against lower-risk collateral such as
+          Bitcoin and Ether. <strong className="font-medium text-gray-900">Frontier</strong> aims for more yield with
+          more risk. Both use per-market caps, timelocks on changes that add risk, and a sentinel that can pull funds
+          back.
         </p>
         <p>
-          APY is the current net rate and changes with the market. The vaults charge no fees. Vault names open the vault on Morpho, with its markets, liquidity and history.
+          Yields are variable and not guaranteed. Vault performance and management fees are set to 0%. You still pay
+          network (gas) and any third-party costs. Read the{' '}
+          <Link href="/risk" className="text-blue-600 underline">
+            Risk
+          </Link>{' '}
+          page,{' '}
+          <Link href="/legal" className="text-blue-600 underline">
+            Legal disclaimer
+          </Link>
+          , and{' '}
+          <Link href="/terms" className="text-blue-600 underline">
+            Terms of Use
+          </Link>{' '}
+          before using a vault. For any questions,{' '}
+          <Link href="/contact" className="text-blue-600 underline">
+            Contact
+          </Link>{' '}
+          us.
         </p>
       </div>
 

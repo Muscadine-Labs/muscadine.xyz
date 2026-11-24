@@ -32,10 +32,10 @@ const LegalPage: React.FC = () => {
           <section className="mb-8">
             <h2 className={SECTION_HEADING}>1. A personal project</h2>
             <p className={BODY}>
-              Muscadine is a personal, non-commercial project run by an individual. It is not a company and has no
+              Muscadine is a personal, non-commercial project run by individuals. It is not a company and has no
               clients, customers or employees. We do not sell anything, charge fees to anyone, take payment, or manage
-              money for other people. The vaults hold our own funds and are open to approved
-              wallets only.
+              money for other people. The vaults hold our own funds. Deposit access is controlled on-chain and may be
+              limited to addresses we allow.
             </p>
           </section>
 

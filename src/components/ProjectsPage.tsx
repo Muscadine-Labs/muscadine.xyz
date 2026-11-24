@@ -36,13 +36,13 @@ const ProjectsPage = () => {
                 Vaults
               </h3>
               <p className="text-base text-gray-600 leading-relaxed">
-                Non-custodial Morpho vaults on Base, set up for our own funds.
+                Non-custodial Morpho vaults on Base, set up for our own funds. Deposit access may be restricted.
               </p>
               <Link
                 href="/app"
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
-                See the vaults
+                About the vaults
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

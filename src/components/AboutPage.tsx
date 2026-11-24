@@ -22,7 +22,10 @@ const AboutPage = () => {
                 Why this exists
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Muscadine started from a simple belief: you should be able to hold and use your own money without asking permission. Self-custody, open-source software and transparent on-chain systems make that possible.
+                Muscadine was started by two guys in university who loved the financial innovation and freedom in
+                Bitcoin and DeFi. It grew from a simple belief: you should be able to hold and use your own keys
+                without handing them to a custodian. Self-custody, open-source software and transparent on-chain
+                systems make that possible.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
                 The guides here are the notes and tools we use ourselves, published so others can learn from them. The vaults on app.muscadine.xyz are set up for our own funds.

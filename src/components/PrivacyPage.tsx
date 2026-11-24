@@ -45,12 +45,12 @@ const PrivacyPage: React.FC = () => {
               <li>Your wallet and Reown / WalletConnect, which connect it</li>
               <li>Alchemy and other Base RPC providers, for on-chain reads and sending transactions</li>
               <li>An Ethereum RPC (Alchemy or a public node), to show your wallet&apos;s ENS name</li>
-              <li>Morpho&apos;s API, for vault data, positions and token prices. Our server makes these calls, so Morpho sees the wallet address but not your IP address.</li>
+              <li>Morpho&apos;s API (called by app.muscadine.xyz&apos;s server), for vault data, positions and token prices. Morpho sees the looked-up wallet address but not the visitor&apos;s IP via that path.</li>
               <li>Morpho&apos;s image server (cdn.morpho.org), for token logos the app does not bundle</li>
             </ul>
             <p className={BODY}>
-              Blockchains are public. Anything you do on-chain, including vault deposits and withdrawals, is visible
-              to everyone, permanently.
+              muscadine.xyz does not call Morpho&apos;s API. Blockchains are public. Anything you do on-chain,
+              including vault deposits and withdrawals, is visible to everyone, permanently.
             </p>
           </section>
 
