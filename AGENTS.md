@@ -22,7 +22,7 @@ A personal, non-commercial project (the LLC is dissolved). Copy never mentions s
 |-------|-----------|-------|
 | `/` | `MuscadineHome` | Hero + Projects cards (Vaults, Bitcoin Node, Self Custody, Other Projects) |
 | `/projects` | `ProjectsPage` | Same cards. `/solutions` redirects here (308, `next.config.js`) |
-| `/app` | `AppPage` | Vaults intro + Open App CTA. No live Morpho API / vault table. |
+| `/app` | `AppPage` | Vaults intro. No Open App button. No live Morpho API / vault table. |
 | `/self-custody` | `SelfCustodyPage` | One page: kinds of wallets, seed backups (BIP-85 as a collapsed note), habits, Bitcoin and DeFi links |
 | `/node` | `NodePage` | Electrum server over Tor |
 | `/about`, `/contact` | | |
@@ -30,7 +30,7 @@ A personal, non-commercial project (the LLC is dissolved). Copy never mentions s
 
 ## Vaults page rules
 
-- **Open App** is the only link to app.muscadine.xyz.
+- The vaults and app.muscadine.xyz are still in use. This site must not link to app.muscadine.xyz. There is no Open App button.
 - Copy matches Legal / Terms / Risk: own funds; on-chain deposit access may be limited; yields not guaranteed; 0% performance/management fees; link Risk, Legal, Terms, and Contact.
 
 ## Self-custody page

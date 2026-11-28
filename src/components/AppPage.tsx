@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-const APP_URL = 'https://app.muscadine.xyz';
-
 const LEARN_LINKS = [
   { label: 'What is Morpho?', href: 'https://docs.morpho.org/learn/' },
   { label: 'What is a vault?', href: 'https://docs.morpho.org/learn/concepts/vault-v2/' },
@@ -19,28 +17,17 @@ function ExternalIcon({ className = 'w-4 h-4' }: { className?: string }) {
 export default function AppPage() {
   return (
     <div className="max-w-5xl mx-auto py-8">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
-        <div className="max-w-2xl">
-          <p className="text-sm font-medium text-gray-500 mb-2">Morpho vaults on Base</p>
-          <h1 className="font-light text-gray-900 leading-tight font-serif text-3xl sm:text-4xl">
-            Vaults
-          </h1>
-          <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-            Non-custodial Morpho vaults on Base, set up for our own funds. Deposit access is controlled on-chain and
-            may be limited to addresses we allow; check the vault on the app or on-chain before sending funds. Yield
-            comes from overcollateralized lending, is not guaranteed, and you can lose money. A large withdrawal can
-            wait for market liquidity.
-          </p>
-        </div>
-        <a
-          href={APP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
-        >
-          Open App
-          <ExternalIcon />
-        </a>
+      <div className="max-w-2xl mb-12">
+        <p className="text-sm font-medium text-gray-500 mb-2">Morpho vaults on Base</p>
+        <h1 className="font-light text-gray-900 leading-tight font-serif text-3xl sm:text-4xl">
+          Vaults
+        </h1>
+        <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+          Non-custodial Morpho vaults on Base, set up for our own funds. Deposit access is controlled on-chain and
+          may be limited to addresses we allow; check the vault on the app or on-chain before sending funds. Yield
+          comes from overcollateralized lending, is not guaranteed, and you
+          can lose money. A large withdrawal can wait for market liquidity.
+        </p>
       </div>
 
       <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
